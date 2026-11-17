@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "layouts": {
+    "public": {
+      "header": "standard",
+      "contentWidth": 1080,
+      "footer": "standard"
+    },
+    "business": {
+      "header": "standard",
+      "sections": [
+        "hero",
+        "overview",
+        "availability"
+      ]
+    }
+  }
+}

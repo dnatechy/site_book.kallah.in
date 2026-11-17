@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="{{ site.language | default('en') }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ meta.title }}</title>
+  <meta name="description" content="{{ meta.description }}">
+  <meta name="robots" content="{{ 'index,follow' if meta.indexable else 'noindex,follow' }}">
+  <link rel="canonical" href="{{ meta.canonical }}">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ meta.title }}">
+  <meta property="og:description" content="{{ meta.description }}">
+  <meta property="og:url" content="{{ meta.canonical }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+  <style>:root { {{ theme_css | safe }} }</style>
+  <script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "WebSite", "name": site.name, "url": site.url} | tojson }}</script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{{ url_for('web.home') }}">KALLAH <span>Book</span></a>
+      <span class="tagline">{{ site.tagline }}</span>
+    </div>
+  </header>
+  <main class="container">{% block content %}{% endblock %}</main>
+  <footer class="site-footer"><div class="container">© KALLAH Book · {{ site.tagline }}</div></footer>
+</body>
+</html>

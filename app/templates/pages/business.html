@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="crumb"><a href="{{ url_for('web.home') }}">Home</a> / <a href="{{ url_for('web.city_page', city_slug=city.slug) }}">{{ city.name }}</a> / <a href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">{{ category.name }}</a></nav>
+<section class="section">
+  <p class="eyebrow">{{ category.name }} · {{ city.name }}</p>
+  <h1>{{ business.content.heading | default(business.name, true) }}</h1>
+  <p>{{ business.content.summary | default('', true) }}</p>
+  <div class="notice">Online appointments and live availability will be added after the booking engine is ready.</div>
+</section>
+{% endblock %}

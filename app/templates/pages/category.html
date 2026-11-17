@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="crumb"><a href="{{ url_for('web.home') }}">Home</a> / <a href="{{ url_for('web.city_page', city_slug=city.slug) }}">{{ city.name }}</a> / {{ category.name }}</nav>
+<section class="section">
+  <h1>{{ category.name }} in {{ city.name }}</h1>
+  <p>{{ category.description }}</p>
+  <div class="cards">
+    {% for business in businesses %}
+    <a class="card" href="{{ url_for('web.business_page', city_slug=city.slug, category_slug=category.slug, business_slug=business.slug) }}">
+      <strong>{{ business.name }}</strong><span>{{ business.content.summary | default('', true) }}</span>
+    </a>
+    {% else %}
+    <p>No verified businesses are published here yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

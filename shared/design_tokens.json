@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "colors": {
+    "primary": "#E53935",
+    "secondary": "#FF7043",
+    "background": "#FFFFFF",
+    "surface": "#F8F9FA",
+    "text": "#202124",
+    "muted": "#667085"
+  },
+  "typography": {
+    "fontFamily": "system-ui",
+    "baseSize": 16,
+    "headingSize": 32
+  },
+  "spacing": {
+    "small": 8,
+    "medium": 16,
+    "large": 24
+  },
+  "radius": {
+    "small": 6,
+    "medium": 12,
+    "large": 20
+  }
+}
