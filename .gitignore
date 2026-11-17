@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.pyc
+tmp/
+cgi-bin/
+.user.ini
+php.ini
+*.log
