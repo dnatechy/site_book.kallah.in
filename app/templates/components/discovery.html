@@ -21,7 +21,7 @@
 <section class="section compact-section"><h2>Featured places</h2><div class="cards">
 {% for item in featured %}
 <a class="card" href="{{ url_for('web.business_page', city_slug=city.slug, category_slug=item.category.slug, business_slug=item.business.slug) }}">
-<strong>{{ item.business.name }}</strong><span>{{ item.category.name }} · {{ city.name }}</span>
+<strong>{{ item.business.name }}</strong>{% if item.business.is_demo %}<span class="sample-label">Demo listing</span>{% endif %}<span>{{ item.category.name }} · {{ city.name }}</span>
 <span>{{ item.business.content.summary | default('', true) }}</span></a>
 {% endfor %}</div></section>
 {% endif %}

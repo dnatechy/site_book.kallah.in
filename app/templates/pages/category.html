@@ -24,14 +24,17 @@
 <a href="{{ url_for('web.city_page', city_slug=city.slug) }}">{{ city.name }}</a> / {{ category.name }}</nav>
 <section class="section listing-section">
 <p class="eyebrow">{{ category.name | upper }} · {{ city.name | upper }}</p>
-<h1>{{ category.name }} in {{ city.name }}</h1><p class="muted">{{ category.description }}</p>
+<h1>{{ category.name }} in {{ city.name }}</h1>{% if demo.enabled %}<p class="sample-note">Showing sample businesses for UI testing only — these are not real places or verified Google ratings.</p>{% endif %}<p class="muted">{{ category.description }}</p>
 <p class="result-count" id="result-count">{{ businesses | length }} places found</p>
 <p class="location-status" id="near-me-status" role="status" aria-live="polite"></p>
 <div class="cards">{% for business in businesses %}
 <a class="card business-card" href="{{ url_for('web.business_page',city_slug=city.slug,category_slug=category.slug,business_slug=business.slug) }}"
 {% if business.geo is defined and business.geo.lat is defined and business.geo.lng is defined %}
 data-lat="{{ business.geo.lat }}" data-lng="{{ business.geo.lng }}"{% endif %}>
-<strong>{{ business.name }}</strong><span>{{ business.content.summary | default('',true) }}</span>
+<strong>{{ business.name }}</strong>{% if business.is_demo %}<span class="sample-label">Demo listing</span>{% endif %}
+<span>{{ business.content.summary | default('',true) }}</span>
+{% if business.rating_value is defined and business.rating_value is not none %}
+<span class="demo-rating">★ {{ business.rating_value }} · {{ business.rating_label | default('Rating') }}</span>{% endif %}
 {% if business.google_rating is defined and business.rating_source | default('') == 'google' %}
 <span>Google rating: {{ business.google_rating }} ★</span>{% endif %}
 </a>

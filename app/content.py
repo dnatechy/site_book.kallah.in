@@ -28,6 +28,19 @@ def get_site():
     return global_config("site")
 
 
+def get_booking_config():
+    return global_config("booking")
+
+
+def demo_enabled():
+    """Turn all demonstration records on/off using one JSON flag."""
+    return global_config("demo").get("enabled") is True
+
+
+def demo_config():
+    return global_config("demo")
+
+
 def _city_path(slug):
     if not isinstance(slug, str) or not SLUG_RE.fullmatch(slug):
         return None
@@ -130,8 +143,15 @@ def get_businesses(city_slug, category_slug):
         business = _json(path / "data.json")
         slug = business.get("slug")
         if (business.get("published") is True and business.get("enabled", True) is not False
-                and isinstance(slug, str) and SLUG_RE.fullmatch(slug)):
+                and isinstance(slug, str) and SLUG_RE.fullmatch(slug)
+                and (not business.get("is_demo") or demo_enabled())):
             business["professionals"] = get_professionals(business)
+            if business.get("is_demo"):
+                business["rating_value"] = business.get("demo_rating")
+                business["rating_label"] = "Demo score"
+            elif business.get("rating_source") == "google":
+                business["rating_value"] = business.get("google_rating")
+                business["rating_label"] = "Google rating"
             found.append(business)
     return sorted(found, key=lambda record: (record.get("name") or "").casefold())
 

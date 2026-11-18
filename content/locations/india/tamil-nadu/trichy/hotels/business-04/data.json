@@ -1,0 +1,67 @@
+{
+  "id": 700204,
+  "name": "Demo Stay Hotel 04",
+  "slug": "demo-hotel-04",
+  "enabled": true,
+  "published": true,
+  "is_demo": true,
+  "featured": false,
+  "address": "Sample address · Srirangam, Trichy (not a real location)",
+  "area": "Srirangam",
+  "geo": {
+    "lat": 10.762093,
+    "lng": 78.738825
+  },
+  "demo_rating": 4.8,
+  "amenities": {
+    "parking": true,
+    "wifi": true,
+    "accessible": true
+  },
+  "content": {
+    "heading": "Demo Stay Hotel 04",
+    "summary": "Explore stays and preview check-in enquiry slots.",
+    "description": "This is a sample hotels listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+  },
+  "seo": {
+    "title": "Demo Stay Hotel 04 — Demo Listing | KALLAH Book",
+    "description": "Explore a sample hotels profile, filters and demo slots in KALLAH Book. Not a real business."
+  },
+  "theme": {
+    "colors": {
+      "primary": "#9A4D32"
+    }
+  },
+  "professionals": [
+    {
+      "id": "demo-hotels-person-04",
+      "name": "Demo Guest Host 04",
+      "role": "Guest host (sample)",
+      "description": "Illustrative demo guest host profile for testing the website. No real professional is represented.",
+      "photo_url": null,
+      "enabled": true,
+      "demo_slots": [
+        {
+          "time": "11:00",
+          "enabled": true
+        },
+        {
+          "time": "13:00",
+          "enabled": false
+        },
+        {
+          "time": "15:00",
+          "enabled": true
+        },
+        {
+          "time": "17:00",
+          "enabled": true
+        }
+      ],
+      "services": [
+        "stay-enquiry"
+      ]
+    }
+  ],
+  "stay_type": "guest-house"
+}

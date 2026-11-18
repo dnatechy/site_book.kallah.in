@@ -42,9 +42,9 @@
     },
     {
       "key": "rating",
-      "label": "Google rating",
+      "label": "Google rating / Demo score",
       "type": "min_number",
-      "field": "google_rating",
+      "field": "rating_value",
       "options": [
         {
           "value": "4.5",

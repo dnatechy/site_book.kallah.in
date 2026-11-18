@@ -1,0 +1,73 @@
+{
+  "id": 700104,
+  "name": "Demo Style Salon 04",
+  "slug": "demo-salon-04",
+  "enabled": true,
+  "published": true,
+  "is_demo": true,
+  "featured": false,
+  "address": "Sample address · Srirangam, Trichy (not a real location)",
+  "area": "Srirangam",
+  "geo": {
+    "lat": 10.762093,
+    "lng": 78.738825
+  },
+  "demo_rating": 4.8,
+  "amenities": {
+    "parking": true,
+    "wifi": true,
+    "accessible": true
+  },
+  "content": {
+    "heading": "Demo Style Salon 04",
+    "summary": "Explore stylists, services and preview sample slots.",
+    "description": "This is a sample salons listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+  },
+  "seo": {
+    "title": "Demo Style Salon 04 — Demo Listing | KALLAH Book",
+    "description": "Explore a sample salons profile, filters and demo slots in KALLAH Book. Not a real business."
+  },
+  "theme": {
+    "colors": {
+      "primary": "#AA466A"
+    }
+  },
+  "professionals": [
+    {
+      "id": "demo-salons-person-04",
+      "name": "Demo Hair Stylist 04",
+      "role": "Hair stylist (sample)",
+      "description": "Illustrative demo hair stylist profile for testing the website. No real professional is represented.",
+      "photo_url": null,
+      "enabled": true,
+      "demo_slots": [
+        {
+          "time": "10:00",
+          "enabled": false
+        },
+        {
+          "time": "11:00",
+          "enabled": true
+        },
+        {
+          "time": "12:00",
+          "enabled": true
+        },
+        {
+          "time": "15:00",
+          "enabled": true
+        },
+        {
+          "time": "17:00",
+          "enabled": true
+        }
+      ],
+      "services": [
+        "bridal"
+      ]
+    }
+  ],
+  "services": [
+    "bridal"
+  ]
+}

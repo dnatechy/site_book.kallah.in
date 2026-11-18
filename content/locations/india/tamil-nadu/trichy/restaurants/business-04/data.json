@@ -1,0 +1,73 @@
+{
+  "id": 700304,
+  "name": "Demo Dine Restaurant 04",
+  "slug": "demo-restaurant-04",
+  "enabled": true,
+  "published": true,
+  "is_demo": true,
+  "featured": false,
+  "address": "Sample address · Srirangam, Trichy (not a real location)",
+  "area": "Srirangam",
+  "geo": {
+    "lat": 10.762093,
+    "lng": 78.738825
+  },
+  "demo_rating": 4.8,
+  "amenities": {
+    "parking": true,
+    "wifi": true,
+    "accessible": true
+  },
+  "content": {
+    "heading": "Demo Dine Restaurant 04",
+    "summary": "Browse cuisines and try sample table reservation times.",
+    "description": "This is a sample restaurants listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+  },
+  "seo": {
+    "title": "Demo Dine Restaurant 04 — Demo Listing | KALLAH Book",
+    "description": "Explore a sample restaurants profile, filters and demo slots in KALLAH Book. Not a real business."
+  },
+  "theme": {
+    "colors": {
+      "primary": "#CF6631"
+    }
+  },
+  "professionals": [
+    {
+      "id": "demo-restaurants-person-04",
+      "name": "Demo Table Host 04",
+      "role": "Table host (sample)",
+      "description": "Illustrative demo table host profile for testing the website. No real professional is represented.",
+      "photo_url": null,
+      "enabled": true,
+      "demo_slots": [
+        {
+          "time": "12:00",
+          "enabled": false
+        },
+        {
+          "time": "12:30",
+          "enabled": true
+        },
+        {
+          "time": "13:30",
+          "enabled": true
+        },
+        {
+          "time": "19:00",
+          "enabled": true
+        },
+        {
+          "time": "20:00",
+          "enabled": true
+        }
+      ],
+      "services": [
+        "table-reservation"
+      ]
+    }
+  ],
+  "cuisines": [
+    "south-indian"
+  ]
+}

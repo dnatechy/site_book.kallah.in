@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="crumb"><a href="{{ url_for('web.home') }}">Home</a> / Demo bookings</nav>
+<section class="section">
+<p class="eyebrow">YOUR BROWSER-ONLY DEMO</p>
+<h1>My demo bookings</h1>
+<p class="muted">No real appointments are created. These previews are saved on this browser only and can be cancelled here.</p>
+<div id="demo-booking-list" class="demo-booking-list" aria-live="polite">
+<p>Checking your sample bookings…</p>
+</div>
+<a class="button button-secondary" href="{{ url_for('web.city_page', city_slug='trichy') }}">Explore more sample places</a>
+</section>
+{% endblock %}

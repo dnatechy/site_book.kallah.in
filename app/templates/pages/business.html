@@ -6,10 +6,15 @@
 <section class="section business-intro"><p class="eyebrow">{{ category.name | upper }} · {{ city.name | upper }}</p>
 <h1>{{ business.content.heading | default(business.name,true) }}</h1>
 <p class="muted">{{ business.content.summary | default('',true) }}</p>
+{% if business.is_demo %}<span class="sample-label">Demo listing · Not a real business</span>{% endif %}
 {% if business.address is defined %}<p>📍 {{ business.address }}</p>{% endif %}
 {% if business.google_rating is defined and business.rating_source | default('') == 'google' %}
 <p>★ {{ business.google_rating }} · Google rating</p>{% endif %}
+{% if business.is_demo %}
+<div class="notice">These are test details only. You can try a sample slot and see a browser-only confirmation; it does not reserve an actual appointment.</div>
+{% else %}
 <div class="notice">Booking and live slot availability are being prepared. No payment is collected on this page.</div>
+{% endif %}
 </section>
 {% if business.professionals %}
 <section class="section compact-section" id="professionals">
@@ -24,8 +29,30 @@
 {% if person.description %}<p>{{ person.description }}</p>{% endif %}
 {% if person.specialties %}<p class="profile-skills">{{ person.specialties | join(" · ") }}</p>{% endif %}
 {% if person.services %}<p class="profile-skills">{{ person.services | join(" · ") }}</p>{% endif %}
+{% if business.is_demo %}
+<button class="button button-primary" type="button" data-demo-person="{{ person.id }}">Try sample slots</button>
+{% else %}
 <button class="button button-secondary" type="button" disabled aria-label="Slots for {{ person.name }} coming soon">Slots coming soon</button>
+{% endif %}
 </div></article>
 {% endfor %}</div></section>
+{% endif %}
+{% if business.is_demo and demo.enabled %}
+<section class="section demo-booking-section" id="demo-booking-panel" hidden>
+<h2>Try a sample appointment</h2>
+<p class="muted">This preview is stored only in your browser. It is not an actual booking.</p>
+<div class="demo-fee"><span>Future convenience fee (preview)</span><strong>₹{{ booking_config.convenience_fee_inr }}</strong>
+<small>No fee is collected in demo mode. Payable now: ₹{{ booking_config.demo_payable_inr }}.</small></div>
+<form id="demo-booking-form">
+<p><strong id="demo-selected-person"></strong></p>
+<label class="demo-date-label">Choose a date <input id="demo-date" type="date" required></label>
+<p><strong>Sample available times</strong></p>
+<div class="demo-slot-list" id="demo-slot-list" role="group" aria-label="Sample time slots"></div>
+<button type="submit" class="button button-primary">Confirm demo booking · ₹0</button>
+</form>
+<p id="demo-booking-message" class="demo-result" role="status" aria-live="polite"></p>
+<p><a href="{{ url_for('web.demo_bookings') }}">View my demo bookings</a></p>
+</section>
+<script type="application/json" id="demo-booking-data">{{ {"business": business.name, "slug": business.slug, "category": category.slug, "city": city.slug, "professionals": business.professionals, "days_ahead": booking_config.demo_days_ahead} | tojson }}</script>
 {% endif %}
 {% endblock %}
