@@ -1,0 +1,22 @@
+{
+  "home": {
+    "title": "KALLAH Book | Book Ahead, Spend Less Time Waiting",
+    "description": "Explore local services and booking options with KALLAH Book."
+  },
+  "city": {
+    "title": "Services in {city} | {site}",
+    "description": "Explore clinics, salons, hotels and restaurants in {city}."
+  },
+  "category": {
+    "title": "{category} in {city} | {site}",
+    "description": "Explore {category} in {city} and discover participating businesses."
+  },
+  "business": {
+    "title": "{name} in {city} | {site}",
+    "description": "Find business details and booking information for {name} in {city}."
+  },
+  "not_found": {
+    "title": "Page Not Found | {site}",
+    "description": "The requested page could not be found."
+  }
+}

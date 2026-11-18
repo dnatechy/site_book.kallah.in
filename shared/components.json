@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "components": {
+    "button": {
+      "primaryToken": "colors.primary",
+      "radiusToken": "radius.medium"
+    },
+    "card": {
+      "backgroundToken": "colors.surface",
+      "radiusToken": "radius.medium"
+    }
+  }
+}

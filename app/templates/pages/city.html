@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="crumb"><a href="{{ url_for('web.home') }}">Home</a> / {{ city.name }}</nav>
+<section class="section">
+  <h1>Explore services in {{ city.name }}</h1>
+  <p>Browse the available categories in {{ city.name }}.</p>
+  <div class="cards">
+    {% for category in categories %}
+    <a class="card" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">
+      <strong>{{ category.name }}</strong><span>{{ category.description }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

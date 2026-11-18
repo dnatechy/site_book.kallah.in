@@ -1,8 +1,13 @@
 .env
 .env.*
 !.env.example
+.venv/
+venv/
 __pycache__/
-*.pyc
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
 tmp/
 cgi-bin/
 .user.ini

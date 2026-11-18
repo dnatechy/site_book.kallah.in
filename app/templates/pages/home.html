@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">KALLAH BOOK</p>
+  <h1>Book ahead. Spend less time waiting.</h1>
+  <p>Find local services and, once booking is enabled, reserve a convenient time.</p>
+</section>
+<section class="section">
+  <h2>Explore by location</h2>
+  <div class="cards">
+    {% for city in cities %}
+    <a class="card" href="{{ url_for('web.city_page', city_slug=city.slug) }}">
+      <strong>{{ city.name }}</strong><span>{{ city.state }}, {{ city.country }}</span>
+    </a>
+    {% else %}
+    <p>Locations will appear here soon.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
