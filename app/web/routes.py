@@ -176,6 +176,10 @@ def sitemap():
                 urls.append("/" + slug + "/" + category_slug)
                 urls.extend("/" + slug + "/" + category_slug + "/" + b["slug"]
                             for b in businesses)
+                if category_slug in ('clinics', 'salons'):
+                    urls.extend(f"/{slug}/{category_slug}/{b['slug']}/{p['id']}"
+                                for b in businesses for p in b.get('professionals', [])
+                                if p.get('id'))
                 if category_slug == 'hotels':
                     urls.extend(f"/{slug}/hotels/{b['slug']}/rooms/{room['id']}"
                                 for b in businesses for room in b.get('rooms', []))
