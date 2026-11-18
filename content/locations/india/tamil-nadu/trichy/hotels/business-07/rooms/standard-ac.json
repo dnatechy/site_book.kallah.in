@@ -1,0 +1,88 @@
+{
+  "id": "standard-ac",
+  "name": "Standard AC Room",
+  "enabled": true,
+  "description": "A comfortable, air-conditioned room with a private bathroom and space to unwind. Illustrative demo photographs.",
+  "photo_url": "https://hiltongardenairport15108.hotels-pennsylvania.com/data/Images/OriginalPhoto/12851/1285169/1285169581/moon-township-hilton-garden-inn-pittsburgh-airport-image-20.JPEG",
+  "bed": "1 king bed",
+  "size_sqm": 24,
+  "max_guests": 2,
+  "amenities": [
+    "Air conditioning",
+    "Private bathroom",
+    "Wi-Fi",
+    "Television"
+  ],
+  "inventory": 1,
+  "time_zone": "Asia/Kolkata",
+  "nightly_rate_inr": 2500,
+  "check_in_time": "14:00",
+  "check_out_time": "11:00",
+  "max_nights": 30,
+  "booking_modes": [
+    "night",
+    "hour"
+  ],
+  "blocked_stays": [
+    {
+      "check_in": "2026-11-20T14:00",
+      "check_out": "2026-11-22T11:00"
+    }
+  ],
+  "gallery": {
+    "albums": [
+      {
+        "id": "room",
+        "title": "The room",
+        "source": "items",
+        "items": [
+          {
+            "type": "image",
+            "url": "https://hiltongardenairport15108.hotels-pennsylvania.com/data/Images/OriginalPhoto/12851/1285169/1285169581/moon-township-hilton-garden-inn-pittsburgh-airport-image-20.JPEG",
+            "caption": "Illustrative demo room photo",
+            "layout": "landscape"
+          },
+          {
+            "type": "image",
+            "url": "https://cache.marriott.com/content/dam/marriott-renditions/WVBPE/wvbpe-guestroom-0031-hor-clsc.jpg?downsize=1336px%3A%2A&interpolation=progressive-bilinear&output-quality=70",
+            "caption": "Alternative room reference",
+            "layout": "landscape"
+          }
+        ]
+      },
+      {
+        "id": "hotel",
+        "title": "The hotel",
+        "source": "items",
+        "items": [
+          {
+            "type": "image",
+            "url": "/static/images/hotel_place.jpg",
+            "caption": "Demo hotel reception"
+          }
+        ]
+      }
+    ]
+  },
+  "hourly": {
+    "rate_inr": 440,
+    "min_hours": 2,
+    "max_hours": 8,
+    "opens": "06:00",
+    "closes": "22:00"
+  },
+  "reviews": [
+    {
+      "author": "Demo guest 01",
+      "rating": 5,
+      "comment": "Clean room, comfortable bed and good air conditioning.",
+      "date": "2026-11-12"
+    },
+    {
+      "author": "Demo guest 02",
+      "rating": 4,
+      "comment": "A convenient room for a short stay. The bathroom was tidy and Wi-Fi worked well.",
+      "date": "2026-11-08"
+    }
+  ]
+}
