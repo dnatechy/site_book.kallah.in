@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/{{ city.slug }}">{{ city.name }}</a><span>/</span><a href="/{{ city.slug }}/hotels?browse=1">Hotels</a><span>/</span><a href="/{{ city.slug }}/hotels/{{ business.slug }}">{{ business.name }}</a><span>/</span><span>{{ room.name }}</span></nav>
+<section class="section room-detail-layout">
+  <div class="room-overview professional-profile-top">
+    {% set person = room %}{% include "components/gallery.html" %}
+    <p class="eyebrow">{{ business.name }} · {{ business.area }}</p><h1>{{ room.name }}</h1>
+    <p class="room-review-summary">{% if room.review_count %}<a href="#room-reviews"><span class="demo-rating">★ {{ room.rating }} / 5</span> · {{ room.review_count }} room reviews</a>{% else %}<a href="#room-reviews">No room reviews yet</a>{% endif %}</p>
+    <img class="room-hero-photo" src="{{ room.photo_url }}" alt="{{ room.name }}" referrerpolicy="no-referrer">
+    <p class="muted">{{ room.description }}</p><div class="room-amenity-chips"><span>{{ room.bed }}</span><span>{{ room.size_sqm }} m²</span><span>Up to {{ room.max_guests }} guests</span>{% for amenity in room.amenities %}<span>{{ amenity }}</span>{% endfor %}</div>
+    <div class="room-stay-policy"><h2>Stay details</h2><p>Nightly check-in: <strong>{{ room.check_in_time }}</strong> · Check-out: <strong>{{ room.check_out_time }}</strong></p>{% if 'hour' in room.booking_modes %}<p>Hourly stays: {{ room.hourly.opens }}–{{ room.hourly.closes }} · {{ room.hourly.min_hours }}–{{ room.hourly.max_hours }} hours.</p>{% else %}<p>This room is available for overnight stays.</p>{% endif %}<p class="muted">All arrival and departure times are in India Standard Time.</p></div>
+  </div>
+  <aside class="room-reservation-card" aria-labelledby="room-reservation-title"><p class="eyebrow">Make room for a good stay</p><h2 id="room-reservation-title">Book your room</h2><div class="room-rate-heading"><strong>₹{{ room.nightly_rate_inr }}</strong><span>/ night</span></div>
+    <form id="room-booking-form">
+      <fieldset class="room-booking-modes"><legend>Stay type</legend><label><input type="radio" name="stay-mode" value="night" checked>Nightly stay</label>{% if 'hour' in room.booking_modes %}<label><input type="radio" name="stay-mode" value="hour">Hourly stay · ₹{{ room.hourly.rate_inr }}/hour</label>{% endif %}</fieldset>
+      <div class="room-date-fields"><label>Check-in date<input id="room-check-in" type="date" class="input-control" required></label><label id="room-check-out-field">Check-out date<input id="room-check-out" type="date" class="input-control" required></label></div>
+      <div id="room-hour-fields" hidden><div class="room-date-fields"><label>Arrival time<input id="room-arrival-time" type="time" class="input-control" value="10:00"></label><label>Hours<input id="room-hours" type="number" class="input-control" value="{{ room.hourly.min_hours if room.hourly else 2 }}" min="{{ room.hourly.min_hours if room.hourly else 2 }}" max="{{ room.hourly.max_hours if room.hourly else 12 }}" step="1"></label></div></div>
+      <label class="room-guest-field">Guests<input id="room-guests" type="number" class="input-control" value="1" min="1" max="{{ room.max_guests }}" step="1" required></label>
+      <div class="room-quote-box" aria-live="polite"><p id="room-price-breakdown">Choose your dates.</p><div><span>Room total</span><strong id="room-total">—</strong></div><p id="room-availability" role="status"></p></div>
+      <button type="submit" class="button button-primary booking-submit-btn" id="room-book-button">Reserve room</button><p id="room-booking-message" role="status" class="demo-result"></p>
+      <p class="room-demo-note">Demo reservation · no payment is collected.</p><a href="/demo-bookings">View my bookings →</a>
+    </form>
+  </aside>
+  <section class="professional-reviews-block room-reviews" id="room-reviews" aria-labelledby="room-reviews-title">
+    <div class="section-heading"><div><p class="eyebrow">{% if business.is_demo %}Demo guest feedback{% else %}Guest feedback{% endif %}</p><h2 id="room-reviews-title">Room reviews</h2><p class="muted">{{ room.name }}</p></div>{% if room.review_count %}<strong class="demo-rating">★ {{ room.rating }} / 5 <small>({{ room.review_count }} reviews)</small></strong>{% endif %}</div>
+    {% if business.is_demo and room.review_count %}<p class="muted room-review-note">Sample reviews for this demo room.</p>{% endif %}
+    <div class="reviews-grid">{% for rev in room.reviews %}<article class="review-card"><div class="review-card-head"><strong>{{ rev.author }}</strong><span class="demo-rating">★ {{ rev.rating }} / 5</span></div><p class="review-comment">“{{ rev.comment }}”</p><time class="review-date" datetime="{{ rev.date }}">{{ rev.date }}</time></article>{% else %}<p class="muted">No reviews for this room yet.</p>{% endfor %}</div>
+  </section>
+</section>
+<script type="application/json" id="room-booking-data">{{ {"room": room, "business": {"name": business.name, "slug": business.slug}, "city": city.slug} | tojson }}</script>
+{% set person = room %}{% include "components/gallery_dialogs.html" %}
+<script src="{{ url_for('static', filename='js/room_booking.js') }}" defer></script>
+{% endblock %}
