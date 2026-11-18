@@ -37,3 +37,13 @@ Current slots are read-only JSON schedule previews. Demo selections are local-on
 - Do not deploy directly from the reference repository.
 - Keep secrets, .env, logs, virtual environments and user data out of Git.
 - Update README, architecture/API docs, tests and this handbook with each significant change.
+
+
+## 2026-11-18 / AI Studio preview migration
+- Source: `mani-baskar/kallah-book-with-AI-Studio` branch `sites-preview-2026-11-18`; target: `dnatechy/site_book.kallah.in` Dev_v01 -> Publish.
+- Keep Flask SSR and `/api/v1` as the sole shared backend, including future Flutter clients. Never introduce EJS/Node to hosting.
+- `app/templates/base.html` owns the shared navigation/header/footer and SEO metadata. Do not fork common headers for restaurants.
+- Global theme: `content/global/theme.json`, `allow_scoped_overrides=false` by default; theme is not independently set in category pages.
+- Do not regress existing bootstrap/search/pagination/professional availability APIs. Rooms and dining have distinct quote endpoints and JSON content directories.
+- Quotes are not reservations. No real OTP/payment/booking persistence until explicit transactional backend work.
+- Full maps, contracts, hosting command: `docs/AI_STUDIO_FLASK_MIGRATION.md`.

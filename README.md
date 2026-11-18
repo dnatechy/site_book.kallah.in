@@ -119,3 +119,10 @@ Business discovery supports JSON-defined filters, search, sorting, pagination an
 Demo booking interactions are browser-local only (`localStorage`). There is no server-side booking persistence, slot locking, real-time availability, authentication, payment, SMS or notification integration yet. Do not treat demo slots or demo ratings as real business data. No production booking or payment is enabled.
 
 Before a real public launch, replace demo fixtures with verified business data and set `content/global/demo.json` to `enabled: false`. Keep runtime `.env`, credentials, logs, virtual environments, backups and user data outside Git.
+
+
+## AI Studio preview migration (18 November 2026)
+
+Restaurant group dining, hotel rooms and galleries from `sites-preview-2026-11-18` were ported into the existing Flask/Jinja implementation; the EJS/Node/Sites runtime was not copied. Existing Flutter-ready search, pagination and professional schedule APIs were retained.
+
+See **[Python migration, folder map and APIs](docs/AI_STUDIO_FLASK_MIGRATION.md)**. Site-wide branding is configured once in `content/global/theme.json`. Hospitality quotes are server-calculated but remain demonstrations until payment, OTP and persistent bookings are implemented.
