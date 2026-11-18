@@ -1,0 +1,30 @@
+{
+  "albums": [
+    {
+      "id": "dining-room",
+      "title": "The dining room",
+      "source": "items",
+      "items": [
+        {
+          "type": "image",
+          "url": "/static/images/restaurant_place.jpg",
+          "caption": "Illustrative demo dining room",
+          "layout": "landscape"
+        }
+      ]
+    },
+    {
+      "id": "food",
+      "title": "On the table",
+      "source": "items",
+      "items": [
+        {
+          "type": "image",
+          "url": "/static/images/veg_meals_card.jpg",
+          "caption": "Illustrative vegetarian meal",
+          "layout": "landscape"
+        }
+      ]
+    }
+  ]
+}
