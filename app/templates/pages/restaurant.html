@@ -1,19 +1,8 @@
 {% extends "base.html" %}
-{% from "components/review_cards.html" import review_cards %}
 {% block content %}
 {% set dining = business.dining %}
-<nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/{{ city.slug }}">{{ city.name }}</a><span>/</span><a href="/{{ city.slug }}/restaurants?browse=1">Restaurants</a><span>/</span><span>{{ business.name }}</span></nav>
-<section class="section dining-hero">
-  <div class="dining-hero-image"><img src="/static/images/restaurant_place.jpg" alt="Illustrative dining room at {{ business.name }}"><span>Good food. Better company.</span></div>
-  <div class="dining-hero-copy professional-profile-top">
-    {% set person = {"name": business.name, "gallery": dining.gallery} %}{% include "components/gallery.html" %}
-    <p class="eyebrow">Group dining · {{ business.area }}, {{ city.name }}</p><h1>{{ business.name }}</h1>
-    <p class="dining-intro">Bring your people.<br><em>We’ll make room.</em></p>
-    <p class="muted">Reserve seats together, choose your favourites, and get your meal started before you arrive.</p>
-    <div class="dining-hero-meta"><a href="#restaurant-reviews">{% if dining.restaurant_reviews.review_count %}<strong>★ {{ dining.restaurant_reviews.rating }} / 5</strong> · {{ dining.restaurant_reviews.review_count }} restaurant reviews{% else %}No restaurant reviews yet{% endif %}</a><span>{{ 'Pure vegetarian' if business.diet == 'veg' else 'Veg & non-veg' }}</span><span>Groups up to {{ dining.max_party_size }}</span></div>
-    <p class="dining-address">{{ business.address }}{% if business.phone %} · <a href="tel:{{ business.phone | replace(' ', '') }}">Call restaurant</a>{% endif %}</p>
-  </div>
-</section>
+{% from "components/reviews.html" import review_section, review_list %}
+{% include "components/business_header.html" %}
 <section class="section dining-layout">
   <section class="dining-card dining-visit" aria-labelledby="dining-visit-title">
     <p class="eyebrow">01 / Make a plan</p><h2 id="dining-visit-title">A table for your whole group</h2><p class="muted">We check tables that can seat everyone together.</p>
@@ -31,7 +20,7 @@
       <article class="dining-dish" data-dish-card="{{ dish.id }}" data-dish-diet="{{ dish.diet }}">
         <div class="dining-dish-photo">{% if dish.photo_url %}<img src="{{ dish.photo_url }}" alt="{{ dish.name }} illustration" loading="lazy">{% endif %}<span class="dining-diet-tag {{ 'is-nonveg' if dish.diet == 'non-veg' else '' }}">{{ 'Non-veg' if dish.diet == 'non-veg' else 'Veg' }}</span></div>
         <div class="dining-dish-body"><span class="dining-dish-category">{{ dish.category }} · serves {{ dish.serves }}</span><h3>{{ dish.name }}</h3><p>{{ dish.description }}</p>
-          <details class="dining-dish-reviews"><summary>{% if dish.review_count %}★ {{ dish.rating }} · {{ dish.review_count }} dish reviews{% else %}No dish reviews yet{% endif %}</summary>{% if business.is_demo and dish.review_count %}<small>Sample dish feedback</small>{% endif %}{% for rev in dish.reviews %}<div><strong>{{ rev.author }} · ★ {{ rev.rating }}/5</strong><p>{{ rev.comment }}</p><time datetime="{{ rev.date }}">{{ rev.date }}</time></div>{% endfor %}</details>
+          <details class="dining-dish-reviews"><summary>{% if dish.review_count %}★ {{ dish.rating }} · {{ dish.review_count }} dish reviews{% else %}No dish reviews yet{% endif %}</summary>{% if business.is_demo and dish.review_count %}<small>Sample dish feedback</small>{% endif %}{{ review_list(dish.reviews, true) }}</details>
           <div class="dining-dish-bottom"><strong>₹{{ '%g' | format(dish.price_paise / 100) }}</strong>{% if dish.available and dish.stock_per_slot > 0 %}<div class="dining-quantity"><button type="button" data-quantity="{{ dish.id }}" data-delta="-1" aria-label="Remove one {{ dish.name }}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/></svg></button><label class="sr-only" for="qty-{{ dish.id }}">Quantity of {{ dish.name }}</label><input id="qty-{{ dish.id }}" data-dish-quantity="{{ dish.id }}" type="number" min="0" max="{{ dish.max_per_order }}" step="1" value="0"><button type="button" data-quantity="{{ dish.id }}" data-delta="1" aria-label="Add one {{ dish.name }}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg></button></div>{% else %}<span class="dining-sold-out">Sold out</span>{% endif %}</div>
         </div>
       </article>
@@ -39,8 +28,9 @@
     </div><p class="dining-small">Menu pictures are illustrative. Tell the restaurant about allergies or dietary requirements before ordering.</p>
   </section>
   <aside class="dining-card dining-order" aria-labelledby="dining-order-title"><p class="eyebrow">03 / All together</p><h2 id="dining-order-title">Your dining plan</h2><div class="dining-summary-visit" id="dining-summary-visit"></div><div id="dining-cart" class="dining-cart"><p class="muted">Add dishes to pre-order your meal.</p></div><div class="dining-total"><span>Food total</span><strong id="dining-food-total">₹0</strong></div><div class="dining-pay-now"><span>Pay at booking</span><strong id="dining-pay-total">₹0</strong></div><p class="dining-small">Menu prices include taxes. No seat reservation charge.<br>Pre-orders are paid in full when booking.</p><button type="button" class="button button-primary" id="dining-checkout">Review dining plan</button><p id="dining-message" role="status"></p><p class="dining-demo-note">Demo booking · no money is collected.</p><a href="/demo-bookings">My bookings →</a></aside>
-  <section class="dining-card dining-restaurant-reviews" id="restaurant-reviews" aria-labelledby="restaurant-reviews-title"><div class="section-heading"><div><p class="eyebrow">The place, the food, the company</p><h2 id="restaurant-reviews-title">Restaurant reviews</h2></div>{% if dining.restaurant_reviews.review_count %}<strong class="demo-rating">★ {{ dining.restaurant_reviews.rating }} / 5</strong>{% endif %}</div>{% if business.is_demo %}<p class="dining-small">Sample guest reviews for this demo restaurant. Dish reviews are shown with each menu item.</p>{% endif %}{{ review_cards(dining.restaurant_reviews.reviews, empty_message='No restaurant reviews yet.') }}</section>
+
 </section>
+<div class="section">{{ review_section(dining.restaurant_reviews.reviews, "Restaurant reviews", "restaurant-reviews", dining.restaurant_reviews.rating, business.is_demo, business.name) }}</div>
 <dialog class="dining-checkout-dialog" id="dining-checkout-dialog" aria-labelledby="dining-checkout-title"><div class="dining-checkout-shell"><header><div><p class="eyebrow">One last look</p><h2 id="dining-checkout-title">Ready for your get-together?</h2></div><button type="button" class="gallery-close" id="dining-close-checkout" aria-label="Close checkout"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></header><div id="dining-checkout-details"></div><p class="dining-demo-note">Demo checkout — no money will be charged.</p><button type="button" class="button button-primary" id="dining-confirm">Simulate payment &amp; reserve</button><p id="dining-checkout-error" role="status"></p></div></dialog>
 <script type="application/json" id="dining-data">{{ {"dining": dining, "business": {"name": business.name, "slug": business.slug}, "city": city.slug} | tojson }}</script>
 {% set person = {"name": business.name, "gallery": dining.gallery} %}{% include "components/gallery_dialogs.html" %}

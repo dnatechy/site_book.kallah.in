@@ -6,7 +6,7 @@ def test_flutter_bootstrap_contains_shared_app_configuration(client):
     assert payload["site"]["name"] == "KALLAH Book"
     assert payload["pages"]["home"]["hero"]["title"] == "Book ahead."
     assert payload["pages"]["navigation"][0]["label"] == "Services"
-    assert payload["theme"]["colors"]["primary"] == "#C92A2A"
+    assert payload["theme"]["colors"]["primary"] == "#E53935"
     assert payload["booking"]["timezone"] == "Asia/Kolkata"
     assert payload["locations"]
     assert payload["selected_location"]["city"]["slug"] == "trichy"

@@ -1,0 +1,22 @@
+{% macro review_list(reviews, compact=false) %}
+<div class="reviews-grid{% if compact %} reviews-grid--compact{% endif %}">
+  {% for review in reviews %}
+  <article class="review-card">
+    <div class="review-card-head"><strong>{{ review.author }}</strong><span class="demo-rating tabular">★ {{ review.rating }} / 5</span></div>
+    <p class="review-comment">“{{ review.comment }}”</p>
+    <time class="review-date" datetime="{{ review.date }}">{{ review.date }}</time>
+  </article>
+  {% else %}<p class="muted">No reviews yet.</p>{% endfor %}
+</div>
+{% endmacro %}
+
+{% macro review_section(reviews, title, section_id, rating=none, sample=false, subtitle='', layout_class='') %}
+<section class="reviews-section {{ layout_class }}" id="{{ section_id }}" aria-labelledby="{{ section_id }}-title">
+  <div class="section-heading">
+    <div><p class="eyebrow">Guest feedback</p><h2 id="{{ section_id }}-title">{{ title }}</h2>{% if subtitle %}<p class="muted">{{ subtitle }}</p>{% endif %}</div>
+    {% if rating is not none %}<strong class="demo-rating tabular">★ {{ rating }} / 5 <small>({{ reviews | length }} reviews)</small></strong>{% endif %}
+  </div>
+  {% if sample and reviews %}<p class="reviews-note muted">Sample reviews for this demo.</p>{% endif %}
+  {{ review_list(reviews) }}
+</section>
+{% endmacro %}

@@ -1,13 +1,6 @@
 {
   "version": 2,
-  "allow_scoped_overrides": false,
-  "colors": {
-    "primary": "#C92A2A",
-    "secondary": "#E66A2C",
-    "background": "#FAF9F7",
-    "surface": "#FFFFFF",
-    "ink": "#141418",
-    "text": "#18181B",
-    "muted": "#5A5C66"
-  }
+  "mode": "global",
+  "colors": {},
+  "category_colors": {}
 }

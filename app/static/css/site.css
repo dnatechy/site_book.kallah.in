@@ -101,7 +101,7 @@ input:focus-visible {
   top: 0;
   z-index: 20;
   border-bottom: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-background) 88%, transparent);
+  background: rgba(250, 249, 247, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -119,7 +119,7 @@ input:focus-visible {
   font-weight: 800;
   font-size: 1.3rem;
   letter-spacing: -0.035em;
-  color: var(--color-ink);
+  color: var(--color-brand-ink);
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -128,13 +128,13 @@ input:focus-visible {
   text-decoration: none;
 }
 
-.brand span,
 .hero h1 em {
   color: var(--color-primary);
   font-style: italic;
 }
 
 .brand span {
+  color: var(--color-brand-accent);
   font-style: normal;
 }
 
@@ -1080,7 +1080,7 @@ input:focus-visible {
 
 .location-status {
   min-height: 1.1em;
-  color: #8A542E;
+  color: var(--color-rating);
   font-size: 0.9rem;
   margin: 4px 0;
 }
@@ -1103,6 +1103,7 @@ input:focus-visible {
 }
 
 .business-media-box {
+  position: relative;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--color-border);
@@ -1111,15 +1112,19 @@ input:focus-visible {
 }
 
 .business-cover {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  min-height: 300px;
-  max-height: 420px;
+  min-height: 0;
+  max-height: none;
   object-fit: cover;
   display: block;
 }
 
 .business-summary-col {
+  position: relative;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1548,8 +1553,9 @@ input:focus-visible {
   border-top: 1px solid var(--color-border);
 }
 
-.professional-reviews-block {
-  grid-area: reviews;
+.professional-reviews-block { grid-area: reviews; }
+
+.reviews-section {
   min-width: 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -1558,13 +1564,15 @@ input:focus-visible {
   box-shadow: var(--shadow-card);
 }
 
-.professional-reviews-block .section-heading {
+.reviews-section .section-heading {
+  flex-wrap: wrap;
+  gap: 12px;
   margin-bottom: 18px;
 }
 
 .reviews-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
   gap: 16px;
 }
 
@@ -2247,7 +2255,7 @@ input:focus-visible {
 .channel-choice-card input:checked + .channel-card-body {
   border-color: var(--color-primary);
   background: var(--color-surface);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 14%, transparent);
+  box-shadow: 0 0 0 2px rgba(201, 42, 42, 0.14);
 }
 
 @media (max-width: 960px) {
@@ -2304,7 +2312,7 @@ input:focus-visible {
   .filter-wizard,
   .business-hero-grid,
   .professional-profile-top,
-  .professional-reviews-block,
+  .reviews-section,
   .direct-booking-card,
   .login-card {
     padding: 18px 16px;
@@ -2375,10 +2383,17 @@ input:focus-visible {
 .phone-number-field .login-phone-input:focus-visible { outline: none; }
 .phone-number-help { color: var(--color-muted); font-size: .75rem; font-weight: 400; }
 
-
-/* Preserve existing clinic and salon profile wrapper. */
-.professional-profile-card {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
+/* Shared showcase/reviews: layout belongs to the page, appearance to the component. */
+.business-summary-col:has(> .profile-gallery-trigger) > .eyebrow,
+.business-summary-col:has(> .profile-gallery-trigger) > h1 { padding-right: 56px; }
+.business-summary-col > .profile-gallery-trigger { top: 0; right: 0; }
+.reviews-section { scroll-margin-top: 100px; }
+.reviews-section .section-heading h2 { margin: 0; }
+.reviews-section .section-heading p { margin: 4px 0 0; }
+.reviews-section small { font-size: .8rem; font-weight: 500; }
+.reviews-note { font-size: .8rem; margin-top: -6px; }
+.reviews-grid--compact { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.reviews-grid--compact .review-card { padding: 12px; box-shadow: none; }
+.reviews-grid--compact .review-card-head,
+.reviews-grid--compact .review-comment,
+.reviews-grid--compact .review-date { font-size: .75rem; }

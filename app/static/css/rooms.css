@@ -3,7 +3,7 @@
 .hotel-room-card:hover { text-decoration: none; box-shadow: var(--shadow-lift); }
 .hotel-room-photo { position: relative; }
 .hotel-room-photo img { width: 100%; height: 290px; object-fit: cover; display: block; }
-.hotel-room-photo > span { position: absolute; bottom: 16px; left: 16px; border-radius: 30px; padding: 5px 13px; color: #fff; background: color-mix(in srgb, var(--color-ink) 70%, transparent); backdrop-filter: blur(8px); font-size: .75rem; }
+.hotel-room-photo > span { position: absolute; bottom: 16px; left: 16px; border-radius: 30px; padding: 5px 13px; color: #fff; background: #191916b0; backdrop-filter: blur(8px); font-size: .75rem; }
 .hotel-room-card-body { padding: 24px; }
 .hotel-room-card-body h3 { font-size: 1.3rem; margin: 0 0 8px; }
 .hotel-room-card-body > p { color: var(--color-muted); font-size: .88rem; }
@@ -41,9 +41,6 @@
 @media(max-width:680px) { .room-reservation-card, .hotel-room-card-body { padding: 20px 16px; } .hotel-room-photo img { height: 240px; } .room-date-fields { gap: 10px; } }
 
 .room-reviews { scroll-margin-top: 100px; }
-.room-reviews .section-heading { flex-wrap: wrap; gap: 12px; }
-.room-reviews .section-heading p { margin: 4px 0 0; }
-.room-reviews .reviews-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%,230px),1fr)); }
 .room-reviews small { font-size: .8rem; font-weight: 500; }
 .room-review-summary { font-size: .85rem; margin: 4px 0 16px; }
-.room-review-note { font-size: .8rem; margin-top: -6px; }
+.room-reviews { grid-area: reviews; }

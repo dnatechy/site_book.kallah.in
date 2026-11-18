@@ -28,11 +28,6 @@
     "title": "Demo Care Clinic 01 in Trichy | KALLAH Book",
     "description": "Book appointments and skip queues at Demo Care Clinic 01 in Trichy with KALLAH Book."
   },
-  "theme": {
-    "colors": {
-      "primary": "#DF473C"
-    }
-  },
   "specialties": [
     "dermatology"
   ],

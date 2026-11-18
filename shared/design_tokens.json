@@ -6,7 +6,19 @@
     "background": "#FFFFFF",
     "surface": "#F8F9FA",
     "text": "#202124",
-    "muted": "#667085"
+    "muted": "#667085",
+    "brand_ink": "#141418",
+    "brand_accent": "#E53935",
+    "ink": "#141418",
+    "on_primary": "#FFFFFF",
+    "surface_muted": "#F3F1ED",
+    "rating": "#965216",
+    "success": "#275D35",
+    "success_background": "#EAF3E9",
+    "danger": "#913C2C",
+    "danger_background": "#F8EAE6",
+    "disabled": "#787771",
+    "disabled_background": "#E9E7E2"
   },
   "typography": {
     "fontFamily": "system-ui",

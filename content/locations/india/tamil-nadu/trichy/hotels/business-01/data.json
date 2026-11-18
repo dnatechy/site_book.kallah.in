@@ -28,11 +28,6 @@
     "title": "Demo Stay Hotel 01 in Trichy | KALLAH Book",
     "description": "Book appointments and skip queues at Demo Stay Hotel 01 in Trichy with KALLAH Book."
   },
-  "theme": {
-    "colors": {
-      "primary": "#9A4D32"
-    }
-  },
   "stay_type": "guest-house",
   "photo_url": "/static/images/hotel_place.jpg",
   "timings": "24-hour check-in · Reception 06:00 AM – 11:00 PM",

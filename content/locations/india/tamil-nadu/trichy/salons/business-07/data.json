@@ -28,11 +28,6 @@
     "title": "Demo Style Salon 07 in Trichy | KALLAH Book",
     "description": "Book appointments and skip queues at Demo Style Salon 07 in Trichy with KALLAH Book."
   },
-  "theme": {
-    "colors": {
-      "primary": "#AA466A"
-    }
-  },
   "services": [
     "beard-grooming"
   ],

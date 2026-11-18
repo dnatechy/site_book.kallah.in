@@ -16,9 +16,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
 {% if demo.enabled %}<link rel="stylesheet" href="{{ url_for('static', filename='css/demo.css') }}">{% endif %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/rooms.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dining.css') }}">
+{% if person is defined or room is defined or (business is defined and business.booking_type == 'dining') %}<link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">{% endif %}
+{% if category is defined and category.slug == 'hotels' %}<link rel="stylesheet" href="{{ url_for('static', filename='css/rooms.css') }}">{% endif %}
+{% if business is defined and business.booking_type == 'dining' %}<link rel="stylesheet" href="{{ url_for('static', filename='css/dining.css') }}">{% endif %}
 <style>:root { {{ theme_css | safe }} }</style>
 <script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "WebSite", "name": site.name, "url": site.url} | tojson }}</script>
 <script type="application/json" id="location-data">{{ locations | tojson }}</script>
