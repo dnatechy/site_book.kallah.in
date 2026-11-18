@@ -588,9 +588,12 @@
         segBtn.setAttribute("aria-label", validStart
           ? `Start at ${formatTime12(t)} for ${duration} minutes`
           : `${formatTime12(t)} unavailable for ${duration} minutes`);
+        const conflicts = savedSpans.filter(s => rangesOverlap(t, duration, s.start, s.duration));
         segBtn.title = validStart
           ? `${formatTime12(t)} – ${formatTime12(t + duration)} (${duration} min)`
-          : "Exceeds session end or overlaps a booked slot";
+          : conflicts.length
+            ? `Booked: ${conflicts.map(s => `${formatTime12(s.start)} – ${formatTime12(s.start + s.duration)}`).join(", ")}`
+            : "Not enough time before this session closes";
 
         if (t % 30 === 0 || (t === startM)) {
           segBtn.appendChild(textElement("span", formatTimeShort(t), "session-tick-label tabular"));
@@ -614,7 +617,10 @@
         const bookedEl = document.createElement("div");
         bookedEl.className = "session-booked-span";
         bookedEl.style.left = `${(clampedStart - startM) * pxPerMin}px`;
-        bookedEl.style.width = `${Math.max(24, (clampedEnd - clampedStart) * pxPerMin)}px`;
+        bookedEl.style.width = `${(clampedEnd - clampedStart) * pxPerMin}px`;
+        bookedEl.setAttribute("role", "img");
+        bookedEl.setAttribute("aria-label", `${b.label}: ${formatTime12(b.start)} – ${formatTime12(b.start + b.duration)}`);
+        bookedEl.title = `${b.label}: ${formatTime12(b.start)} – ${formatTime12(b.start + b.duration)}`;
         bookedEl.appendChild(textElement("span", "Booked", "session-span-text"));
         lane.appendChild(bookedEl);
       }
@@ -800,5 +806,8 @@
     }
     selectedTime = "";
     renderSessionBars();
+  });
+  window.addEventListener("storage", event => {
+    if (event.key === storageKey || event.key === null) renderSessionBars();
   });
 })();
