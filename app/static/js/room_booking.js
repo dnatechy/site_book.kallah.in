@@ -82,8 +82,24 @@
   form.addEventListener('input',()=>{message.textContent='';update();});
   form.addEventListener('change',()=>{message.textContent='';update();});
   window.addEventListener('storage', event=>{if(event.key===storageKey || event.key===null)update();});
-  form.addEventListener('submit', event=>{
+  form.addEventListener('submit', async event=>{
     event.preventDefault(); const q=update(); if(!q?.available)return;
+    // Published rates and room inventory are confirmed by Flask before demo save.
+    try {
+      const url = '/api/v1/locations/' + encodeURIComponent(page.city) +
+        '/hotels/businesses/' + encodeURIComponent(page.business.slug) +
+        '/rooms/' + encodeURIComponent(room.id) + '/quote?' +
+        new URLSearchParams(state()).toString();
+      const response = await fetch(url, {headers:{'Accept':'application/json'}});
+      const payload = await response.json();
+      if (!response.ok || !payload.quote?.available || payload.quote.total_inr !== q.total_inr) {
+        message.textContent = payload.error?.message || 'Stay availability or rate changed. Review your dates.';
+        return;
+      }
+    } catch (error) {
+      message.textContent = 'Unable to verify the stay with the booking API. Please retry.';
+      return;
+    }
     let user;
     try { user=JSON.parse(localStorage.getItem('kallah-book:user:v1') || 'null'); } catch { user=null; }
     if (!user || !/^(?:\+91)?\d{10}$/.test(user.phone || '')) {

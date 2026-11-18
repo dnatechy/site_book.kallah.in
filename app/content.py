@@ -230,7 +230,7 @@ def get_businesses(city_slug, category_slug):
                 business["professionals"] = get_professionals(business, city_slug=city_slug)
             if business.get("is_demo"):
                 business["rating_value"] = business.get("demo_rating")
-                business["rating_label"] = "Rating"
+                business["rating_label"] = "Demo score"
             elif business.get("rating_source") == "google":
                 business["rating_value"] = business.get("google_rating")
                 business["rating_label"] = "Google rating"

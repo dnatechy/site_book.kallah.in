@@ -9,8 +9,8 @@ CATEGORIES = ("clinics", "salons", "hotels", "restaurants")
 PROFESSIONALS_PER_BUSINESS = {
     "clinics": 3,
     "salons": 3,
-    "hotels": 2,
-    "restaurants": 2,
+    "hotels": 0,
+    "restaurants": 0,
 }
 
 
@@ -24,8 +24,17 @@ def test_each_category_has_ten_demo_businesses_and_json_professionals(client):
         assert sum(len(row["professionals"]) for row in businesses) >= expected * 10
         for business in businesses:
             assert business["demo_rating"] >= 3.5
-            assert business["rating_value"] == business["demo_rating"]
-            assert business["rating_label"] == "Demo score"
+            if category == "restaurants":
+                assert business["booking_type"] == "dining"
+                assert business["rating_label"] == "Guest rating"
+                assert business["dining"]["menu"]
+                assert business["dining"]["seating_options"]
+            else:
+                assert business["rating_value"] == business["demo_rating"]
+                assert business["rating_label"] == "Demo score"
+            if category == "hotels":
+                assert business["booking_type"] == "rooms"
+                assert business["rooms"]
             assert business["photo_url"].startswith("/static/images/")
             assert len(business["professionals"]) >= expected
             assert all(person["photo_url"].startswith("/static/images/")
