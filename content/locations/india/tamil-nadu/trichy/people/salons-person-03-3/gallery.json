@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "albums": [
+    {
+      "id": "studio",
+      "title": "The studio",
+      "description": "The place, the people, the little details. Demo photographs.",
+      "source": "folder",
+      "folder": "demo-salon/studio"
+    },
+    {
+      "id": "inspiration",
+      "title": "Inspiration",
+      "description": "Externally hosted reference photographs, not this professional’s portfolio.",
+      "source": "items",
+      "items": [
+        {
+          "type": "image",
+          "url": "https://ij.org/wp-content/uploads/2022/09/barber-salon-scaled.jpg",
+          "caption": "Barbering reference · Institute for Justice",
+          "layout": "landscape"
+        },
+        {
+          "type": "image",
+          "ref": "person_photo",
+          "caption": "Meet your stylist",
+          "layout": "portrait"
+        },
+        {
+          "type": "image",
+          "url": "https://www.yoemprendo.com.ar/blog/uploads/precios-belleza02.jpeg",
+          "caption": "Styling reference · Yo Emprendo",
+          "layout": "natural"
+        }
+      ]
+    },
+    {
+      "id": "instagram",
+      "title": "Instagram",
+      "description": "Public posts shared by this professional.",
+      "source": "items",
+      "items": []
+    }
+  ]
+}
