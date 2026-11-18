@@ -28,15 +28,10 @@
     "title": "Demo Dine Restaurant 04 in Trichy | KALLAH Book",
     "description": "Reserve group seating and pre-order food at Demo Dine Restaurant 04 in Trichy."
   },
-  "theme": {
-    "colors": {
-      "primary": "#CF6631"
-    }
-  },
   "cuisines": [
     "south-indian"
   ],
-  "photo_url": "/static/images/nonveg_biryani_card.jpg",
+  "photo_url": "/static/images/restaurant_place.jpg",
   "timings": "07:00 AM – 10:30 PM",
   "diet": "non-veg",
   "dishes": [

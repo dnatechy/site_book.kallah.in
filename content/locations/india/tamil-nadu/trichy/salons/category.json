@@ -61,8 +61,18 @@
       "all_image": "/static/images/filters/rating_top.svg",
       "all_subtitle": "Any rating",
       "options": [
-        { "value": "4.5", "label": "4.5+ ★", "subtitle": "Top rated", "image": "/static/images/filters/rating_top.svg" },
-        { "value": "4", "label": "4+ ★", "subtitle": "Highly rated", "image": "/static/images/filters/rating_top.svg" }
+        {
+          "value": "4.5",
+          "label": "4.5+ ★",
+          "subtitle": "Top rated",
+          "image": "/static/images/filters/rating_top.svg"
+        },
+        {
+          "value": "4",
+          "label": "4+ ★",
+          "subtitle": "Highly rated",
+          "image": "/static/images/filters/rating_top.svg"
+        }
       ]
     },
     {
@@ -88,6 +98,5 @@
       "image": "/static/images/filters/near_me.svg",
       "type": "proximity"
     }
-  ],
-  "theme": {}
+  ]
 }

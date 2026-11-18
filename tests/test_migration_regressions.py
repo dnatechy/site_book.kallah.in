@@ -15,6 +15,9 @@ def test_salon_person_profile_and_trailing_slash(client):
     assert b"session-bars-container" in html
     assert b"header-links" not in html
     assert b"professional-profile-card" not in html
+    assert b"reviews-section" in html
+    assert b"person-reviews" in html
+    assert b"contact-actions" in html
     assert html.index(b"professional-profile-top") < html.index(b"direct-booking-card")
     assert html.index(b"direct-booking-card") < html.index(b"professional-reviews-block")
     assert b"demo-salons-person-01/availability" in html

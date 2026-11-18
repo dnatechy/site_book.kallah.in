@@ -379,24 +379,20 @@ def _merge(base, changes):
 
 
 def get_theme(city_slug=None, category_slug=None, business=None):
-    """Single site-wide palette. Explicit opt-in permits a scoped override."""
+    # Business pages and discovery share the same explicit global/category policy.
     theme = _merge(_json(SHARED_ROOT / "design_tokens.json"), global_config("theme"))
-    if theme.get("allow_scoped_overrides") is True:
-        if city_slug and category_slug:
-            category = get_category(city_slug, category_slug)
-            if category:
-                theme = _merge(theme, category.get("theme", {}))
-        if business:
-            theme = _merge(theme, business.get("theme", {}))
+    if theme.get('mode') == 'category' and category_slug:
+        palette = theme.get('category_colors', {}).get(category_slug, {})
+        theme = _merge(theme, {'colors': {name: value for name, value in palette.items()
+                                         if name in ('primary', 'secondary')}})
     return theme
 
 
 def theme_css(theme):
     variables = []
-    for name in ("primary", "secondary", "background", "surface", "ink", "text", "muted"):
-        value = theme.get("colors", {}).get(name)
-        if isinstance(value, str) and HEX_RE.fullmatch(value):
-            variables.append("--color-" + name + ": " + value)
+    for name, value in theme.get("colors", {}).items():
+        if re.fullmatch(r'[a-z][a-z0-9_]*', name) and isinstance(value, str) and HEX_RE.fullmatch(value):
+            variables.append("--color-" + name.replace('_', '-') + ": " + value)
     return "; ".join(variables)
 
 

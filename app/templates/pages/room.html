@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% from "components/review_cards.html" import review_cards %}
 {% block content %}
+{% from "components/reviews.html" import review_section %}
 <nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/{{ city.slug }}">{{ city.name }}</a><span>/</span><a href="/{{ city.slug }}/hotels?browse=1">Hotels</a><span>/</span><a href="/{{ city.slug }}/hotels/{{ business.slug }}">{{ business.name }}</a><span>/</span><span>{{ room.name }}</span></nav>
 <section class="section room-detail-layout">
   <div class="room-overview professional-profile-top">
@@ -22,11 +22,8 @@
       <p class="room-demo-note">Demo reservation · no payment is collected.</p><a href="/demo-bookings">View my bookings →</a>
     </form>
   </aside>
-  <section class="professional-reviews-block room-reviews" id="room-reviews" aria-labelledby="room-reviews-title">
-    <div class="section-heading"><div><p class="eyebrow">{% if business.is_demo %}Demo guest feedback{% else %}Guest feedback{% endif %}</p><h2 id="room-reviews-title">Room reviews</h2><p class="muted">{{ room.name }}</p></div>{% if room.review_count %}<strong class="demo-rating">★ {{ room.rating }} / 5 <small>({{ room.review_count }} reviews)</small></strong>{% endif %}</div>
-    {% if business.is_demo and room.review_count %}<p class="muted room-review-note">Sample reviews for this demo room.</p>{% endif %}
-    {{ review_cards(room.reviews, empty_message='No reviews for this room yet.') }}
-  </section>
+  {{ review_section(room.reviews, "Room reviews", "room-reviews", room.rating, business.is_demo, room.name, "room-reviews") }}
+
 </section>
 <script type="application/json" id="room-booking-data">{{ {"room": room, "business": {"name": business.name, "slug": business.slug}, "city": city.slug} | tojson }}</script>
 {% set person = room %}{% include "components/gallery_dialogs.html" %}

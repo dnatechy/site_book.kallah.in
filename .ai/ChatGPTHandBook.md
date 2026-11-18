@@ -57,3 +57,11 @@ Current slots are read-only JSON schedule previews. Demo selections are local-on
 - Shared reviews are rendered with app/templates/components/review_cards.html.
 - Restaurant and hotel bookings are represented in demo-bookings history alongside professional appointments.
 - Demo slot/quote APIs are not live capacity reservations and do not persist bookings. Production needs database, authentication, payments and atomic slot locking.
+
+## 2026-11-18 / source shared UI + theme migration
+- Source repo `mani-baskar/kallah-book-with-AI-Studio` commit `bc829fdd` is the reference for the shared business header, contact actions, reviews and global theme tokens.
+- `components/business_header.html` handles all four business types with JSON-driven cover, identity, highlights and contact information. Restaurant seating/menu/checkout remains below that common header.
+- `components/contact_actions.html` macro is reused by businesses and professionals and preserves dynamic phone/email element IDs.
+- `components/reviews.html` provides shared review section/cards across professionals, rooms, restaurants and dish feedback.
+- `shared/design_tokens.json` defines global brand/status colors; `content/global/theme.json` chooses `global` or `category` mode. Only category primary/secondary may change. Business/category JSON no longer owns colors.
+- Keep Flask SEO SSR and versioned `/api/v1` for Flutter; preserve existing Python booking availability and quote APIs. Do not introduce Node, EJS or another backend.
