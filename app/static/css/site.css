@@ -91,7 +91,7 @@ input:focus-visible {
 }
 
 .container {
-  width: min(1260px, calc(100% - 32px));
+  width: calc(100% - 32px);
   margin-inline: auto;
 }
 
@@ -101,7 +101,7 @@ input:focus-visible {
   top: 0;
   z-index: 20;
   border-bottom: 1px solid var(--color-border);
-  background: rgba(250, 249, 247, 0.88);
+  background: color-mix(in srgb, var(--color-background) 88%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -1362,7 +1362,11 @@ input:focus-visible {
   width: 100%;
 }
 
+.modal-close svg, .zoom-btn svg { display: block; pointer-events: none; }
+
 .modal-close {
+  padding: 0;
+  box-sizing: border-box;
   position: absolute;
   top: 12px;
   right: 12px;
@@ -1460,17 +1464,15 @@ input:focus-visible {
 .professional-page-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.02fr) minmax(0, 1.15fr);
+  grid-template-areas: "profile booking" "reviews booking";
+  grid-template-rows: min-content 1fr;
   gap: 28px;
   align-items: start;
 }
 
-.professional-profile-card {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
 .professional-profile-top {
+  grid-area: profile;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1547,6 +1549,8 @@ input:focus-visible {
 }
 
 .professional-reviews-block {
+  grid-area: reviews;
+  min-width: 0;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -1597,6 +1601,7 @@ input:focus-visible {
 
 /* Booking Panel: Venue Switcher, Weekly Table, 7-Day Strip, Service Duration & Dual Horizontal Session Bars */
 .direct-booking-card {
+  grid-area: booking;
   position: sticky;
   top: 84px;
   background: var(--color-surface);
@@ -1880,6 +1885,8 @@ input:focus-visible {
 }
 
 .zoom-btn {
+  padding: 0;
+  box-sizing: border-box;
   width: 28px;
   height: 28px;
   display: grid;
@@ -2240,7 +2247,7 @@ input:focus-visible {
 .channel-choice-card input:checked + .channel-card-body {
   border-color: var(--color-primary);
   background: var(--color-surface);
-  box-shadow: 0 0 0 2px rgba(201, 42, 42, 0.14);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 14%, transparent);
 }
 
 @media (max-width: 960px) {
@@ -2249,6 +2256,11 @@ input:focus-visible {
   .professional-page-grid {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  .professional-page-grid {
+    grid-template-areas: "profile" "booking" "reviews";
+    grid-template-rows: auto;
   }
 
   .direct-booking-card {
@@ -2344,4 +2356,29 @@ input:focus-visible {
   *::after {
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Booked ranges use the same hatching in the timeline and availability legend. */
+.booking-slot-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; margin: 12px 0; font-size: .75rem; color: var(--color-muted); }
+.booking-slot-legend > span { display: inline-flex; align-items: center; gap: 6px; }
+.slot-key { display: inline-block; width: 18px; height: 14px; border: 1px solid #aaa; border-radius: 3px; }
+.slot-key-open { background: var(--color-background); }
+.slot-key-booked { background: repeating-linear-gradient(-45deg, #e7e3db, #e7e3db 4px, #c9c3b7 4px, #c9c3b7 8px); }
+.slot-key-selected { background: var(--color-primary); border-color: var(--color-primary); }
+.session-booked-span { box-sizing: border-box; padding: 0 2px; }
+.session-tick-btn:disabled { cursor: not-allowed; }
+
+.phone-number-field { display: flex; align-items: stretch; border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); background: var(--color-background); overflow: hidden; }
+.phone-country-code { display: flex; align-items: center; flex-shrink: 0; padding: 0 14px; border-right: 1px solid var(--color-border); font-weight: 700; }
+.phone-number-field .login-phone-input { min-width: 0; width: 100%; flex: 1; border: 0; border-radius: 0; background: transparent; box-shadow: none; letter-spacing: .035em; }
+.phone-number-field:focus-within { outline: 2px solid var(--color-primary); outline-offset: 2px; }
+.phone-number-field .login-phone-input:focus-visible { outline: none; }
+.phone-number-help { color: var(--color-muted); font-size: .75rem; font-weight: 400; }
+
+
+/* Preserve existing clinic and salon profile wrapper. */
+.professional-profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }

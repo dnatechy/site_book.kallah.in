@@ -9,7 +9,7 @@ def test_home_health_and_theme(client):
     assert client.get("/").status_code == 200
     assert b"KALLAH Book" in client.get("/").data
     assert client.get("/api/v1/health").json["status"] == "ok"
-    assert client.get("/api/v1/config/theme").json["theme"]["colors"]["primary"] == "#E53935"
+    assert client.get("/api/v1/config/theme").json["theme"]["colors"]["primary"] == "#C92A2A"
 
 
 def test_location_category_and_empty_sitemap(client):
@@ -43,8 +43,18 @@ def test_published_business_isolated_content(client, tmp_path, monkeypatch):
     response = client.get("/trichy/clinics/example-clinic")
     assert response.status_code == 200
     assert b"Example Clinic in Trichy" in response.data
-    assert b"#123456" in response.data
-    assert client.get("/api/v1/locations/trichy/clinics/businesses/example-clinic").json["theme"]["colors"]["primary"] == "#123456"
+    # Default: the site palette cannot be silently overridden by a business.
+    assert b"#123456" not in response.data
+    assert b"#C92A2A" in response.data
+    url = "/api/v1/locations/trichy/clinics/businesses/example-clinic"
+    assert client.get(url).json["theme"]["colors"]["primary"] == "#C92A2A"
+    # A scoped override only works when opted-in from the central JSON file.
+    theme_file = tmp_path / "global/theme.json"
+    theme = json.loads(theme_file.read_text(encoding="utf-8"))
+    theme["allow_scoped_overrides"] = True
+    theme_file.write_text(json.dumps(theme), encoding="utf-8")
+    assert b"#123456" in client.get("/trichy/clinics/example-clinic").data
+    assert client.get(url).json["theme"]["colors"]["primary"] == "#123456"
     assert b"example-clinic" in client.get("/sitemap.xml").data
     assert b"noindex,follow" not in client.get("/trichy/clinics").data
     assert client.get("/trichy/salons/example-clinic").status_code == 404

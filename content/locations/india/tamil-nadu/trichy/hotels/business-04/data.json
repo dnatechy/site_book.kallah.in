@@ -21,8 +21,8 @@
   },
   "content": {
     "heading": "Demo Stay Hotel 04",
-    "summary": "Plan your arrival and check-in window ahead for a smooth, effortless stay.",
-    "description": "Comfortable rooms, attentive hospitality, and pre-scheduled check-in assistance in Trichy."
+    "summary": "Choose your room, check availability for your dates, and plan a comfortable stay.",
+    "description": "Room details, amenities, nightly rates and optional hourly stays in one place."
   },
   "seo": {
     "title": "Demo Stay Hotel 04 in Trichy | KALLAH Book",
@@ -46,14 +46,11 @@
   ],
   "phone": "+91 431 244 1004",
   "email": "hello@demo-hotel-04.trichy.in",
-  "people_ids": [
-    "demo-hotels-person-04",
-    "hotels-person-04-2"
-  ],
   "social_links": {
     "whatsapp": "https://wa.me/914312441004",
     "instagram": "https://instagram.com/demo.hotel.04.trichy",
     "linkedin": "https://linkedin.com/company/demo-hotel-04-trichy",
     "facebook": "https://facebook.com/demo.hotel.04.trichy"
-  }
+  },
+  "booking_type": "rooms"
 }

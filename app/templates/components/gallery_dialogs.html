@@ -1,0 +1,25 @@
+{% if person.gallery and person.gallery.albums %}
+<script type="application/json" id="person-gallery-data">{{ {"name": person.name, "gallery": person.gallery} | tojson }}</script>
+<dialog class="person-gallery-dialog" id="person-gallery" aria-labelledby="person-gallery-title">
+  <div class="gallery-shell">
+    <header class="gallery-dialog-header">
+      <div><p class="eyebrow">A closer look</p><h2 id="person-gallery-title">{{ person.name }}</h2><p class="gallery-header-note">Photos, places &amp; a little inspiration.</p></div>
+      <button class="gallery-close" type="button" data-close-gallery aria-label="Close photo albums"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+    </header>
+    <div class="gallery-album-tabs" role="tablist" aria-label="Photo albums"></div>
+    <div class="gallery-panel" id="gallery-album-panel" role="tabpanel" tabindex="0">
+      <div class="gallery-album-heading"><h3 id="gallery-album-title"></h3><span id="gallery-album-count"></span></div>
+      <p class="gallery-album-description" id="gallery-album-description"></p>
+      <div class="gallery-masonry" id="gallery-masonry"></div>
+    </div>
+  </div>
+</dialog>
+<dialog class="gallery-viewer" id="gallery-viewer" aria-labelledby="gallery-viewer-title">
+  <div class="gallery-viewer-shell">
+    <header class="gallery-viewer-header"><div><h2 id="gallery-viewer-title">Photo</h2><span id="gallery-viewer-count"></span></div><div class="gallery-viewer-actions"><button type="button" id="gallery-zoom" aria-label="Zoom photo" aria-pressed="false">Zoom +</button><button class="gallery-close" type="button" data-close-viewer aria-label="Close enlarged photo"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div></header>
+    <div class="gallery-viewer-body"><button type="button" id="gallery-previous" class="gallery-arrow" aria-label="Previous photo"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 6-6 6 6 6"/></svg></button><div class="gallery-viewer-stage" id="gallery-viewer-stage"></div><button type="button" id="gallery-next" class="gallery-arrow" aria-label="Next photo"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 6 6 6-6 6"/></svg></button></div>
+    <footer class="gallery-viewer-caption"><p id="gallery-viewer-caption"></p><a id="gallery-original-link" target="_blank" rel="noopener noreferrer">Open original ↗</a></footer>
+  </div>
+</dialog>
+<script src="{{ url_for('static', filename='js/gallery.js') }}" defer></script>
+{% endif %}

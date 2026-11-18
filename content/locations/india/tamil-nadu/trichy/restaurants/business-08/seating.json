@@ -1,0 +1,198 @@
+{
+  "time_zone": "Asia/Kolkata",
+  "max_party_size": 20,
+  "duration_minutes": 90,
+  "slot_minutes": 30,
+  "advance_days": 30,
+  "lead_minutes": 60,
+  "sessions": [
+    {
+      "id": "lunch",
+      "label": "Lunch",
+      "opens": "11:30",
+      "closes": "16:00"
+    },
+    {
+      "id": "dinner",
+      "label": "Dinner",
+      "opens": "18:00",
+      "closes": "22:30"
+    }
+  ],
+  "tables": [
+    {
+      "id": "a1",
+      "seats": 4
+    },
+    {
+      "id": "a2",
+      "seats": 4
+    },
+    {
+      "id": "a3",
+      "seats": 4
+    },
+    {
+      "id": "a4",
+      "seats": 4
+    },
+    {
+      "id": "a5",
+      "seats": 4
+    },
+    {
+      "id": "b1",
+      "seats": 6
+    },
+    {
+      "id": "b2",
+      "seats": 6
+    },
+    {
+      "id": "c1",
+      "seats": 2
+    },
+    {
+      "id": "c2",
+      "seats": 2
+    }
+  ],
+  "seating_options": [
+    {
+      "id": "a1",
+      "label": "Table for 4",
+      "table_ids": [
+        "a1"
+      ]
+    },
+    {
+      "id": "a2",
+      "label": "Table for 4",
+      "table_ids": [
+        "a2"
+      ]
+    },
+    {
+      "id": "a3",
+      "label": "Table for 4",
+      "table_ids": [
+        "a3"
+      ]
+    },
+    {
+      "id": "a4",
+      "label": "Table for 4",
+      "table_ids": [
+        "a4"
+      ]
+    },
+    {
+      "id": "a5",
+      "label": "Table for 4",
+      "table_ids": [
+        "a5"
+      ]
+    },
+    {
+      "id": "b1",
+      "label": "Table for 6",
+      "table_ids": [
+        "b1"
+      ]
+    },
+    {
+      "id": "b2",
+      "label": "Table for 6",
+      "table_ids": [
+        "b2"
+      ]
+    },
+    {
+      "id": "c1",
+      "label": "Table for 2",
+      "table_ids": [
+        "c1"
+      ]
+    },
+    {
+      "id": "c2",
+      "label": "Table for 2",
+      "table_ids": [
+        "c2"
+      ]
+    },
+    {
+      "id": "team-8",
+      "label": "Joined tables for up to 8",
+      "table_ids": [
+        "a1",
+        "a2"
+      ]
+    },
+    {
+      "id": "team-12",
+      "label": "Joined tables for up to 12",
+      "table_ids": [
+        "a1",
+        "a2",
+        "a3"
+      ]
+    },
+    {
+      "id": "team-16",
+      "label": "Joined tables for up to 16",
+      "table_ids": [
+        "a1",
+        "a2",
+        "a3",
+        "a4"
+      ]
+    },
+    {
+      "id": "team-20",
+      "label": "Joined tables for up to 20",
+      "table_ids": [
+        "a1",
+        "a2",
+        "a3",
+        "a4",
+        "a5"
+      ]
+    },
+    {
+      "id": "family-12",
+      "label": "Joined family tables for up to 12",
+      "table_ids": [
+        "b1",
+        "b2"
+      ]
+    }
+  ],
+  "demo_daily_reservations": [
+    {
+      "time": "12:30",
+      "duration_minutes": 90,
+      "table_ids": [
+        "a1",
+        "a2",
+        "a3"
+      ]
+    },
+    {
+      "time": "19:00",
+      "duration_minutes": 90,
+      "table_ids": [
+        "b1",
+        "b2"
+      ]
+    }
+  ],
+  "blocked_reservations": [],
+  "payment": {
+    "mode": "demo",
+    "preorder_payment": "full",
+    "currency": "INR",
+    "prices_include_tax": true,
+    "gateway": null
+  }
+}

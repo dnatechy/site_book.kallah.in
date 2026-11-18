@@ -1,0 +1,20 @@
+[
+  {
+    "author": "Demo guest 01",
+    "rating": 5,
+    "comment": "Our team could sit together, and ordering ahead made the lunch easy.",
+    "date": "2026-11-12"
+  },
+  {
+    "author": "Demo guest 02",
+    "rating": 4,
+    "comment": "A comfortable dining room for a family meal. The staff helped with our group.",
+    "date": "2026-11-09"
+  },
+  {
+    "author": "Demo guest 03",
+    "rating": 5,
+    "comment": "Good food and a relaxed place to catch up with friends.",
+    "date": "2026-11-05"
+  }
+]

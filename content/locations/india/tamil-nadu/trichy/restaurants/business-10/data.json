@@ -21,12 +21,12 @@
   },
   "content": {
     "heading": "Demo Dine Restaurant 10",
-    "summary": "Reserve your table ahead and enjoy fresh meals without standing in line.",
-    "description": "Welcoming local dining room offering pre-booked seating for families, lunches, and evening meals."
+    "summary": "Bring your people together. Reserve seats, choose your food, and arrive ready to dine.",
+    "description": "Plan team outings, family meals and celebrations with group seating and advance food orders."
   },
   "seo": {
     "title": "Demo Dine Restaurant 10 in Trichy | KALLAH Book",
-    "description": "Book appointments and skip queues at Demo Dine Restaurant 10 in Trichy with KALLAH Book."
+    "description": "Reserve group seating and pre-order food at Demo Dine Restaurant 10 in Trichy."
   },
   "theme": {
     "colors": {
@@ -45,14 +45,11 @@
   ],
   "phone": "+91 431 243 1010",
   "email": "hello@demo-restaurant-10.trichy.in",
-  "people_ids": [
-    "demo-restaurants-person-10",
-    "restaurants-person-10-2"
-  ],
   "social_links": {
     "whatsapp": "https://wa.me/914312431010",
     "instagram": "https://instagram.com/demo.restaurant.10.trichy",
     "linkedin": "https://linkedin.com/company/demo-restaurant-10-trichy",
     "facebook": "https://facebook.com/demo.restaurant.10.trichy"
-  }
+  },
+  "booking_type": "dining"
 }

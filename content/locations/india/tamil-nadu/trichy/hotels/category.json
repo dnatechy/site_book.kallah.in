@@ -1,11 +1,10 @@
 {
   "slug": "hotels",
   "name": "Hotels",
-  "description": "Explore local hotels, dining kitchens, and room check-in options in Trichy.",
+  "description": "Compare rooms, amenities, nightly stays and optional hourly rentals.",
   "short_description": "Rooms & stays",
   "enabled": true,
   "icon": "🏨",
-  "professional_label": "Guest host",
   "layout_type": "hotel",
   "filter_page": {
     "eyebrow": "Stay & kitchen preferences",
@@ -43,9 +42,24 @@
       "all_image": "/static/images/filters/all_hotels.svg",
       "all_subtitle": "Any stay type",
       "options": [
-        { "value": "hotel", "label": "Hotel", "subtitle": "Full-service stay", "image": "/static/images/filters/hotel_stay.svg" },
-        { "value": "guest-house", "label": "Guest House", "subtitle": "Quiet family rooms", "image": "/static/images/filters/guest_house.svg" },
-        { "value": "resort", "label": "Resort", "subtitle": "Leisure & grounds", "image": "/static/images/filters/resort.svg" }
+        {
+          "value": "hotel",
+          "label": "Hotel",
+          "subtitle": "Full-service stay",
+          "image": "/static/images/filters/hotel_stay.svg"
+        },
+        {
+          "value": "guest-house",
+          "label": "Guest House",
+          "subtitle": "Quiet family rooms",
+          "image": "/static/images/filters/guest_house.svg"
+        },
+        {
+          "value": "resort",
+          "label": "Resort",
+          "subtitle": "Leisure & grounds",
+          "image": "/static/images/filters/resort.svg"
+        }
       ]
     },
     {
@@ -56,9 +70,24 @@
       "all_image": "/static/images/filters/all_restaurants.svg",
       "all_subtitle": "Any kitchen",
       "options": [
-        { "value": "south-indian", "label": "South Indian", "subtitle": "Breakfast & meals", "image": "/static/images/filters/south_indian.svg" },
-        { "value": "north-indian", "label": "North Indian", "subtitle": "Curries & breads", "image": "/static/images/filters/north_indian.svg" },
-        { "value": "multi-cuisine", "label": "Multi-cuisine", "subtitle": "All-day menu", "image": "/static/images/filters/all_restaurants.svg" }
+        {
+          "value": "south-indian",
+          "label": "South Indian",
+          "subtitle": "Breakfast & meals",
+          "image": "/static/images/filters/south_indian.svg"
+        },
+        {
+          "value": "north-indian",
+          "label": "North Indian",
+          "subtitle": "Curries & breads",
+          "image": "/static/images/filters/north_indian.svg"
+        },
+        {
+          "value": "multi-cuisine",
+          "label": "Multi-cuisine",
+          "subtitle": "All-day menu",
+          "image": "/static/images/filters/all_restaurants.svg"
+        }
       ]
     },
     {
@@ -69,7 +98,12 @@
       "all_image": "/static/images/filters/rating_top.svg",
       "all_subtitle": "Any rating",
       "options": [
-        { "value": "4", "label": "4+ ★", "subtitle": "Highly rated", "image": "/static/images/filters/rating_top.svg" }
+        {
+          "value": "4",
+          "label": "4+ ★",
+          "subtitle": "Highly rated",
+          "image": "/static/images/filters/rating_top.svg"
+        }
       ]
     },
     {
@@ -96,5 +130,6 @@
       "type": "proximity"
     }
   ],
-  "theme": {}
+  "theme": {},
+  "booking_type": "rooms"
 }

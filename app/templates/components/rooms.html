@@ -1,0 +1,11 @@
+<section class="section compact-section" id="rooms">
+  <div class="section-heading"><div><p class="eyebrow">Your stay, your space</p><h2>Choose your room</h2></div><span class="muted">Compare rooms, then choose your dates.</span></div>
+  <div class="hotel-room-grid">
+    {% for room in business.rooms %}
+    <a class="hotel-room-card" href="{{ url_for('web.room_page', city_slug=city.slug, business_slug=business.slug, room_id=room.id) }}">
+      <div class="hotel-room-photo"><img src="{{ room.photo_url }}" alt="{{ room.name }}" loading="lazy" referrerpolicy="no-referrer"><span>{{ room.max_guests }} guests · {{ room.bed }}</span></div>
+      <div class="hotel-room-card-body"><h3>{{ room.name }}</h3>{% if room.review_count %}<p class="room-review-summary"><span class="demo-rating">★ {{ room.rating }} / 5</span> · {{ room.review_count }} room reviews</p>{% else %}<p class="room-review-summary muted">No room reviews yet</p>{% endif %}<p>{{ room.description }}</p><div class="room-amenity-chips">{% for amenity in room.amenities %}<span>{{ amenity }}</span>{% endfor %}</div><div class="room-card-prices"><strong>₹{{ room.nightly_rate_inr }} <small>/ night</small></strong>{% if 'hour' in room.booking_modes %}<span>₹{{ room.hourly.rate_inr }} / hour · {{ room.hourly.min_hours }}-hour minimum</span>{% else %}<span>Overnight stays</span>{% endif %}</div><span class="card-action">Check dates &amp; book →</span></div>
+    </a>
+    {% else %}<p class="notice">Room details will be added soon.</p>{% endfor %}
+  </div>
+</section>

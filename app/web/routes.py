@@ -101,7 +101,7 @@ def business_page(city_slug, category_slug, business_slug):
     if not city or not category or not business:
         abort(404)
     return render_template(
-        "pages/business.html", active_city=city, city=city, category=category,
+        "pages/restaurant.html" if category_slug == "restaurants" else "pages/business.html", active_city=city, city=city, category=category,
         business=business, theme_css=theme_css(get_theme(city_slug, category_slug, business)),
         meta=_meta("business", True, city=city, category=category, business=business),
     )
@@ -127,6 +127,21 @@ def professional_page(city_slug, category_slug, business_slug, person_id):
     )
 
 
+@web_bp.get('/<city_slug>/hotels/<business_slug>/rooms/<room_id>')
+def room_page(city_slug, business_slug, room_id):
+    city, category = get_city(city_slug), get_category(city_slug, 'hotels')
+    business = get_business(city_slug, 'hotels', business_slug)
+    room = next((r for r in (business or {}).get('rooms', []) if r['id'] == room_id), None)
+    if not city or not category or not business or not room:
+        abort(404)
+    meta = _meta('business', True, city=city, category=category, business=business)
+    meta['title'] = f"{room['name']} — {business['name']} | KALLAH Book"
+    meta['description'] = room.get('description', '')
+    return render_template('pages/room.html', city=city, active_city=city, category=category,
+                           business=business, room=room, meta=meta,
+                           theme_css=theme_css(get_theme(city_slug, 'hotels', business)))
+
+
 @web_bp.get("/robots.txt")
 def robots():
     return Response("User-agent: *\nAllow: /\nSitemap: " +
@@ -147,6 +162,9 @@ def sitemap():
                 urls.append("/" + slug + "/" + category_slug)
                 urls.extend("/" + slug + "/" + category_slug + "/" + b["slug"]
                             for b in businesses)
+                if category_slug == 'hotels':
+                    urls.extend(f"/{slug}/hotels/{b['slug']}/rooms/{room['id']}"
+                                for b in businesses for room in b.get('rooms', []))
         if with_businesses:
             urls.append("/" + slug)
     ET.register_namespace("", SITEMAP_NS)
