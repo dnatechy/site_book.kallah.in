@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": false,
-  "address": "Sample address · Anna Nagar, Trichy (not a real location)",
+  "address": "Anna Nagar, Trichy, Tamil Nadu",
   "area": "Anna Nagar",
   "geo": {
     "lat": 10.835077,
@@ -16,58 +16,40 @@
   "amenities": {
     "parking": true,
     "wifi": true,
-    "accessible": false
+    "accessible": false,
+    "ac": false
   },
   "content": {
     "heading": "Demo Style Salon 10",
-    "summary": "Explore stylists, services and preview sample slots.",
-    "description": "This is a sample salons listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Book your preferred hair artist or stylist in advance for zero chair wait.",
+    "description": "Personal grooming and hair artistry studio offering punctual appointments with dedicated stylists."
   },
   "seo": {
-    "title": "Demo Style Salon 10 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample salons profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Style Salon 10 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Style Salon 10 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#AA466A"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-salons-person-10",
-      "name": "Demo Hair Stylist 10",
-      "role": "Hair stylist (sample)",
-      "description": "Illustrative demo hair stylist profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "10:00",
-          "enabled": true
-        },
-        {
-          "time": "11:00",
-          "enabled": false
-        },
-        {
-          "time": "12:00",
-          "enabled": true
-        },
-        {
-          "time": "15:00",
-          "enabled": true
-        },
-        {
-          "time": "17:00",
-          "enabled": true
-        }
-      ],
-      "services": [
-        "haircut"
-      ]
-    }
-  ],
   "services": [
     "haircut"
-  ]
+  ],
+  "photo_url": "/static/images/salon_place.jpg",
+  "timings": "09:30 AM – 09:00 PM",
+  "avg_wait": "10 min",
+  "phone": "+91 431 242 1010",
+  "email": "hello@demo-salon-10.trichy.in",
+  "people_ids": [
+    "demo-salons-person-10",
+    "salons-person-10-2",
+    "salons-person-10-3"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312421010",
+    "instagram": "https://instagram.com/demo.salon.10.trichy",
+    "linkedin": "https://linkedin.com/company/demo-salon-10-trichy",
+    "facebook": "https://facebook.com/demo.salon.10.trichy"
+  }
 }

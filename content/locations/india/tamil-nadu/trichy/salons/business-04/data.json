@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": false,
-  "address": "Sample address · Srirangam, Trichy (not a real location)",
+  "address": "Srirangam, Trichy, Tamil Nadu",
   "area": "Srirangam",
   "geo": {
     "lat": 10.762093,
@@ -16,58 +16,40 @@
   "amenities": {
     "parking": true,
     "wifi": true,
-    "accessible": true
+    "accessible": true,
+    "ac": false
   },
   "content": {
     "heading": "Demo Style Salon 04",
-    "summary": "Explore stylists, services and preview sample slots.",
-    "description": "This is a sample salons listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Book your preferred hair artist or stylist in advance for zero chair wait.",
+    "description": "Personal grooming and hair artistry studio offering punctual appointments with dedicated stylists."
   },
   "seo": {
-    "title": "Demo Style Salon 04 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample salons profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Style Salon 04 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Style Salon 04 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#AA466A"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-salons-person-04",
-      "name": "Demo Hair Stylist 04",
-      "role": "Hair stylist (sample)",
-      "description": "Illustrative demo hair stylist profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "10:00",
-          "enabled": false
-        },
-        {
-          "time": "11:00",
-          "enabled": true
-        },
-        {
-          "time": "12:00",
-          "enabled": true
-        },
-        {
-          "time": "15:00",
-          "enabled": true
-        },
-        {
-          "time": "17:00",
-          "enabled": true
-        }
-      ],
-      "services": [
-        "bridal"
-      ]
-    }
-  ],
   "services": [
     "bridal"
-  ]
+  ],
+  "photo_url": "/static/images/salon_place.jpg",
+  "timings": "09:30 AM – 09:00 PM",
+  "avg_wait": "10 min",
+  "phone": "+91 431 242 1004",
+  "email": "hello@demo-salon-04.trichy.in",
+  "people_ids": [
+    "demo-salons-person-04",
+    "salons-person-04-2",
+    "salons-person-04-3"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312421004",
+    "instagram": "https://instagram.com/demo.salon.04.trichy",
+    "linkedin": "https://linkedin.com/company/demo-salon-04-trichy",
+    "facebook": "https://facebook.com/demo.salon.04.trichy"
+  }
 }

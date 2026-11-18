@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": true,
-  "address": "Sample address · Thillai Nagar, Trichy (not a real location)",
+  "address": "Thillai Nagar, Trichy, Tamil Nadu",
   "area": "Thillai Nagar",
   "geo": {
     "lat": 10.805574,
@@ -16,58 +16,41 @@
   "amenities": {
     "parking": true,
     "wifi": true,
-    "accessible": false
+    "accessible": false,
+    "ac": false
   },
   "content": {
     "heading": "Demo Care Clinic 02",
-    "summary": "Practice consultations, profiles and the demo appointment flow.",
-    "description": "This is a sample clinics listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Consult experienced doctors by appointment and skip waiting room delays.",
+    "description": "Structured appointment slots with experienced specialists in Trichy so you walk in right at your scheduled time."
   },
   "seo": {
-    "title": "Demo Care Clinic 02 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample clinics profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Care Clinic 02 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Care Clinic 02 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#DF473C"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-clinics-person-02",
-      "name": "Demo Doctor 02",
-      "role": "Doctor (sample)",
-      "description": "Illustrative demo doctor profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "09:30",
-          "enabled": true
-        },
-        {
-          "time": "10:00",
-          "enabled": true
-        },
-        {
-          "time": "10:30",
-          "enabled": true
-        },
-        {
-          "time": "11:00",
-          "enabled": false
-        },
-        {
-          "time": "16:00",
-          "enabled": true
-        }
-      ],
-      "specialties": [
-        "dental"
-      ]
-    }
-  ],
   "specialties": [
-    "dental"
-  ]
+    "dental",
+    "gastro"
+  ],
+  "photo_url": "/static/images/clinic_place.jpg",
+  "timings": "08:30 AM – 02:00 PM, 05:00 PM – 09:00 PM",
+  "avg_wait": "5–10 min",
+  "phone": "+91 431 241 1002",
+  "email": "hello@demo-clinic-02.trichy.in",
+  "people_ids": [
+    "demo-clinics-person-02",
+    "clinics-person-02-2",
+    "clinics-person-02-3"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312411002",
+    "instagram": "https://instagram.com/demo.clinic.02.trichy",
+    "linkedin": "https://linkedin.com/company/demo-clinic-02-trichy",
+    "facebook": "https://facebook.com/demo.clinic.02.trichy"
+  }
 }

@@ -1,0 +1,168 @@
+{
+  "id": "clinics-person-09-3",
+  "name": "Dr. Venkatraman S.",
+  "category": "clinics",
+  "role": "Chief Physician",
+  "description": "15+ years of clinical experience focusing on preventive care and unhurried appointments.",
+  "photo_url": "/static/images/doctor_male_portrait.jpg",
+  "enabled": true,
+  "rating": 4.7,
+  "experience": "8 yrs experience",
+  "consultation_fee": "₹350 consultation",
+  "languages": [
+    "Tamil",
+    "English"
+  ],
+  "reviews": [
+    {
+      "author": "Karthik N.",
+      "rating": 5,
+      "date": "5 days ago",
+      "comment": "Booked right before leaving home. Smooth experience from start to finish."
+    },
+    {
+      "author": "Meenakshi R.",
+      "rating": 5,
+      "date": "1 month ago",
+      "comment": "Explained every test clearly and followed up properly."
+    }
+  ],
+  "demo_slots": [
+    {
+      "time": "09:00",
+      "enabled": true
+    },
+    {
+      "time": "10:30",
+      "enabled": true
+    },
+    {
+      "time": "11:30",
+      "enabled": true
+    },
+    {
+      "time": "16:00",
+      "enabled": true
+    },
+    {
+      "time": "17:30",
+      "enabled": true
+    }
+  ],
+  "schedules": [
+    {
+      "business_slug": "demo-clinic-09",
+      "category_slug": "clinics",
+      "weekly": {
+        "mon": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "17:00",
+            "end": "20:00"
+          }
+        ],
+        "wed": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "17:00",
+            "end": "20:00"
+          }
+        ],
+        "fri": [
+          {
+            "start": "17:00",
+            "end": "20:00"
+          }
+        ],
+        "sun": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "17:00",
+            "end": "20:00"
+          }
+        ]
+      },
+      "enabled_dates": [
+        "today",
+        "tomorrow"
+      ],
+      "slot_minutes": 15
+    },
+    {
+      "business_slug": "demo-clinic-02",
+      "category_slug": "clinics",
+      "weekly": {
+        "tue": [
+          {
+            "start": "10:00",
+            "end": "13:30"
+          },
+          {
+            "start": "17:00",
+            "end": "20:30"
+          }
+        ],
+        "thu": [
+          {
+            "start": "10:00",
+            "end": "13:30"
+          },
+          {
+            "start": "17:00",
+            "end": "20:30"
+          }
+        ],
+        "sat": [
+          {
+            "start": "10:00",
+            "end": "14:00"
+          },
+          {
+            "start": "16:30",
+            "end": "19:30"
+          }
+        ]
+      },
+      "enabled_dates": [
+        "today",
+        "tomorrow"
+      ],
+      "slot_minutes": 15
+    }
+  ],
+  "specialties": [
+    "orthopedics"
+  ],
+  "services_menu": [
+    {
+      "id": "consultation",
+      "label": "Consultation",
+      "duration_min": 15
+    },
+    {
+      "id": "checkup",
+      "label": "Detailed Check-up",
+      "duration_min": 30
+    },
+    {
+      "id": "report-review",
+      "label": "Report Review",
+      "duration_min": 10
+    }
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/919842510018",
+    "instagram": "https://instagram.com/dr.venkatraman.s.trichy",
+    "linkedin": "https://linkedin.com/in/dr-venkatraman-s-trichy",
+    "facebook": "https://facebook.com/dr.venkatraman.s.trichy"
+  }
+}

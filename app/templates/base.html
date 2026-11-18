@@ -1,13 +1,19 @@
 <!doctype html>
 <html lang="{{ site.language | default('en') }}">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{{ meta.title }}</title><meta name="description" content="{{ meta.description }}">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ meta.title }}</title>
+<meta name="description" content="{{ meta.description }}">
 <meta name="robots" content="{{ 'index,follow' if meta.indexable else 'noindex,follow' }}">
 <link rel="canonical" href="{{ meta.canonical }}">
-<meta property="og:type" content="website"><meta property="og:title" content="{{ meta.title }}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ meta.title }}">
 <meta property="og:description" content="{{ meta.description }}">
 <meta property="og:url" content="{{ meta.canonical }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
 {% if demo.enabled %}<link rel="stylesheet" href="{{ url_for('static', filename='css/demo.css') }}">{% endif %}
 <style>:root { {{ theme_css | safe }} }</style>
@@ -17,27 +23,52 @@
 {% if demo.enabled %}<script src="{{ url_for('static', filename='js/demo_booking.js') }}" defer></script>{% endif %}
 </head>
 <body data-current-city="{{ active_city.slug if active_city else '' }}" data-entry-page="{{ 'yes' if is_root else 'no' }}">
-<header class="site-header"><div class="container header-inner">
-<a class="brand" href="{{ url_for('web.home') }}">KALLAH <span>Book</span></a>
-<nav class="header-nav">{% if demo.enabled %}<a class="demo-nav-link" href="{{ url_for('web.demo_bookings') }}">My demo bookings</a>{% endif %}
-<button class="location-button" type="button" data-open-location aria-haspopup="dialog">
-<span aria-hidden="true">⌖</span> <span id="selected-district">{{ active_city.name if active_city else 'Select district' }}</span> <span aria-hidden="true">⌄</span>
-</button></nav></div></header>
-{% if demo.enabled %}<div class="demo-banner" role="status"><div class="container"><strong>DEMO MODE</strong> · All businesses, professionals, ratings and slots shown are fictitious. No real appointments or payments.</div></div>{% endif %}
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="{{ url_for('web.home') }}">{{ site.brand_primary | default('KALLAH') }} <span>{{ site.brand_suffix | default('Book') }}</span></a>
+    <nav class="header-links" aria-label="Primary navigation">
+      {% for item in pages.navigation | default([]) %}
+      {% if item.key == 'services' %}
+      <a class="nav-link" href="{{ '#browse' if is_root or active_city else url_for('web.home') + '#browse' }}">{{ item.label }}</a>
+      {% elif item.key == 'how_it_works' %}
+      <a class="nav-link" href="{{ url_for('web.home') }}#how-it-works">{{ item.label }}</a>
+      {% endif %}
+      {% endfor %}
+      {% if demo.enabled %}<a class="nav-link demo-nav-link" href="{{ url_for('web.demo_bookings') }}">{{ pages.bookings.nav_label }}</a>{% endif %}
+    </nav>
+    <div class="header-actions">
+      <button class="location-button" type="button" data-open-location aria-haspopup="dialog">
+        <span aria-hidden="true">⌖</span>
+        <span id="selected-district">{{ active_city.name if active_city else 'Select district' }}</span>
+        <span aria-hidden="true">⌄</span>
+      </button>
+    </div>
+  </div>
+</header>
 {% block filterbar %}{% endblock %}
 <main class="container">{% block content %}{% endblock %}</main>
-<footer class="site-footer"><div class="container">© KALLAH Book · {{ site.tagline }}</div></footer>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span>© KALLAH Book · {{ site.tagline }}</span>
+    <span>{% if demo.enabled %}<a href="{{ url_for('web.demo_bookings') }}">My bookings</a> · {% endif %}<a href="{{ url_for('web.home') }}">All districts</a></span>
+  </div>
+</footer>
 <dialog class="location-modal" id="location-modal" aria-labelledby="location-title">
-<div class="modal-body">
-<button type="button" class="modal-close" id="close-location" aria-label="Close">×</button>
-<p class="eyebrow">YOUR LOCATION</p><h2 id="location-title">Choose your district</h2>
-<p>Browse services available in your area. We only use your location to select a district.</p>
-<button type="button" class="button button-primary" id="use-my-location">⌖ Use my current location</button>
-<p id="location-status" class="location-status" role="status" aria-live="polite"></p>
-<label for="district-select">Or choose manually</label>
-<select class="input-control" id="district-select">
-{% for item in locations %}<option value="{{ item.slug }}" {% if active_city and active_city.slug==item.slug %}selected{% endif %}>{{ item.name }}, {{ item.state }}</option>{% endfor %}
-</select>
-<button type="button" class="button button-secondary" id="confirm-district">Show services</button>
-</div></dialog>
-</body></html>
+  <div class="modal-body">
+    <button type="button" class="modal-close" id="close-location" aria-label="{{ pages.location_picker.close_label }}">×</button>
+    <p class="eyebrow">{{ pages.location_picker.eyebrow }}</p>
+    <h2 id="location-title">{{ pages.location_picker.title }}</h2>
+    <p>{{ pages.location_picker.description }}</p>
+    <button type="button" class="button button-primary" id="use-my-location">⌖ {{ pages.location_picker.use_location }}</button>
+    <p id="location-status" class="location-status" role="status" aria-live="polite"></p>
+    <label for="district-select">{{ pages.location_picker.manual_label }}</label>
+    <select class="input-control" id="district-select">
+      {% for item in locations %}
+      <option value="{{ item.slug }}" {% if active_city and active_city.slug == item.slug %}selected{% endif %}>{{ item.name }}, {{ item.state }}</option>
+      {% endfor %}
+    </select>
+    <button type="button" class="button button-secondary" id="confirm-district">{{ pages.location_picker.confirm_label }}</button>
+  </div>
+</dialog>
+</body>
+</html>

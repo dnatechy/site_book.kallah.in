@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": false,
-  "address": "Sample address · Palakkarai, Trichy (not a real location)",
+  "address": "Palakkarai, Trichy, Tamil Nadu",
   "area": "Palakkarai",
   "geo": {
     "lat": 10.792013,
@@ -16,58 +16,44 @@
   "amenities": {
     "parking": false,
     "wifi": false,
-    "accessible": false
+    "accessible": false,
+    "ac": true
   },
   "content": {
     "heading": "Demo Dine Restaurant 09",
-    "summary": "Browse cuisines and try sample table reservation times.",
-    "description": "This is a sample restaurants listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Reserve your table ahead and enjoy fresh meals without standing in line.",
+    "description": "Welcoming local dining room offering pre-booked seating for families, lunches, and evening meals."
   },
   "seo": {
-    "title": "Demo Dine Restaurant 09 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample restaurants profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Dine Restaurant 09 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Dine Restaurant 09 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#CF6631"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-restaurants-person-09",
-      "name": "Demo Table Host 09",
-      "role": "Table host (sample)",
-      "description": "Illustrative demo table host profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "12:00",
-          "enabled": false
-        },
-        {
-          "time": "12:30",
-          "enabled": true
-        },
-        {
-          "time": "13:30",
-          "enabled": true
-        },
-        {
-          "time": "19:00",
-          "enabled": true
-        },
-        {
-          "time": "20:00",
-          "enabled": true
-        }
-      ],
-      "services": [
-        "table-reservation"
-      ]
-    }
-  ],
   "cuisines": [
-    "north-indian"
-  ]
+    "north-indian",
+    "biryani"
+  ],
+  "photo_url": "/static/images/nonveg_biryani_card.jpg",
+  "timings": "07:30 AM – 10:00 PM",
+  "diet": "non-veg",
+  "dishes": [
+    "tandoor",
+    "biryani"
+  ],
+  "phone": "+91 431 243 1009",
+  "email": "hello@demo-restaurant-09.trichy.in",
+  "people_ids": [
+    "demo-restaurants-person-09",
+    "restaurants-person-09-2"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312431009",
+    "instagram": "https://instagram.com/demo.restaurant.09.trichy",
+    "linkedin": "https://linkedin.com/company/demo-restaurant-09-trichy",
+    "facebook": "https://facebook.com/demo.restaurant.09.trichy"
+  }
 }

@@ -1,18 +1,29 @@
-# site_book.kallah.in
+# KALLAH Book
 
-## Branches and hosting
+Python Flask + Jinja2 web application and versioned JSON API for https://book.kallah.in.
 
-- `Dev_v01`: develop and test application changes.
-- `Publish`: reviewed files used by MilesWeb hosting. Do **not** develop directly in this branch.
-- Hosting URL: `https://book.kallah.in`
-- MilesWeb application root: `/home/dnatechy/book.kallah.in`
-- Python: `3.10.22`; Passenger startup file: `passenger_wsgi.py`; WSGI entry point: `application`.
+## Branch policy
+
+- `Dev_v01`: all development, experiments and automated tests.
+- `Publish`: reviewed release files used by MilesWeb hosting. Promote only tested changes.
+- Hosting checkout: `/home/dnatechy/book.kallah.in` (tracks `Publish`).
+
+## Hosting environment
+
+- Python: 3.10.22
+- WSGI startup file: `passenger_wsgi.py`
+- WSGI application object: `application`
+- Passenger virtual environment is managed by cPanel.
+- Public site: https://book.kallah.in
+- API base: https://book.kallah.in/api/v1
+
+The Passenger entrypoint creates the Flask application with `create_app()`. Do not replace the cPanel-generated `.htaccess` or move the hosting virtual environment into Git.
 
 ## Common GitHub SSH access from MilesWeb
 
-**Important: the common, account-level SSH key already exists on the MilesWeb server. Do not create a new SSH/deploy key for each repository.**
+The shared account-level SSH key already exists on MilesWeb. Do not create a new key for this repository.
 
-The server's `~/.ssh/config` includes this reusable host alias:
+The `~/.ssh/config` alias is:
 
 ```sshconfig
 Host github-milesweb
@@ -22,32 +33,21 @@ Host github-milesweb
     IdentitiesOnly yes
 ```
 
-- SSH alias: `github-milesweb`
-- Account-level public key is registered under the GitHub user `mani-baskar` at https://github.com/settings/keys
-- This account key works for repositories that the GitHub account is authorized to access, including newly created repositories. A separate repository deploy key is not required.
-- Never print, copy to the repository, or commit the **private** key.
-
-Check the existing connection:
+Test the connection:
 
 ```bash
 ssh -T git@github-milesweb
 ```
 
-Expected authenticated account greeting: `Hi mani-baskar!` (GitHub's “does not provide shell access” message is normal).
+Expected greeting: `Hi mani-baskar!` (GitHub's “does not provide shell access” message is normal).
 
-### Connect this existing Book hosting directory
+Repository remote:
 
-This hosting folder was initialized with Git already. Its tested remote is:
-
-```bash
-cd /home/dnatechy/book.kallah.in
-git remote set-url origin git@github-milesweb:dnatechy/site_book.kallah.in.git
-git fetch origin
-git branch -a
-git status -sb
+```
+git@github-milesweb:dnatechy/site_book.kallah.in.git
 ```
 
-The local hosting branch is `Publish`, tracking `origin/Publish`. For future updates, after confirming the working tree is safe:
+Update the existing hosting checkout only after a reviewed release has reached `Publish`:
 
 ```bash
 cd /home/dnatechy/book.kallah.in
@@ -55,33 +55,67 @@ git switch Publish
 git pull --ff-only origin Publish
 ```
 
-### Connect a **future** GitHub repository using the same SSH key
+If dependencies changed, install them using the existing cPanel Python 3.10 virtual environment. Restart Passenger using the hosting panel or its configured restart mechanism. Never use `git reset --hard`, `git clean -fd`, or force checkout to bypass a hosting working-tree conflict.
 
-Replace `REPO_NAME` and the local path as appropriate. No new SSH key is needed.
-
-For an **empty/new local folder**, clone its Publish branch:
+For another repository, the same SSH alias can be reused. For an empty folder:
 
 ```bash
 git clone --branch Publish git@github-milesweb:dnatechy/REPO_NAME.git
 ```
 
-For an **existing hosting folder** that is not yet a Git repository (and may contain cPanel/Passenger files):
+For an existing folder, inspect its files and Git status before adding the remote or switching branches.
+
+## Local development and tests
+
+Python 3.10+:
 
 ```bash
-cd /home/dnatechy/REPO_NAME
-git init
-git remote add origin git@github-milesweb:dnatechy/REPO_NAME.git
-git fetch origin
-git switch -c Publish --track origin/Publish
-git status -sb
+python -m venv .venv
+python -m pip install -r requirements-dev.txt
+python -m flask --app "app:create_app" run --debug
+python -m pytest -q
 ```
 
-If `origin` already exists, use `git remote set-url origin ...` instead of `git remote add origin ...`. If `Publish` is already checked out, do **not** recreate it. Existing untracked files may block checkout; inspect/backup them first. Never use `git reset --hard`, `git clean -fd`, or force checkout to bypass a conflict.
+Windows helper: `scripts/windows/run_dev.ps1`.
 
-### Deployment and security notes
+GitHub Actions runs Python compilation and the Flask/API test suite on `Dev_v01` and `Publish`.
 
-1. Make application changes on `Dev_v01`; move only approved files to `Publish`.
-2. The MilesWeb hosting directory pulls only `Publish` (and restarts Passenger only when application changes require it).
-3. Keep runtime `.env`, logs, `tmp/`, virtual environments, credentials, and SSH keys outside Git.
-4. SSH authentication does not push files automatically: changes reach GitHub only after an explicit commit and `git push`.
-5. Account-level SSH access is broad: protect the MilesWeb account and remove/revoke the GitHub key if the server is compromised.
+## Architecture and content
+
+- Flask/Jinja2 renders server-side HTML for search-engine crawlability.
+- Public pages and the Flutter-facing API use the same Python content and service layer.
+- Global site, navigation, theme, SEO and booking configuration live under `content/global/`.
+- City, category, business and professional data live under `content/locations/`.
+- Reusable design tokens and shared layout metadata live under `shared/`.
+- Business-specific content, SEO, theme, media, filters and schedules are maintained as JSON.
+- Public SEO metadata, canonical URLs, `robots.txt` and `sitemap.xml` are generated by Flask.
+
+## Main web routes
+
+- `/` — home
+- `/<city>` — city discovery
+- `/<city>/<category>` — category and filters
+- `/<city>/<category>/<business>` — business profile
+- `/<city>/<category>/<business>/<person>` — professional profile
+- `/robots.txt` and `/sitemap.xml`
+
+## Flutter API
+
+Start with:
+
+```
+GET /api/v1/health
+GET /api/v1/bootstrap?city=trichy
+GET /api/v1/locations
+GET /api/v1/locations/trichy/categories
+```
+
+Business discovery supports JSON-defined filters, search, sorting, pagination and near-me coordinates. Professional profile and sample availability endpoints are included. The request/response contract is documented in `docs/API_CONTRACT.md`.
+
+## Preview data and booking limitations
+
+`content/global/demo.json` currently has `enabled: true` for preview. Trichy contains fictional sample businesses, ratings, professionals and time slots. Demo content is visibly labelled and excluded from indexing/sitemaps while demo mode is active.
+
+Demo booking interactions are browser-local only (`localStorage`). There is no server-side booking persistence, slot locking, real-time availability, authentication, payment, SMS or notification integration yet. Do not treat demo slots or demo ratings as real business data. No production booking or payment is enabled.
+
+Before a real public launch, replace demo fixtures with verified business data and set `content/global/demo.json` to `enabled: false`. Keep runtime `.env`, credentials, logs, virtual environments, backups and user data outside Git.

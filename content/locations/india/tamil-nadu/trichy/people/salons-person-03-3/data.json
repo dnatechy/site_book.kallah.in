@@ -1,0 +1,158 @@
+{
+  "id": "salons-person-03-3",
+  "name": "Rajesh Kannan",
+  "category": "salons",
+  "role": "Senior Hair Artist",
+  "description": "Expert in modern fades, beard sculpting, and tailored grooming consultations.",
+  "photo_url": "/static/images/stylist_male_portrait.jpg",
+  "enabled": true,
+  "rating": 4.7,
+  "experience": "8 yrs experience",
+  "consultation_fee": "Starts ₹300",
+  "languages": [
+    "Tamil",
+    "English"
+  ],
+  "reviews": [
+    {
+      "author": "Aravind P.",
+      "rating": 5,
+      "date": "1 week ago",
+      "comment": "Exact haircut I wanted and zero waiting time when booked ahead."
+    },
+    {
+      "author": "Nivetha S.",
+      "rating": 5,
+      "date": "3 weeks ago",
+      "comment": "Hygienic tools, attentive styling, and great finishing."
+    }
+  ],
+  "demo_slots": [
+    {
+      "time": "09:30",
+      "enabled": true
+    },
+    {
+      "time": "12:00",
+      "enabled": true
+    },
+    {
+      "time": "15:00",
+      "enabled": true
+    },
+    {
+      "time": "17:00",
+      "enabled": true
+    }
+  ],
+  "schedules": [
+    {
+      "business_slug": "demo-salon-03",
+      "category_slug": "salons",
+      "weekly": {
+        "mon": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "16:00",
+            "end": "20:30"
+          }
+        ],
+        "tue": [
+          {
+            "start": "10:00",
+            "end": "13:30"
+          },
+          {
+            "start": "16:00",
+            "end": "20:00"
+          }
+        ],
+        "wed": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "16:00",
+            "end": "20:30"
+          }
+        ],
+        "thu": [
+          {
+            "start": "10:00",
+            "end": "13:30"
+          },
+          {
+            "start": "16:00",
+            "end": "20:00"
+          }
+        ],
+        "fri": [
+          {
+            "start": "16:00",
+            "end": "20:30"
+          }
+        ],
+        "sat": [
+          {
+            "start": "09:30",
+            "end": "14:00"
+          },
+          {
+            "start": "16:00",
+            "end": "21:00"
+          }
+        ],
+        "sun": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "16:30",
+            "end": "20:00"
+          }
+        ]
+      },
+      "enabled_dates": [
+        "today",
+        "tomorrow"
+      ],
+      "slot_minutes": 20
+    }
+  ],
+  "services": [
+    "facial"
+  ],
+  "services_menu": [
+    {
+      "id": "haircut",
+      "label": "Haircut",
+      "duration_min": 30
+    },
+    {
+      "id": "beard",
+      "label": "Beard Trim",
+      "duration_min": 15
+    },
+    {
+      "id": "combo",
+      "label": "Haircut & Beard",
+      "duration_min": 45
+    },
+    {
+      "id": "spa",
+      "label": "Facial & Spa",
+      "duration_min": 60
+    }
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/919842510086",
+    "instagram": "https://instagram.com/rajesh.kannan.trichy",
+    "linkedin": "https://linkedin.com/in/rajesh-kannan-trichy",
+    "facebook": "https://facebook.com/rajesh.kannan.trichy"
+  }
+}

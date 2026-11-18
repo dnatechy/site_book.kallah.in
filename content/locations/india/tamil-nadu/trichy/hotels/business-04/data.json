@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": false,
-  "address": "Sample address · Srirangam, Trichy (not a real location)",
+  "address": "Srirangam, Trichy, Tamil Nadu",
   "area": "Srirangam",
   "geo": {
     "lat": 10.762093,
@@ -16,52 +16,44 @@
   "amenities": {
     "parking": true,
     "wifi": true,
-    "accessible": true
+    "accessible": true,
+    "ac": false
   },
   "content": {
     "heading": "Demo Stay Hotel 04",
-    "summary": "Explore stays and preview check-in enquiry slots.",
-    "description": "This is a sample hotels listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Plan your arrival and check-in window ahead for a smooth, effortless stay.",
+    "description": "Comfortable rooms, attentive hospitality, and pre-scheduled check-in assistance in Trichy."
   },
   "seo": {
-    "title": "Demo Stay Hotel 04 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample hotels profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Stay Hotel 04 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Stay Hotel 04 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#9A4D32"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-hotels-person-04",
-      "name": "Demo Guest Host 04",
-      "role": "Guest host (sample)",
-      "description": "Illustrative demo guest host profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "11:00",
-          "enabled": true
-        },
-        {
-          "time": "13:00",
-          "enabled": false
-        },
-        {
-          "time": "15:00",
-          "enabled": true
-        },
-        {
-          "time": "17:00",
-          "enabled": true
-        }
-      ],
-      "services": [
-        "stay-enquiry"
-      ]
-    }
+  "stay_type": "guest-house",
+  "photo_url": "/static/images/hotel_place.jpg",
+  "timings": "Check-in 12:00 PM · Check-out 11:00 AM",
+  "diet": "veg",
+  "cuisines": [
+    "south-indian"
   ],
-  "stay_type": "guest-house"
+  "room_types": [
+    "Standard AC",
+    "Deluxe Room"
+  ],
+  "phone": "+91 431 244 1004",
+  "email": "hello@demo-hotel-04.trichy.in",
+  "people_ids": [
+    "demo-hotels-person-04",
+    "hotels-person-04-2"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312441004",
+    "instagram": "https://instagram.com/demo.hotel.04.trichy",
+    "linkedin": "https://linkedin.com/company/demo-hotel-04-trichy",
+    "facebook": "https://facebook.com/demo.hotel.04.trichy"
+  }
 }

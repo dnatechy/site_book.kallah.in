@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": false,
-  "address": "Sample address · KK Nagar, Trichy (not a real location)",
+  "address": "KK Nagar, Trichy, Tamil Nadu",
   "area": "KK Nagar",
   "geo": {
     "lat": 10.828957,
@@ -16,58 +16,43 @@
   "amenities": {
     "parking": false,
     "wifi": true,
-    "accessible": false
+    "accessible": false,
+    "ac": false
   },
   "content": {
     "heading": "Demo Dine Restaurant 06",
-    "summary": "Browse cuisines and try sample table reservation times.",
-    "description": "This is a sample restaurants listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Reserve your table ahead and enjoy fresh meals without standing in line.",
+    "description": "Welcoming local dining room offering pre-booked seating for families, lunches, and evening meals."
   },
   "seo": {
-    "title": "Demo Dine Restaurant 06 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample restaurants profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Dine Restaurant 06 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Dine Restaurant 06 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#CF6631"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-restaurants-person-06",
-      "name": "Demo Table Host 06",
-      "role": "Table host (sample)",
-      "description": "Illustrative demo table host profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "12:00",
-          "enabled": true
-        },
-        {
-          "time": "12:30",
-          "enabled": true
-        },
-        {
-          "time": "13:30",
-          "enabled": false
-        },
-        {
-          "time": "19:00",
-          "enabled": true
-        },
-        {
-          "time": "20:00",
-          "enabled": true
-        }
-      ],
-      "services": [
-        "table-reservation"
-      ]
-    }
-  ],
   "cuisines": [
     "chinese"
-  ]
+  ],
+  "photo_url": "/static/images/veg_meals_card.jpg",
+  "timings": "07:30 AM – 10:00 PM",
+  "diet": "veg",
+  "dishes": [
+    "meals-thali",
+    "tandoor"
+  ],
+  "phone": "+91 431 243 1006",
+  "email": "hello@demo-restaurant-06.trichy.in",
+  "people_ids": [
+    "demo-restaurants-person-06",
+    "restaurants-person-06-2"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312431006",
+    "instagram": "https://instagram.com/demo.restaurant.06.trichy",
+    "linkedin": "https://linkedin.com/company/demo-restaurant-06-trichy",
+    "facebook": "https://facebook.com/demo.restaurant.06.trichy"
+  }
 }

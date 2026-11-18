@@ -1,45 +1,88 @@
 {% extends "base.html" %}
 {% block filterbar %}
-<section class="filter-strip" aria-label="{{ category.name }} filters"><div class="container">
-<form class="filters" id="category-filters" method="get" action="{{ url_for('web.category_page',city_slug=city.slug,category_slug=category.slug) }}">
-<strong class="filter-heading">Filter {{ category.name }}</strong>
-{% for filter in category.filters | default([]) %}
-{% if filter.type in ['select', 'min_number'] %}
-<label class="filter-field"><span>{{ filter.label }}</span><select class="input-control" name="{{ filter.key }}">
-<option value="">All</option>{% for option in filter.options | default([]) %}
-<option value="{{ option.value }}" {% if selected.get(filter.key, '') == (option.value|string) %}selected{% endif %}>{{ option.label }}</option>
-{% endfor %}</select></label>
-{% elif filter.type in ['toggle', 'proximity'] %}
-<label class="filter-toggle"><input type="checkbox" name="{{ filter.key }}" value="1"
-{% if selected.get(filter.key) == '1' %}checked{% endif %}
-{% if filter.type == 'proximity' %}data-near-me="true"{% endif %}>{{ filter.label }}</label>
-{% endif %}
-{% endfor %}
-<button class="button button-primary filter-submit" type="submit">Apply</button>
-<a class="filter-reset" href="{{ url_for('web.category_page',city_slug=city.slug,category_slug=category.slug) }}">Clear</a>
-</form></div></section>
+<section class="filter-strip" aria-label="{{ category.name }} filters">
+  <div class="container">
+    <form class="filters" id="category-filters" method="get" action="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">
+      <input type="hidden" name="browse" value="1">
+      <strong class="filter-heading">Filter {{ category.name }}</strong>
+      {% for filter in category.filters | default([]) %}
+      {% if filter.type in ['select', 'min_number'] %}
+      <label class="filter-field">
+        <span>{{ filter.label }}</span>
+        <select class="input-control" name="{{ filter.key }}">
+          <option value="">All</option>
+          {% for option in filter.options | default([]) %}
+          <option value="{{ option.value }}" {% if selected.get(filter.key, '') == (option.value|string) %}selected{% endif %}>{{ option.label }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      {% elif filter.type in ['toggle', 'proximity'] %}
+      <label class="filter-toggle">
+        <input type="checkbox" name="{{ filter.key }}" value="1" {% if selected.get(filter.key) == '1' %}checked{% endif %} {% if filter.type == 'proximity' %}data-near-me="true"{% endif %}>
+        <span>{{ filter.label }}</span>
+      </label>
+      {% endif %}
+      {% endfor %}
+      <button class="button button-primary filter-submit" type="submit">Apply</button>
+      <a class="filter-reset" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug, browse='1') }}">Clear</a>
+      <a class="filter-reset" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">Filter page</a>
+    </form>
+  </div>
+</section>
 {% endblock %}
 {% block content %}
-<nav class="crumb"><a href="{{ url_for('web.home') }}">Home</a> /
-<a href="{{ url_for('web.city_page', city_slug=city.slug) }}">{{ city.name }}</a> / {{ category.name }}</nav>
-<section class="section listing-section">
-<p class="eyebrow">{{ category.name | upper }} · {{ city.name | upper }}</p>
-<h1>{{ category.name }} in {{ city.name }}</h1>{% if demo.enabled %}<p class="sample-note">Showing sample businesses for UI testing only — these are not real places or verified Google ratings.</p>{% endif %}<p class="muted">{{ category.description }}</p>
-<p class="result-count" id="result-count">{{ businesses | length }} places found</p>
-<p class="location-status" id="near-me-status" role="status" aria-live="polite"></p>
-<div class="cards">{% for business in businesses %}
-<a class="card business-card" href="{{ url_for('web.business_page',city_slug=city.slug,category_slug=category.slug,business_slug=business.slug) }}"
-{% if business.geo is defined and business.geo.lat is defined and business.geo.lng is defined %}
-data-lat="{{ business.geo.lat }}" data-lng="{{ business.geo.lng }}"{% endif %}>
-<strong>{{ business.name }}</strong>{% if business.is_demo %}<span class="sample-label">Demo listing</span>{% endif %}
-<span>{{ business.content.summary | default('',true) }}</span>
-{% if business.rating_value is defined and business.rating_value is not none %}
-<span class="demo-rating">★ {{ business.rating_value }} · {{ business.rating_label | default('Rating') }}</span>{% endif %}
-{% if business.google_rating is defined and business.rating_source | default('') == 'google' %}
-<span>Google rating: {{ business.google_rating }} ★</span>{% endif %}
-</a>
-{% else %}<div class="notice">
-{% if total_businesses == 0 %}No published {{ category.name | lower }} in {{ city.name }} yet.
-{% else %}No businesses match these filters. Try clearing a filter.{% endif %}
-</div>{% endfor %}</div></section>
+<nav class="crumb" aria-label="Breadcrumb">
+  <a href="{{ url_for('web.home') }}">Home</a>
+  <span aria-hidden="true">/</span>
+  <a href="{{ url_for('web.city_page', city_slug=city.slug) }}">{{ city.name }}</a>
+  <span aria-hidden="true">/</span>
+  <a href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">{{ category.name }}</a>
+  <span aria-hidden="true">/</span>
+  <span>Results</span>
+</nav>
+<section class="section">
+  <div class="listing-header">
+    <p class="eyebrow">{{ category.name }} · {{ city.name }}</p>
+    <h1>{{ category.name }} in {{ city.name }}</h1>
+    <p class="muted">{{ category.description }}</p>
+  </div>
+  <p class="result-count" id="result-count">{{ businesses | length }} places found</p>
+  <p class="location-status" id="near-me-status" role="status" aria-live="polite"></p>
+  <div class="cards">
+    {% for business in businesses %}
+    <a class="card business-card" href="{{ url_for('web.business_page', city_slug=city.slug, category_slug=category.slug, business_slug=business.slug) }}"
+      {% if business.geo is defined and business.geo.lat is defined and business.geo.lng is defined %}
+      data-lat="{{ business.geo.lat }}" data-lng="{{ business.geo.lng }}"{% endif %}>
+      <div class="card-media">
+        {% if business.photo_url %}
+        <img class="card-photo" src="{{ business.photo_url }}" alt="{{ business.name }}" loading="lazy" referrerpolicy="no-referrer">
+        {% else %}
+        <div class="card-photo-fallback" aria-hidden="true">{{ category.icon | default('◈') }}</div>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <strong class="card-title">{{ business.name }}</strong>
+        <div class="card-meta">
+          {% if business.area is defined and business.area %}<span>{{ business.area }}</span>{% endif %}
+          {% if business.diet is defined and business.diet %}
+          {% if business.area is defined and business.area %}<span aria-hidden="true">·</span>{% endif %}
+          <span>{{ 'Only Veg' if business.diet == 'veg' else 'Veg & Non-Veg' }}</span>
+          {% endif %}
+          {% if business.rating_value is defined and business.rating_value is not none %}
+          <span aria-hidden="true">·</span>
+          <span class="demo-rating">★ {{ business.rating_value }}</span>
+          {% endif %}
+        </div>
+        <span class="card-summary">{{ business.content.summary | default('', true) }}</span>
+        <span class="card-action">Check slots →</span>
+      </div>
+    </a>
+    {% else %}
+    <div class="notice">
+      {% if total_businesses == 0 %}No published {{ category.name | lower }} in {{ city.name }} yet.
+      {% else %}No places match these filters. Try clearing a filter or returning to the <a href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">filter page</a>.{% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}

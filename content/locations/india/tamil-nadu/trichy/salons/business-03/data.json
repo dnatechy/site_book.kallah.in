@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": true,
-  "address": "Sample address · Woraiyur, Trichy (not a real location)",
+  "address": "Woraiyur, Trichy, Tamil Nadu",
   "area": "Woraiyur",
   "geo": {
     "lat": 10.751279,
@@ -16,58 +16,40 @@
   "amenities": {
     "parking": false,
     "wifi": false,
-    "accessible": false
+    "accessible": false,
+    "ac": true
   },
   "content": {
     "heading": "Demo Style Salon 03",
-    "summary": "Explore stylists, services and preview sample slots.",
-    "description": "This is a sample salons listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Book your preferred hair artist or stylist in advance for zero chair wait.",
+    "description": "Personal grooming and hair artistry studio offering punctual appointments with dedicated stylists."
   },
   "seo": {
-    "title": "Demo Style Salon 03 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample salons profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Style Salon 03 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Style Salon 03 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#AA466A"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-salons-person-03",
-      "name": "Demo Hair Stylist 03",
-      "role": "Hair stylist (sample)",
-      "description": "Illustrative demo hair stylist profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "10:00",
-          "enabled": true
-        },
-        {
-          "time": "11:00",
-          "enabled": true
-        },
-        {
-          "time": "12:00",
-          "enabled": true
-        },
-        {
-          "time": "15:00",
-          "enabled": true
-        },
-        {
-          "time": "17:00",
-          "enabled": false
-        }
-      ],
-      "services": [
-        "facial"
-      ]
-    }
-  ],
   "services": [
     "facial"
-  ]
+  ],
+  "photo_url": "/static/images/salon_place.jpg",
+  "timings": "09:00 AM – 09:30 PM",
+  "avg_wait": "15 min",
+  "phone": "+91 431 242 1003",
+  "email": "hello@demo-salon-03.trichy.in",
+  "people_ids": [
+    "demo-salons-person-03",
+    "salons-person-03-2",
+    "salons-person-03-3"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312421003",
+    "instagram": "https://instagram.com/demo.salon.03.trichy",
+    "linkedin": "https://linkedin.com/company/demo-salon-03-trichy",
+    "facebook": "https://facebook.com/demo.salon.03.trichy"
+  }
 }

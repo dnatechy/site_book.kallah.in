@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": false,
-  "address": "Sample address · Anna Nagar, Trichy (not a real location)",
+  "address": "Anna Nagar, Trichy, Tamil Nadu",
   "area": "Anna Nagar",
   "geo": {
     "lat": 10.835077,
@@ -16,58 +16,43 @@
   "amenities": {
     "parking": true,
     "wifi": true,
-    "accessible": false
+    "accessible": false,
+    "ac": false
   },
   "content": {
     "heading": "Demo Dine Restaurant 10",
-    "summary": "Browse cuisines and try sample table reservation times.",
-    "description": "This is a sample restaurants listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Reserve your table ahead and enjoy fresh meals without standing in line.",
+    "description": "Welcoming local dining room offering pre-booked seating for families, lunches, and evening meals."
   },
   "seo": {
-    "title": "Demo Dine Restaurant 10 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample restaurants profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Dine Restaurant 10 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Dine Restaurant 10 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#CF6631"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-restaurants-person-10",
-      "name": "Demo Table Host 10",
-      "role": "Table host (sample)",
-      "description": "Illustrative demo table host profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "12:00",
-          "enabled": true
-        },
-        {
-          "time": "12:30",
-          "enabled": false
-        },
-        {
-          "time": "13:30",
-          "enabled": true
-        },
-        {
-          "time": "19:00",
-          "enabled": true
-        },
-        {
-          "time": "20:00",
-          "enabled": true
-        }
-      ],
-      "services": [
-        "table-reservation"
-      ]
-    }
-  ],
   "cuisines": [
     "chinese"
-  ]
+  ],
+  "photo_url": "/static/images/nonveg_biryani_card.jpg",
+  "timings": "07:00 AM – 10:30 PM",
+  "diet": "non-veg",
+  "dishes": [
+    "biryani",
+    "tandoor"
+  ],
+  "phone": "+91 431 243 1010",
+  "email": "hello@demo-restaurant-10.trichy.in",
+  "people_ids": [
+    "demo-restaurants-person-10",
+    "restaurants-person-10-2"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312431010",
+    "instagram": "https://instagram.com/demo.restaurant.10.trichy",
+    "linkedin": "https://linkedin.com/company/demo-restaurant-10-trichy",
+    "facebook": "https://facebook.com/demo.restaurant.10.trichy"
+  }
 }

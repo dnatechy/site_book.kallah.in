@@ -1,62 +1,103 @@
 {
   "slug": "restaurants",
   "name": "Restaurants",
-  "description": "Explore restaurants and table reservation options in Trichy.",
+  "description": "Explore restaurants, cuisines, and table reservations in Trichy.",
   "short_description": "Tables & dining",
   "enabled": true,
   "icon": "🍽️",
-  "professional_label": "Staff",
+  "professional_label": "Table host",
+  "layout_type": "restaurant",
+  "filter_page": {
+    "eyebrow": "Dining preferences",
+    "title": "What would you like to eat?",
+    "subtitle": "Choose pure veg or non-veg dining, preferred cuisine or dish style, and table comfort."
+  },
   "filters": [
+    {
+      "key": "diet",
+      "label": "Food preference",
+      "type": "select",
+      "field": "diet",
+      "all_image": "/static/images/filters/all_restaurants.svg",
+      "all_subtitle": "All restaurants",
+      "options": [
+        {
+          "value": "veg",
+          "label": "Only Veg",
+          "subtitle": "Pure vegetarian kitchens",
+          "image": "/static/images/filters/veg_food.svg"
+        },
+        {
+          "value": "non-veg",
+          "label": "Veg & Non-Veg",
+          "subtitle": "Biryani, grill & meals",
+          "image": "/static/images/filters/nonveg_food.svg"
+        }
+      ]
+    },
     {
       "key": "cuisine",
       "label": "Cuisine",
       "type": "select",
       "field": "cuisines",
+      "all_image": "/static/images/filters/all_restaurants.svg",
+      "all_subtitle": "Any cuisine",
       "options": [
-        {
-          "value": "south-indian",
-          "label": "South Indian"
-        },
-        {
-          "value": "north-indian",
-          "label": "North Indian"
-        },
-        {
-          "value": "chinese",
-          "label": "Chinese"
-        },
-        {
-          "value": "multi-cuisine",
-          "label": "Multi-cuisine"
-        }
+        { "value": "south-indian", "label": "South Indian", "subtitle": "Tiffin & traditional", "image": "/static/images/filters/south_indian.svg" },
+        { "value": "north-indian", "label": "North Indian", "subtitle": "Roti & curries", "image": "/static/images/filters/north_indian.svg" },
+        { "value": "biryani", "label": "Biryani & Grill", "subtitle": "Dum & tandoor", "image": "/static/images/filters/biryani.svg" },
+        { "value": "chinese", "label": "Chinese", "subtitle": "Wok & noodles", "image": "/static/images/filters/chinese.svg" },
+        { "value": "multi-cuisine", "label": "Multi-cuisine", "subtitle": "Mixed family menu", "image": "/static/images/filters/all_restaurants.svg" }
       ]
     },
     {
-      "key": "near-me",
-      "label": "Near me (10 km)",
-      "type": "proximity"
+      "key": "dish",
+      "label": "Dish style",
+      "type": "select",
+      "field": "dishes",
+      "all_image": "/static/images/filters/all_restaurants.svg",
+      "all_subtitle": "Any dish",
+      "options": [
+        { "value": "meals-thali", "label": "Meals & Thali", "subtitle": "Full banana leaf", "image": "/static/images/filters/meals_thali.svg" },
+        { "value": "tiffin", "label": "Dosa & Tiffin", "subtitle": "Idli, dosa & coffee", "image": "/static/images/filters/tiffin.svg" },
+        { "value": "biryani", "label": "Biryani", "subtitle": "Spiced rice bowls", "image": "/static/images/filters/biryani.svg" },
+        { "value": "tandoor", "label": "Tandoor & Curries", "subtitle": "Grill & gravies", "image": "/static/images/filters/tandoor.svg" }
+      ]
     },
     {
       "key": "rating",
-      "label": "Google rating / Demo score",
+      "label": "Minimum rating",
       "type": "min_number",
       "field": "rating_value",
+      "all_image": "/static/images/filters/rating_top.svg",
+      "all_subtitle": "Any rating",
       "options": [
-        {
-          "value": "4.5",
-          "label": "4.5+ ★"
-        },
-        {
-          "value": "4",
-          "label": "4+ ★"
-        }
+        { "value": "4.5", "label": "4.5+ ★", "subtitle": "Top rated", "image": "/static/images/filters/rating_top.svg" },
+        { "value": "4", "label": "4+ ★", "subtitle": "Highly rated", "image": "/static/images/filters/rating_top.svg" }
       ]
+    },
+    {
+      "key": "ac",
+      "label": "AC dining",
+      "subtitle": "Air-conditioned hall",
+      "image": "/static/images/filters/ac.svg",
+      "type": "toggle",
+      "field": "amenities.ac"
     },
     {
       "key": "parking",
       "label": "Car parking",
+      "subtitle": "Dedicated parking",
+      "image": "/static/images/filters/parking.svg",
       "type": "toggle",
       "field": "amenities.parking"
+    },
+    {
+      "key": "near-me",
+      "label": "Near me (10 km)",
+      "subtitle": "Closest dining",
+      "image": "/static/images/filters/near_me.svg",
+      "type": "proximity"
     }
   ],
   "theme": {}

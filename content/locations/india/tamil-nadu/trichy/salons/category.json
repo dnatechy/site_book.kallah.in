@@ -1,66 +1,92 @@
 {
   "slug": "salons",
   "name": "Salons",
-  "description": "Discover salons and personal care services in Trichy.",
+  "description": "Discover salons, hair artists, and grooming appointments in Trichy.",
   "short_description": "Hair & grooming",
   "enabled": true,
   "icon": "✂️",
   "professional_label": "Hair stylist",
+  "layout_type": "salon",
+  "filter_page": {
+    "eyebrow": "Grooming & styling",
+    "title": "Choose your salon service",
+    "subtitle": "Tap the hair or grooming service and comfort options you want in Trichy."
+  },
   "filters": [
     {
       "key": "service",
       "label": "Service",
       "type": "select",
       "field": "services",
+      "all_image": "/static/images/filters/all_salons.svg",
+      "all_subtitle": "All salon studios",
       "options": [
         {
           "value": "haircut",
-          "label": "Haircut"
+          "label": "Haircut",
+          "subtitle": "Precision cuts & trim",
+          "image": "/static/images/filters/haircut.svg"
         },
         {
           "value": "hair-styling",
-          "label": "Hair styling"
+          "label": "Hair styling",
+          "subtitle": "Blowout & finish",
+          "image": "/static/images/filters/hair_styling.svg"
         },
         {
           "value": "beard-grooming",
-          "label": "Beard grooming"
+          "label": "Beard grooming",
+          "subtitle": "Shave & sculpting",
+          "image": "/static/images/filters/beard_grooming.svg"
         },
         {
           "value": "facial",
-          "label": "Facial"
+          "label": "Facial",
+          "subtitle": "Skin & glow care",
+          "image": "/static/images/filters/facial.svg"
         },
         {
           "value": "bridal",
-          "label": "Bridal"
+          "label": "Bridal",
+          "subtitle": "Occasion & bridal",
+          "image": "/static/images/filters/bridal.svg"
         }
       ]
-    },
-    {
-      "key": "near-me",
-      "label": "Near me (10 km)",
-      "type": "proximity"
     },
     {
       "key": "rating",
-      "label": "Google rating / Demo score",
+      "label": "Minimum rating",
       "type": "min_number",
       "field": "rating_value",
+      "all_image": "/static/images/filters/rating_top.svg",
+      "all_subtitle": "Any rating",
       "options": [
-        {
-          "value": "4.5",
-          "label": "4.5+ ★"
-        },
-        {
-          "value": "4",
-          "label": "4+ ★"
-        }
+        { "value": "4.5", "label": "4.5+ ★", "subtitle": "Top rated", "image": "/static/images/filters/rating_top.svg" },
+        { "value": "4", "label": "4+ ★", "subtitle": "Highly rated", "image": "/static/images/filters/rating_top.svg" }
       ]
+    },
+    {
+      "key": "ac",
+      "label": "AC studio",
+      "subtitle": "Air-conditioned",
+      "image": "/static/images/filters/ac.svg",
+      "type": "toggle",
+      "field": "amenities.ac"
     },
     {
       "key": "parking",
       "label": "Car parking",
+      "subtitle": "Dedicated parking",
+      "image": "/static/images/filters/parking.svg",
       "type": "toggle",
       "field": "amenities.parking"
+    },
+    {
+      "key": "near-me",
+      "label": "Near me (10 km)",
+      "subtitle": "Closest studios",
+      "image": "/static/images/filters/near_me.svg",
+      "type": "proximity"
     }
   ],
   "theme": {}

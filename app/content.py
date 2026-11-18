@@ -28,6 +28,10 @@ def get_site():
     return global_config("site")
 
 
+def get_pages():
+    return global_config("pages")
+
+
 def get_booking_config():
     return global_config("booking")
 
@@ -119,15 +123,78 @@ def safe_photo_url(value):
     return None
 
 
-def get_professionals(business):
+def safe_social_links(raw):
+    if not isinstance(raw, dict):
+        return {}
+    clean = {}
+    for key in ("whatsapp", "instagram", "linkedin", "facebook"):
+        val = raw.get(key)
+        if not isinstance(val, str):
+            continue
+        parsed = urlsplit(val.strip())
+        if parsed.scheme == "https" and parsed.netloc and not parsed.username and not parsed.password:
+            clean[key] = val.strip()
+    return clean
+
+
+def _people_map(city_slug):
+    cpath = _city_path(city_slug)
+    if not cpath:
+        return {}
+    pdir = cpath / "people"
+    if not pdir.is_dir():
+        return {}
+    mapping = {}
+    for entry in pdir.iterdir():
+        if not entry.is_dir() or not SLUG_RE.fullmatch(entry.name):
+            continue
+        record = _json(entry / "data.json")
+        pid = record.get("id") or entry.name
+        if record.get("enabled", True) is False or not record.get("name"):
+            continue
+        person = dict(record)
+        person["id"] = pid
+        person["photo_url"] = safe_photo_url(person.get("photo_url"))
+        person["social_links"] = safe_social_links(person.get("social_links"))
+        mapping[pid] = person
+    return mapping
+
+
+def get_professionals(business, city_slug=None):
     people = []
+    seen = set()
+    pmap = _people_map(city_slug) if city_slug else {}
+    bslug = business.get("slug")
+
+    for pid in business.get("people_ids", []):
+        person = pmap.get(pid)
+        if person and pid not in seen:
+            seen.add(pid)
+            people.append(dict(person))
+
+    if bslug and pmap:
+        for pid in sorted(pmap):
+            if pid in seen:
+                continue
+            person = pmap[pid]
+            if any(isinstance(s, dict) and s.get("business_slug") == bslug
+                   for s in person.get("schedules", [])):
+                seen.add(pid)
+                people.append(dict(person))
+
     for record in business.get("professionals", []):
         if not isinstance(record, dict) or record.get("enabled", True) is False:
             continue
         if not record.get("name"):
             continue
+        pid = record.get("id")
+        if pid and pid in seen:
+            continue
+        if pid:
+            seen.add(pid)
         person = dict(record)
         person["photo_url"] = safe_photo_url(person.get("photo_url"))
+        person["social_links"] = safe_social_links(person.get("social_links"))
         people.append(person)
     return people
 
@@ -145,7 +212,9 @@ def get_businesses(city_slug, category_slug):
         if (business.get("published") is True and business.get("enabled", True) is not False
                 and isinstance(slug, str) and SLUG_RE.fullmatch(slug)
                 and (not business.get("is_demo") or demo_enabled())):
-            business["professionals"] = get_professionals(business)
+            business["photo_url"] = safe_photo_url(business.get("photo_url"))
+            business["social_links"] = safe_social_links(business.get("social_links"))
+            business["professionals"] = get_professionals(business, city_slug=city_slug)
             if business.get("is_demo"):
                 business["rating_value"] = business.get("demo_rating")
                 business["rating_label"] = "Demo score"
@@ -163,6 +232,67 @@ def get_business(city_slug, category_slug, business_slug):
                  if record["slug"] == business_slug), None)
 
 
+def get_professional(city_slug, category_slug, business_slug, person_id):
+    if not isinstance(person_id, str) or not SLUG_RE.fullmatch(person_id):
+        return None, None
+    business = get_business(city_slug, category_slug, business_slug)
+    if not business:
+        return None, None
+    person = next((p for p in business.get("professionals", []) if p.get("id") == person_id), None)
+    if not person:
+        return None, None
+    person = dict(person)
+    venues = []
+    seen_slugs = set()
+    category_cache = {}
+    for sched in person.get("schedules", []):
+        if not isinstance(sched, dict):
+            continue
+        v_slug = sched.get("business_slug")
+        v_cat = sched.get("category_slug") or category_slug
+        if not v_slug or v_slug in seen_slugs:
+            continue
+        if v_cat not in category_cache:
+            category_cache[v_cat] = {b["slug"]: b for b in get_businesses(city_slug, v_cat)}
+        v_biz = category_cache[v_cat].get(v_slug)
+        if not v_biz:
+            continue
+        seen_slugs.add(v_slug)
+        venues.append({
+            "business_slug": v_biz["slug"],
+            "business_name": v_biz["name"],
+            "category_slug": v_cat,
+            "area": v_biz.get("area"),
+            "address": v_biz.get("address"),
+            "phone": v_biz.get("phone"),
+            "email": v_biz.get("email"),
+            "social_links": v_biz.get("social_links", {}),
+            "weekly": sched.get("weekly", {}),
+            "enabled_dates": sched.get("enabled_dates", ["today", "tomorrow"]),
+            "slot_minutes": sched.get("slot_minutes", 15),
+            "url": f"/{city_slug}/{v_cat}/{v_biz['slug']}/{person_id}",
+        })
+    if not venues:
+        venues.append({
+            "business_slug": business["slug"],
+            "business_name": business["name"],
+            "category_slug": category_slug,
+            "area": business.get("area"),
+            "address": business.get("address"),
+            "phone": business.get("phone"),
+            "email": business.get("email"),
+            "social_links": business.get("social_links", {}),
+            "weekly": {},
+            "enabled_dates": ["today", "tomorrow"],
+            "slot_minutes": 15,
+            "url": f"/{city_slug}/{category_slug}/{business['slug']}/{person_id}",
+        })
+    person["venues"] = venues
+    if not person.get("social_links") and business.get("social_links"):
+        person["social_links"] = dict(business["social_links"])
+    return business, person
+
+
 def _values(record, field):
     if not isinstance(field, str) or not FIELD_RE.fullmatch(field):
         return []
@@ -173,7 +303,7 @@ def _values(record, field):
         value = value.get(part)
     result = list(value) if isinstance(value, list) else [value]
     if field in ("specialties", "services"):
-        for person in get_professionals(record):
+        for person in record.get("professionals", []):
             value = person.get(field, [])
             result.extend(value if isinstance(value, list) else [value])
     return [value for value in result if value is not None]
