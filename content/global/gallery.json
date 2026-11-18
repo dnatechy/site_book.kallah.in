@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "demo_categories": {
+    "salons": {
+      "albums": [
+        {
+          "id": "highlights",
+          "title": "Highlights",
+          "description": "A few moments from our demonstration collection.",
+          "source": "items",
+          "items": [
+            {
+              "type": "image",
+              "ref": "person_photo",
+              "caption": "Meet your specialist",
+              "layout": "portrait"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/salon_place.jpg",
+              "caption": "Salon Place",
+              "layout": "landscape"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/stylist_male_portrait.jpg",
+              "caption": "Stylist Male Portrait",
+              "layout": "natural"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/stylist_portrait.jpg",
+              "caption": "Stylist Portrait",
+              "layout": "landscape"
+            }
+          ]
+        },
+        {
+          "id": "the-space",
+          "title": "The space",
+          "description": "A closer look at the people and the place.",
+          "source": "items",
+          "items": [
+            {
+              "type": "image",
+              "url": "/static/images/stylist_portrait.jpg",
+              "caption": "Stylist Portrait",
+              "layout": "landscape"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/stylist_male_portrait.jpg",
+              "caption": "Stylist Male Portrait",
+              "layout": "natural"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/salon_place.jpg",
+              "caption": "Salon Place",
+              "layout": "landscape"
+            },
+            {
+              "type": "image",
+              "ref": "person_photo",
+              "caption": "Meet your specialist",
+              "layout": "portrait"
+            }
+          ]
+        },
+        {
+          "id": "instagram",
+          "title": "Instagram",
+          "description": "Public posts shared by this professional.",
+          "source": "items",
+          "items": []
+        }
+      ]
+    },
+    "clinics": {
+      "albums": [
+        {
+          "id": "highlights",
+          "title": "Highlights",
+          "description": "A few moments from our demonstration collection.",
+          "source": "items",
+          "items": [
+            {
+              "type": "image",
+              "ref": "person_photo",
+              "caption": "Meet your specialist",
+              "layout": "portrait"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/clinic_place.jpg",
+              "caption": "Clinic Place",
+              "layout": "landscape"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/doctor_portrait.jpg",
+              "caption": "Doctor Portrait",
+              "layout": "natural"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/doctor_male_portrait.jpg",
+              "caption": "Doctor Male Portrait",
+              "layout": "landscape"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/doctor_specialist_portrait.jpg",
+              "caption": "Doctor Specialist Portrait",
+              "layout": "natural"
+            }
+          ]
+        },
+        {
+          "id": "the-space",
+          "title": "The space",
+          "description": "A closer look at the people and the place.",
+          "source": "items",
+          "items": [
+            {
+              "type": "image",
+              "url": "/static/images/doctor_specialist_portrait.jpg",
+              "caption": "Doctor Specialist Portrait",
+              "layout": "natural"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/doctor_male_portrait.jpg",
+              "caption": "Doctor Male Portrait",
+              "layout": "landscape"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/doctor_portrait.jpg",
+              "caption": "Doctor Portrait",
+              "layout": "natural"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/clinic_place.jpg",
+              "caption": "Clinic Place",
+              "layout": "landscape"
+            },
+            {
+              "type": "image",
+              "ref": "person_photo",
+              "caption": "Meet your specialist",
+              "layout": "portrait"
+            }
+          ]
+        },
+        {
+          "id": "instagram",
+          "title": "Instagram",
+          "description": "Public posts shared by this professional.",
+          "source": "items",
+          "items": []
+        }
+      ]
+    },
+    "restaurants": {
+      "albums": [
+        {
+          "id": "highlights",
+          "title": "Highlights",
+          "description": "A few moments from our demonstration collection.",
+          "source": "items",
+          "items": [
+            {
+              "type": "image",
+              "ref": "person_photo",
+              "caption": "Meet your specialist",
+              "layout": "portrait"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/restaurant_place.jpg",
+              "caption": "Restaurant Place",
+              "layout": "landscape"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/veg_meals_card.jpg",
+              "caption": "Veg Meals Card",
+              "layout": "natural"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/nonveg_biryani_card.jpg",
+              "caption": "Nonveg Biryani Card",
+              "layout": "landscape"
+            }
+          ]
+        },
+        {
+          "id": "the-space",
+          "title": "The space",
+          "description": "A closer look at the people and the place.",
+          "source": "items",
+          "items": [
+            {
+              "type": "image",
+              "url": "/static/images/nonveg_biryani_card.jpg",
+              "caption": "Nonveg Biryani Card",
+              "layout": "landscape"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/veg_meals_card.jpg",
+              "caption": "Veg Meals Card",
+              "layout": "natural"
+            },
+            {
+              "type": "image",
+              "url": "/static/images/restaurant_place.jpg",
+              "caption": "Restaurant Place",
+              "layout": "landscape"
+            },
+            {
+              "type": "image",
+              "ref": "person_photo",
+              "caption": "Meet your specialist",
+              "layout": "portrait"
+            }
+          ]
+        },
+        {
+          "id": "instagram",
+          "title": "Instagram",
+          "description": "Public posts shared by this professional.",
+          "source": "items",
+          "items": []
+        }
+      ]
+    }
+  }
+}
