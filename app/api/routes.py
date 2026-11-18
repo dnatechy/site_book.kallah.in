@@ -274,7 +274,10 @@ def professional_availability(city_slug, category_slug, business_slug, person_id
         "days", int(booking.get("availability_window_days", 7)), 1, 14
     )
     try:
-        availability = build_availability(person, venue, booking, start_date, days, service_id)
+        demo_context = ({"city_slug": city_slug, "person_id": person_id}
+                        if business.get("is_demo") and demo_enabled() else None)
+        availability = build_availability(person, venue, booking, start_date, days, service_id,
+                                          demo_context=demo_context)
     except ValueError as error:
         abort(400, description=str(error))
     return _response(
