@@ -47,3 +47,13 @@ Current slots are read-only JSON schedule previews. Demo selections are local-on
 - Do not regress existing bootstrap/search/pagination/professional availability APIs. Rooms and dining have distinct quote endpoints and JSON content directories.
 - Quotes are not reservations. No real OTP/payment/booking persistence until explicit transactional backend work.
 - Full maps, contracts, hosting command: `docs/AI_STUDIO_FLASK_MIGRATION.md`.
+
+## 2026-11-18 / professional page parity and regression
+- Canonical URLs omit trailing slash; preview links ending in slash get a 308 redirect (and retain query strings).
+- Shared header is configured with content/global/pages.json and middle navigation is hidden by default.
+- Professional grids use direct children in order: profile, booking, reviews, including on phones.
+- +91 mobile input has 5–5 live formatting. This demo login does NOT send a real OTP or message.
+- Same-person demo bookings in two venues cannot overlap locally; static illustrative booked ranges are shaded/disabled and returned via the Flask /api/v1 availability response for Flutter.
+- Shared reviews are rendered with app/templates/components/review_cards.html.
+- Restaurant and hotel bookings are represented in demo-bookings history alongside professional appointments.
+- Demo slot/quote APIs are not live capacity reservations and do not persist bookings. Production needs database, authentication, payments and atomic slot locking.

@@ -53,7 +53,50 @@ def _service_menu(person, booking_config):
     return [item for item in menu if isinstance(item, dict) and item.get("id")]
 
 
-def build_availability(person, venue, booking_config, start_date=None, days=7, service_id=None):
+def _demo_booked_spans(config, context, venue, iso_date, windows):
+    """Deterministic illustrative reservations, never live capacity."""
+    rules = config.get("demo_booked_slots", {})
+    if not isinstance(rules, dict) or rules.get("enabled") is not True:
+        return []
+    offsets = rules.get("offsets_min") or [30, 60, 90]
+    if not isinstance(offsets, list):
+        return []
+    offsets = [value for value in offsets if isinstance(value, int) and 0 <= value <= 480]
+    if not offsets:
+        return []
+    duration = rules.get("duration_min", 15)
+    extra_duration = rules.get("extra_duration_min", 30)
+    if not isinstance(duration, int) or not 5 <= duration <= 120:
+        return []
+    if not isinstance(extra_duration, int) or not 5 <= extra_duration <= 120:
+        return []
+    key = ":".join((context.get("city_slug", ""), context.get("person_id", ""),
+                    venue.get("business_slug", ""), iso_date))
+    seed = 0
+    for char in key:
+        seed = (seed * 31 + ord(char)) & 0xFFFFFFFF
+    anchor = _parse_time(rules.get("anchor_time", "10:00"))
+    spans = []
+    for index, window in enumerate(windows):
+        start, end = _parse_time(window["start"]), _parse_time(window["end"])
+        if end - start < duration * 2:
+            continue
+        offset = offsets[(seed + index) % len(offsets)]
+        first = (anchor if anchor is not None and start <= anchor
+                 and anchor + duration <= end else min(start + offset, end - duration))
+        candidates = [(first, duration)]
+        extra_start = start + offsets[(seed + index + 1) % len(offsets)] + 90
+        if (extra_start + extra_duration <= end and
+                not (extra_start < first + duration and first < extra_start + extra_duration)):
+            candidates.append((extra_start, extra_duration))
+        for begins, length in candidates:
+            spans.append({"start": _format_time(begins), "end": _format_time(begins + length),
+                          "duration_min": length, "label": "Booked (demo)"})
+    return spans
+
+
+def build_availability(person, venue, booking_config, start_date=None, days=7, service_id=None,
+                       demo_context=None):
     """Return date windows and valid start times for the selected service."""
     if not isinstance(days, int) or not 1 <= days <= 14:
         raise ValueError("days must be between 1 and 14.")
@@ -109,18 +152,25 @@ def build_availability(person, venue, booking_config, start_date=None, days=7, s
         raw_windows = weekly.get(day_key, []) if weekly else fallback
         windows = _normalise_windows(raw_windows)
         is_open = date_allowed and bool(windows)
+        booked_spans = (_demo_booked_spans(booking_config, demo_context, venue, iso_date, windows)
+                        if is_open and demo_context else [])
         slots = []
         if is_open:
             for window in windows:
                 start, end = _parse_time(window["start"]), _parse_time(window["end"])
                 cursor = start
                 while cursor + duration <= end:
+                    blocked = any(
+                        cursor < _parse_time(b["end"]) and
+                        _parse_time(b["start"]) < cursor + duration
+                        for b in booked_spans
+                    )
                     slots.append({
                         "start": _format_time(cursor),
                         "end": _format_time(cursor + duration),
                         "duration_min": duration,
-                        "available": True,
-                        "source": "json_schedule",
+                        "available": not blocked,
+                        "source": "demo_booked" if blocked else "json_schedule",
                     })
                     cursor += step
         day_results.append({
@@ -129,6 +179,7 @@ def build_availability(person, venue, booking_config, start_date=None, days=7, s
             "day_offset": (current - today).days,
             "enabled": is_open,
             "windows": windows if date_allowed else [],
+            "booked_spans": booked_spans,
             "slots": slots,
         })
 
@@ -153,4 +204,5 @@ def build_availability(person, venue, booking_config, start_date=None, days=7, s
         },
         "capacity_is_live": False,
         "booking_is_persistent": False,
+        "demo_booked_spans_are_sample": bool(demo_context),
     }

@@ -79,5 +79,17 @@
     ]
   },
   "payments_enabled": false,
-  "description": "Display-only price preview. Demo reservations are never charged."
+  "description": "Display-only price preview. Demo reservations are never charged.",
+  "demo_booked_slots": {
+    "enabled": true,
+    "anchor_time": "10:00",
+    "duration_min": 15,
+    "offsets_min": [
+      30,
+      60,
+      90,
+      120
+    ],
+    "extra_duration_min": 30
+  }
 }

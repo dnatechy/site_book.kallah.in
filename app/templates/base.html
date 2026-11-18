@@ -29,6 +29,7 @@
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="{{ url_for('web.home') }}">{{ site.brand_primary | default('KALLAH') }} <span>{{ site.brand_suffix | default('Book') }}</span></a>
+    {% if pages.header.show_navigation | default(false) %}
     <nav class="header-links" aria-label="Primary navigation">
       {% for item in pages.navigation | default([]) %}
       {% if item.key == 'services' %}
@@ -39,6 +40,7 @@
       {% endfor %}
       {% if demo.enabled %}<a class="nav-link demo-nav-link" href="{{ url_for('web.demo_bookings') }}">{{ pages.bookings.nav_label }}</a>{% endif %}
     </nav>
+    {% endif %}
     <div class="header-actions">
       <button class="location-button" type="button" data-open-location aria-haspopup="dialog">
         <span aria-hidden="true">⌖</span>
