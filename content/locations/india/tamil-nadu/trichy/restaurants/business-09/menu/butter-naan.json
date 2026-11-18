@@ -1,0 +1,29 @@
+{
+  "id": "butter-naan",
+  "name": "Butter Naan",
+  "enabled": true,
+  "available": true,
+  "category": "Breads & curries",
+  "diet": "veg",
+  "description": "Soft tandoor-baked bread brushed with butter.",
+  "price_paise": 4500,
+  "serves": 1,
+  "photo_url": "/static/images/filters/north_indian.svg",
+  "max_per_order": 30,
+  "stock_per_slot": 60,
+  "reviews": [
+    {
+      "author": "Demo diner 01",
+      "rating": 5,
+      "comment": "Freshly prepared and nicely balanced flavours.",
+      "date": "2026-11-11"
+    },
+    {
+      "author": "Demo diner 02",
+      "rating": 4,
+      "comment": "A good choice for our group. The portion was as described.",
+      "date": "2026-11-07"
+    }
+  ],
+  "sort_order": 6
+}
