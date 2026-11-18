@@ -1,6 +1,6 @@
 """Public pages, category-specific filters, and SEO."""
 from xml.etree import ElementTree as ET
-from flask import Blueprint, Response, abort, current_app, jsonify, render_template, request
+from flask import Blueprint, Response, abort, current_app, jsonify, redirect, render_template, request
 from ..content import (
     filter_businesses, get_business, get_businesses, get_categories,
     get_category, get_city, get_locations, get_professional, get_quick_links,
@@ -9,6 +9,20 @@ from ..content import (
 
 web_bp = Blueprint("web", __name__)
 SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
+
+
+@web_bp.before_app_request
+def normalize_trailing_slash():
+    """One canonical page URL. Preview links may end in a slash; never 404."""
+    if request.method not in ("GET", "HEAD") or request.path == "/":
+        return None
+    if not request.path.endswith("/"):
+        return None
+    url = request.path.rstrip("/")
+    if request.query_string:
+        url += "?" + request.query_string.decode("latin-1")
+    return redirect(url, code=308)
+
 
 
 def _meta(kind, indexable, city=None, category=None, business=None):

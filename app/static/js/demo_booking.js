@@ -3,6 +3,11 @@
   const storageKey = "kallah-book:demo-bookings:v1";
   const userKey = "kallah-book:user:v1";
   const pendingKey = "kallah-book:pending:v1";
+  const phoneDigits = value => {
+    const digits = String(value || '').replace(/\D/g, '');
+    return digits.length === 12 && digits.startsWith('91') ? digits.slice(2) : digits;
+  };
+  const formatPhone = digits => digits.length > 5 ? `${digits.slice(0, 5)} - ${digits.slice(5)}` : digits;
 
   const read = () => {
     try {
@@ -20,7 +25,8 @@
   const readUser = () => {
     try {
       const u = JSON.parse(localStorage.getItem(userKey) || "null");
-      return u && typeof u.phone === "string" && u.phone.length >= 10 ? u : null;
+      const digits = phoneDigits(u?.phone);
+      return u && /^\d{10}$/.test(digits) ? { ...u, phone: '+91' + digits } : null;
     } catch { return null; }
   };
   const saveUser = u => {
@@ -101,23 +107,65 @@
   if (loginForm) {
     const phoneInput = document.getElementById("login-phone");
     const statusEl = document.getElementById("login-status");
+    const updatePhone = () => {
+      const raw = phoneInput.value;
+      const cursor = phoneInput.selectionStart;
+      let before = raw.slice(0, cursor ?? raw.length).replace(/\D/g, '').length;
+      const all = raw.replace(/\D/g, '');
+      if (all.length === 12 && all.startsWith('91')) before = Math.max(0, before - 2);
+      const digits = phoneDigits(raw).slice(0, 10);
+      phoneInput.value = formatPhone(digits);
+      const count = Math.min(before, digits.length);
+      const caret = count + (count > 5 ? 3 : 0);
+      phoneInput.setSelectionRange(caret, caret);
+      phoneInput.setCustomValidity(digits.length && digits.length !== 10 ? 'Please enter exactly 10 digits.' : '');
+      if (statusEl) statusEl.textContent = '';
+    };
+    phoneInput?.addEventListener('input', updatePhone);
+    phoneInput?.addEventListener('paste', event => {
+      event.preventDefault();
+      const pasted = event.clipboardData?.getData('text') || '';
+      const digits = phoneDigits(pasted);
+      if (digits.length > 10) {
+        if (statusEl) statusEl.textContent = 'Please paste a 10-digit mobile number, optionally with +91.';
+        return;
+      }
+      // A complete number replaces the field; shorter pastes replace the selection.
+      if (digits.length === 10) {
+        phoneInput.value = digits;
+        phoneInput.setSelectionRange(digits.length, digits.length);
+      } else phoneInput.setRangeText(digits, phoneInput.selectionStart, phoneInput.selectionEnd, 'end');
+      updatePhone();
+    });
+    phoneInput?.addEventListener('beforeinput', event => {
+      const pos = phoneInput.selectionStart;
+      if (pos !== phoneInput.selectionEnd) return;
+      const backward = event.inputType === 'deleteContentBackward' && pos > 5 && pos <= 8;
+      const forward = event.inputType === 'deleteContentForward' && pos >= 5 && pos < 8;
+      if (!backward && !forward) return;
+      event.preventDefault();
+      const digits = phoneDigits(phoneInput.value);
+      const index = backward ? 4 : 5;
+      phoneInput.value = digits.slice(0, index) + digits.slice(index + 1);
+      phoneInput.setSelectionRange(index, index);
+      updatePhone();
+    });
     const existing = readUser();
     if (existing && phoneInput) {
-      phoneInput.value = existing.phone;
+      phoneInput.value = formatPhone(phoneDigits(existing.phone));
       const radio = loginForm.querySelector(`input[name="channel"][value="${existing.channel}"]`);
       if (radio) radio.checked = true;
     }
     loginForm.addEventListener("submit", event => {
       event.preventDefault();
-      const rawPhone = (phoneInput?.value || "").replace(/\s+/g, "");
-      const digits = rawPhone.replace(/\D/g, "");
-      if (digits.length < 10) {
+      const digits = phoneDigits(phoneInput?.value);
+      if (!/^\d{10}$/.test(digits)) {
         if (statusEl) statusEl.textContent = "Please enter a valid 10-digit mobile number.";
         phoneInput?.focus();
         return;
       }
       const channel = loginForm.querySelector('input[name="channel"]:checked')?.value || "sms";
-      saveUser({ phone: rawPhone, channel, verifiedAt: new Date().toISOString() });
+      saveUser({ phone: '+91' + digits, channel, verifiedAt: new Date().toISOString() });
       let nextUrl = loginForm.dataset.nextUrl || "/";
       if (!nextUrl.startsWith("/") || nextUrl.startsWith("//")) nextUrl = "/";
       window.location.assign(nextUrl);
@@ -139,10 +187,18 @@
         const card = document.createElement("article");
         card.className = "demo-history-item";
         card.appendChild(textElement("strong", booking.business || "Local place"));
+        if (booking.kind === 'room') {
+          card.appendChild(textElement('p', `${booking.room_name} · ${(booking.check_in || '').replace('T', ' ')} → ${(booking.check_out || '').replace('T', ' ')} · ${booking.guests} guest(s) · ₹${booking.total_inr}`));
+        } else if (booking.kind === 'dining') {
+          card.appendChild(textElement('p', `${booking.guests} people · ${booking.date} · ${formatTime12(toMinutes(booking.time))}–${formatTime12(toMinutes(booking.end_time))} · ${booking.seating?.label || 'Group seating'}`));
+          for (const item of booking.items || []) card.appendChild(textElement('p', `${item.quantity} × ${item.name} · ₹${(item.total_paise / 100).toFixed(2)}`));
+          card.appendChild(textElement('p', booking.payment_status === 'demo_paid' ? `Demo payment ₹${(booking.pay_now_paise / 100).toFixed(2)} · no money charged` : 'Seats only · no payment required'));
+        } else {
         const startText = booking.time ? formatTime12(toMinutes(booking.time)) : "";
         const endText = booking.end_time ? ` – ${formatTime12(toMinutes(booking.end_time))}` : "";
         const serviceText = booking.service_label ? ` · ${booking.service_label}` : "";
         card.appendChild(textElement("p", `${booking.professional || "Specialist"} · ${booking.date || ""} · ${startText}${endText}${serviceText}`));
+        }
         if (booking.user_phone) {
           card.appendChild(textElement("p", "Mobile: " + booking.user_phone +
             (booking.channel ? " (" + booking.channel.toUpperCase() + ")" : "")));
@@ -310,7 +366,7 @@
   function getSavedSpans() {
     return read()
       .filter(b =>
-        b.slug === activeVenue.business_slug &&
+        b.city === page.city &&
         b.person_id === person.id &&
         b.date === selectedDateISO &&
         b.time
@@ -321,6 +377,37 @@
         label: b.service_label || "Booked"
       }));
   }
+
+  // Stable demo reservations per person, venue and day; never saved as user bookings.
+  function getDemoSpans() {
+    const rules = page.booking?.demo_booked_slots;
+    if (!rules?.enabled || !selectedDateISO) return [];
+    const [y, m, d] = selectedDateISO.split('-').map(Number);
+    const wins = windowsForDate(new Date(y, m - 1, d));
+    const key = `${page.city}:${person.id}:${activeVenue.business_slug}:${selectedDateISO}`;
+    const seed = [...key].reduce((hash, char) => (hash * 31 + char.charCodeAt(0)) >>> 0, 0);
+    const offsets = rules.offsets_min || [30, 60, 90];
+    const spans = [];
+    wins.forEach((win, index) => {
+      const start = toMinutes(win.start);
+      const end = toMinutes(win.end);
+      const duration = Number(rules.duration_min) || 15;
+      if (end - start < duration * 2) return;
+      const anchor = toMinutes(rules.anchor_time || '10:00');
+      const offset = offsets[(seed + index) % offsets.length];
+      const first = start <= anchor && anchor + duration <= end
+        ? anchor : Math.min(start + offset, end - duration);
+      spans.push({ start: first, duration, label: 'Booked (demo)' });
+      const extraDuration = Number(rules.extra_duration_min) || 30;
+      const extraStart = start + offsets[(seed + index + 1) % offsets.length] + 90;
+      if (extraStart + extraDuration <= end && !rangesOverlap(extraStart, extraDuration, first, duration)) {
+        spans.push({ start: extraStart, duration: extraDuration, label: 'Booked (demo)' });
+      }
+    });
+    return spans;
+  }
+
+  const getOccupiedSpans = () => [...getDemoSpans(), ...getSavedSpans()];
 
   function isStartValidForWindow(startM, duration, winEnd, savedSpans) {
     if (startM + duration > winEnd) return false;
@@ -415,7 +502,7 @@
           const [y, m, dd] = selectedDateISO.split("-").map(Number);
           const wins = windowsForDate(new Date(y, m - 1, dd));
           const startM = toMinutes(selectedTime);
-          const savedSpans = getSavedSpans();
+          const savedSpans = getOccupiedSpans();
           const matchingWin = wins.find(w => startM >= toMinutes(w.start) && startM < toMinutes(w.end));
           if (!matchingWin || !isStartValidForWindow(startM, svc.duration_min, toMinutes(matchingWin.end), savedSpans)) {
             selectedTime = "";
@@ -585,7 +672,14 @@
       calWindowEl.textContent = `${selectedService.label} (${selectedService.duration_min} min) — scroll bar & click start time`;
     }
 
-    const savedSpans = getSavedSpans();
+    const savedSpans = getOccupiedSpans();
+    if (selectedTime) {
+      const start = toMinutes(selectedTime);
+      if (!wins.some(w => start >= toMinutes(w.start) &&
+        isStartValidForWindow(start, selectedService.duration_min, toMinutes(w.end), savedSpans))) {
+        selectedTime = "";
+      }
+    }
     const morningWins = wins.filter(w => toMinutes(w.start) < 15 * 60);
     const eveningWins = wins.filter(w => toMinutes(w.start) >= 15 * 60);
 
@@ -665,9 +759,12 @@
 
     const startM = toMinutes(selectedTime);
     const duration = selectedService.duration_min;
-    const savedSpans = getSavedSpans();
-    if (savedSpans.some(s => rangesOverlap(startM, duration, s.start, s.duration))) {
-      if (messageEl) messageEl.textContent = "This time span overlaps an existing booking on your device. Please pick another start time.";
+    const savedSpans = getOccupiedSpans();
+    const [y, m, dd] = selectedDateISO.split("-").map(Number);
+    const wins = windowsForDate(new Date(y, m - 1, dd));
+    if (!wins.some(w => startM >= toMinutes(w.start) &&
+      isStartValidForWindow(startM, duration, toMinutes(w.end), savedSpans))) {
+      if (messageEl) messageEl.textContent = "This time is unavailable or overlaps an existing booking. Please pick another start time.";
       selectedTime = "";
       renderSessionBars();
       return;

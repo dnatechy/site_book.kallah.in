@@ -8,12 +8,16 @@
 <section class="section login-page-section">
   <div class="login-card">
     <p class="eyebrow">Quick verification</p>
-    <h1>Sign in to book your slot</h1>
-    <p class="muted">Enter your mobile number and choose how you prefer to receive appointment updates. You will return straight to your selected slot.</p>
+    <h1>Sign in to confirm your booking</h1>
+    <p class="muted">Enter your mobile number and choose how you prefer to receive booking updates. You will return to your selected appointment or stay.</p>
     <form id="login-form" class="login-form" data-next-url="{{ next_url }}">
       <label class="login-field-label" for="login-phone">
         Mobile number
-        <input id="login-phone" class="input-control login-phone-input" type="tel" inputmode="numeric" placeholder="Enter 10-digit mobile number" maxlength="15" required>
+        <span class="phone-number-field">
+          <span class="phone-country-code" aria-label="India country code +91">+91</span>
+          <input id="login-phone" class="input-control login-phone-input" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 - 43210" maxlength="13" pattern="[0-9]{5} - [0-9]{5}" aria-describedby="login-phone-help" required>
+        </span>
+        <small class="phone-number-help" id="login-phone-help">Enter your 10-digit mobile number.</small>
       </label>
 
       <fieldset class="login-channel-group">
@@ -39,7 +43,7 @@
       </fieldset>
 
       <p id="login-status" class="location-status" role="status" aria-live="polite"></p>
-      <button type="submit" class="button button-primary booking-submit-btn">Continue to appointment →</button>
+      <button type="submit" class="button button-primary booking-submit-btn">Continue to booking →</button>
     </form>
   </div>
 </section>

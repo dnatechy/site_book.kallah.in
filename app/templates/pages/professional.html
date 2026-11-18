@@ -14,9 +14,8 @@
 
 <section class="section professional-page-hero">
   <div class="professional-page-grid">
-    <div class="professional-profile-card">
       <div class="professional-profile-top">
-        {% include "components/gallery.html" %}
+      {% include "components/gallery.html" %}
         <div class="professional-hero-band">
           <div class="professional-portrait-wrap">
             {% if person.photo_url %}
@@ -104,30 +103,6 @@
         </div>
       </div>
 
-      {% if person.reviews %}
-      <div class="professional-reviews-block">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Verified feedback</p>
-            <h2>Patient &amp; guest reviews</h2>
-          </div>
-          {% if person.rating %}<strong class="demo-rating tabular">★ {{ person.rating }} average</strong>{% endif %}
-        </div>
-        <div class="reviews-grid">
-          {% for rev in person.reviews %}
-          <article class="review-card">
-            <div class="review-card-head">
-              <strong>{{ rev.author }}</strong>
-              <span class="demo-rating tabular">★ {{ rev.rating }}.0</span>
-            </div>
-            <p class="review-comment">“{{ rev.comment }}”</p>
-            <span class="review-date">{{ rev.date }}</span>
-          </article>
-          {% endfor %}
-        </div>
-      </div>
-      {% endif %}
-    </div>
 
     <aside class="direct-booking-card" aria-label="Schedule appointment">
       <p class="eyebrow">Schedule &amp; availability</p>
@@ -189,12 +164,17 @@
               <span class="teams-cal-window" id="teams-cal-window">Scroll Morning or Evening bar and click a time</span>
             </div>
             <div class="teams-zoom-controls" aria-label="Timeline horizontal zoom controls">
-              <button type="button" class="zoom-btn" id="zoom-out" aria-label="Zoom out timeline" title="Zoom out">−</button>
+              <button type="button" class="zoom-btn" id="zoom-out" aria-label="Zoom out timeline" title="Zoom out"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/></svg></button>
               <span class="zoom-level-label tabular" id="zoom-level-label">100%</span>
-              <button type="button" class="zoom-btn" id="zoom-in" aria-label="Zoom in timeline" title="Zoom in">+</button>
+              <button type="button" class="zoom-btn" id="zoom-in" aria-label="Zoom in timeline" title="Zoom in"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M5 12h14M12 5v14"/></svg></button>
             </div>
           </div>
 
+          <div class="booking-slot-legend" aria-label="Time slot availability">
+            <span><i class="slot-key slot-key-open" aria-hidden="true"></i>Available</span>
+            <span><i class="slot-key slot-key-booked" aria-hidden="true"></i>Booked · unavailable</span>
+            <span><i class="slot-key slot-key-selected" aria-hidden="true"></i>Selected</span>
+          </div>
           <div class="session-bars-container" id="session-bars-container"></div>
 
           <div class="slot-selection-summary" id="slot-selection-summary">
@@ -215,6 +195,30 @@
         <a href="{{ url_for('web.business_page', city_slug=city.slug, category_slug=category.slug, business_slug=business.slug) }}">← {{ business.name }}</a>
       </p>
     </aside>
+
+      {% if person.reviews %}
+      <div class="professional-reviews-block">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Verified feedback</p>
+            <h2>Patient &amp; guest reviews</h2>
+          </div>
+          {% if person.rating %}<strong class="demo-rating tabular">★ {{ person.rating }} average</strong>{% endif %}
+        </div>
+        <div class="reviews-grid">
+          {% for rev in person.reviews %}
+          <article class="review-card">
+            <div class="review-card-head">
+              <strong>{{ rev.author }}</strong>
+              <span class="demo-rating tabular">★ {{ rev.rating }}.0</span>
+            </div>
+            <p class="review-comment">“{{ rev.comment }}”</p>
+            <span class="review-date">{{ rev.date }}</span>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
   </div>
 </section>
 <script type="application/json" id="demo-booking-data">{{ {"business": business.name, "slug": business.slug, "category": category.slug, "city": city.slug, "person_id": person.id, "professionals": [person], "venues": person.venues, "days_ahead": booking_config.demo_days_ahead, "booking": booking_config, "default_services": booking_config.services_menu_defaults, "availability_url": url_for('api.professional_availability', city_slug=city.slug, category_slug=category.slug, business_slug=business.slug, person_id=person.id)} | tojson }}</script>
