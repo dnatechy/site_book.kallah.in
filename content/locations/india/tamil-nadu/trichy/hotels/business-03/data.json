@@ -1,0 +1,67 @@
+{
+  "id": 700203,
+  "name": "Demo Stay Hotel 03",
+  "slug": "demo-hotel-03",
+  "enabled": true,
+  "published": true,
+  "is_demo": true,
+  "featured": true,
+  "address": "Sample address · Woraiyur, Trichy (not a real location)",
+  "area": "Woraiyur",
+  "geo": {
+    "lat": 10.751279,
+    "lng": 78.683129
+  },
+  "demo_rating": 4.1,
+  "amenities": {
+    "parking": false,
+    "wifi": false,
+    "accessible": false
+  },
+  "content": {
+    "heading": "Demo Stay Hotel 03",
+    "summary": "Explore stays and preview check-in enquiry slots.",
+    "description": "This is a sample hotels listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+  },
+  "seo": {
+    "title": "Demo Stay Hotel 03 — Demo Listing | KALLAH Book",
+    "description": "Explore a sample hotels profile, filters and demo slots in KALLAH Book. Not a real business."
+  },
+  "theme": {
+    "colors": {
+      "primary": "#9A4D32"
+    }
+  },
+  "professionals": [
+    {
+      "id": "demo-hotels-person-03",
+      "name": "Demo Guest Host 03",
+      "role": "Guest host (sample)",
+      "description": "Illustrative demo guest host profile for testing the website. No real professional is represented.",
+      "photo_url": null,
+      "enabled": true,
+      "demo_slots": [
+        {
+          "time": "11:00",
+          "enabled": false
+        },
+        {
+          "time": "13:00",
+          "enabled": true
+        },
+        {
+          "time": "15:00",
+          "enabled": true
+        },
+        {
+          "time": "17:00",
+          "enabled": true
+        }
+      ],
+      "services": [
+        "stay-enquiry"
+      ]
+    }
+  ],
+  "stay_type": "hotel"
+}

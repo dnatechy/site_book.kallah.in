@@ -1,0 +1,73 @@
+{
+  "id": 700103,
+  "name": "Demo Style Salon 03",
+  "slug": "demo-salon-03",
+  "enabled": true,
+  "published": true,
+  "is_demo": true,
+  "featured": true,
+  "address": "Sample address · Woraiyur, Trichy (not a real location)",
+  "area": "Woraiyur",
+  "geo": {
+    "lat": 10.751279,
+    "lng": 78.683129
+  },
+  "demo_rating": 4.1,
+  "amenities": {
+    "parking": false,
+    "wifi": false,
+    "accessible": false
+  },
+  "content": {
+    "heading": "Demo Style Salon 03",
+    "summary": "Explore stylists, services and preview sample slots.",
+    "description": "This is a sample salons listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+  },
+  "seo": {
+    "title": "Demo Style Salon 03 — Demo Listing | KALLAH Book",
+    "description": "Explore a sample salons profile, filters and demo slots in KALLAH Book. Not a real business."
+  },
+  "theme": {
+    "colors": {
+      "primary": "#AA466A"
+    }
+  },
+  "professionals": [
+    {
+      "id": "demo-salons-person-03",
+      "name": "Demo Hair Stylist 03",
+      "role": "Hair stylist (sample)",
+      "description": "Illustrative demo hair stylist profile for testing the website. No real professional is represented.",
+      "photo_url": null,
+      "enabled": true,
+      "demo_slots": [
+        {
+          "time": "10:00",
+          "enabled": true
+        },
+        {
+          "time": "11:00",
+          "enabled": true
+        },
+        {
+          "time": "12:00",
+          "enabled": true
+        },
+        {
+          "time": "15:00",
+          "enabled": true
+        },
+        {
+          "time": "17:00",
+          "enabled": false
+        }
+      ],
+      "services": [
+        "facial"
+      ]
+    }
+  ],
+  "services": [
+    "facial"
+  ]
+}

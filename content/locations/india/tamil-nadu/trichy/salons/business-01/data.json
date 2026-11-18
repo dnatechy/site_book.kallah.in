@@ -1,0 +1,73 @@
+{
+  "id": 700101,
+  "name": "Demo Style Salon 01",
+  "slug": "demo-salon-01",
+  "enabled": true,
+  "published": true,
+  "is_demo": true,
+  "featured": true,
+  "address": "Sample address · Cantonment, Trichy (not a real location)",
+  "area": "Cantonment",
+  "geo": {
+    "lat": 10.834845,
+    "lng": 78.712179
+  },
+  "demo_rating": 4.2,
+  "amenities": {
+    "parking": true,
+    "wifi": false,
+    "accessible": false
+  },
+  "content": {
+    "heading": "Demo Style Salon 01",
+    "summary": "Explore stylists, services and preview sample slots.",
+    "description": "This is a sample salons listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+  },
+  "seo": {
+    "title": "Demo Style Salon 01 — Demo Listing | KALLAH Book",
+    "description": "Explore a sample salons profile, filters and demo slots in KALLAH Book. Not a real business."
+  },
+  "theme": {
+    "colors": {
+      "primary": "#AA466A"
+    }
+  },
+  "professionals": [
+    {
+      "id": "demo-salons-person-01",
+      "name": "Demo Hair Stylist 01",
+      "role": "Hair stylist (sample)",
+      "description": "Illustrative demo hair stylist profile for testing the website. No real professional is represented.",
+      "photo_url": null,
+      "enabled": true,
+      "demo_slots": [
+        {
+          "time": "10:00",
+          "enabled": true
+        },
+        {
+          "time": "11:00",
+          "enabled": true
+        },
+        {
+          "time": "12:00",
+          "enabled": false
+        },
+        {
+          "time": "15:00",
+          "enabled": true
+        },
+        {
+          "time": "17:00",
+          "enabled": true
+        }
+      ],
+      "services": [
+        "hair-styling"
+      ]
+    }
+  ],
+  "services": [
+    "hair-styling"
+  ]
+}

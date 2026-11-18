@@ -26,6 +26,8 @@ def test_location_category_and_empty_sitemap(client):
 def test_published_business_isolated_content(client, tmp_path, monkeypatch):
     shutil.copytree(content.CONTENT_ROOT, tmp_path, dirs_exist_ok=True)
     monkeypatch.setattr(content, "CONTENT_ROOT", tmp_path)
+    demo_config = tmp_path / "global/demo.json"
+    demo_config.write_text('{"enabled": false}', encoding="utf-8")
     directory = tmp_path / "locations/india/tamil-nadu/trichy/clinics/clinic-2001"
     directory.mkdir()
     data = {

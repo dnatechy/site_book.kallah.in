@@ -4,7 +4,7 @@ from flask import Blueprint, Response, abort, current_app, render_template, requ
 from ..content import (
     filter_businesses, get_business, get_businesses, get_categories,
     get_category, get_city, get_locations, get_quick_links,
-    get_theme, page_meta, theme_css,
+    get_theme, page_meta, theme_css, demo_enabled,
 )
 
 web_bp = Blueprint("web", __name__)
@@ -14,7 +14,7 @@ SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 def _meta(kind, indexable, city=None, category=None, business=None):
     meta = page_meta(kind, city, category, business)
     meta["canonical"] = current_app.config["SITE_URL"] + request.path
-    meta["indexable"] = indexable
+    meta["indexable"] = indexable and not demo_enabled()
     return meta
 
 
@@ -36,6 +36,14 @@ def home():
     cities = get_locations()
     city = get_city("trichy") or (cities[0] if cities else None)
     return render_template("pages/home.html", meta=_meta("home", True), **_home(city, True))
+
+
+@web_bp.get("/demo-bookings")
+def demo_bookings():
+    if not demo_enabled():
+        abort(404)
+    return render_template("pages/demo_bookings.html", meta=_meta("home", False),
+                           active_city=None)
 
 
 @web_bp.get("/<city_slug>")
@@ -85,8 +93,8 @@ def robots():
 
 @web_bp.get("/sitemap.xml")
 def sitemap():
-    urls = ["/"]
-    for city in get_locations():
+    urls = [] if demo_enabled() else ["/"]
+    for city in ([] if demo_enabled() else get_locations()):
         slug = city["slug"]
         with_businesses = []
         for category in get_categories(slug):

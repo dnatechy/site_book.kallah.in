@@ -7,6 +7,8 @@ from app import content
 def _sandbox(tmp_path, monkeypatch):
     shutil.copytree(content.CONTENT_ROOT, tmp_path, dirs_exist_ok=True)
     monkeypatch.setattr(content, "CONTENT_ROOT", tmp_path)
+    # Existing integration tests exercise verified non-demo content and sitemap.
+    (tmp_path / "global/demo.json").write_text('{"enabled": false}', encoding="utf-8")
 
 
 def _business(root, category, slug, **changes):

@@ -1,0 +1,73 @@
+{
+  "id": 700110,
+  "name": "Demo Style Salon 10",
+  "slug": "demo-salon-10",
+  "enabled": true,
+  "published": true,
+  "is_demo": true,
+  "featured": false,
+  "address": "Sample address · Anna Nagar, Trichy (not a real location)",
+  "area": "Anna Nagar",
+  "geo": {
+    "lat": 10.835077,
+    "lng": 78.710716
+  },
+  "demo_rating": 4.5,
+  "amenities": {
+    "parking": true,
+    "wifi": true,
+    "accessible": false
+  },
+  "content": {
+    "heading": "Demo Style Salon 10",
+    "summary": "Explore stylists, services and preview sample slots.",
+    "description": "This is a sample salons listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+  },
+  "seo": {
+    "title": "Demo Style Salon 10 — Demo Listing | KALLAH Book",
+    "description": "Explore a sample salons profile, filters and demo slots in KALLAH Book. Not a real business."
+  },
+  "theme": {
+    "colors": {
+      "primary": "#AA466A"
+    }
+  },
+  "professionals": [
+    {
+      "id": "demo-salons-person-10",
+      "name": "Demo Hair Stylist 10",
+      "role": "Hair stylist (sample)",
+      "description": "Illustrative demo hair stylist profile for testing the website. No real professional is represented.",
+      "photo_url": null,
+      "enabled": true,
+      "demo_slots": [
+        {
+          "time": "10:00",
+          "enabled": true
+        },
+        {
+          "time": "11:00",
+          "enabled": false
+        },
+        {
+          "time": "12:00",
+          "enabled": true
+        },
+        {
+          "time": "15:00",
+          "enabled": true
+        },
+        {
+          "time": "17:00",
+          "enabled": true
+        }
+      ],
+      "services": [
+        "haircut"
+      ]
+    }
+  ],
+  "services": [
+    "haircut"
+  ]
+}

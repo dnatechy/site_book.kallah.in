@@ -77,3 +77,22 @@ controls are disabled until payment, capacity and slot APIs are implemented.
 - The original static category/SEO JSON continues as the source of truth.
 - Public APIs expose only published business/professional data.
 - Any real patient details, bookings or payments must not go in Git JSON files.
+
+## Demo fixtures (November 2026)
+
+The JSON-only preview contains 40 fictional Trichy business entries (10 each clinic,
+salon, hotel, restaurant) and 40 fictional professional profiles. Every entry has
+is_demo:true and a fixed list of demo_slots on its professional. These are
+fictional placeholders, not existing businesses, professionals, verified ratings
+or actual appointment availability.
+
+The browser flow demonstrates choosing a person, selecting a date within the
+next 14 days and a sample time, storing a demo confirmation in localStorage,
+viewing it under /demo-bookings and removing it. No backend writes, patient
+information, gateway transactions or real queue operations exist.
+
+content/global/demo.json is an independent master switch. enabled:false hides
+all demo businesses everywhere, disables the demo history page and restores
+the normal SEO behavior. While enabled, all HTML pages are noindex and the
+sitemap does not expose fictional listings. When production business data is
+ready, turn this flag off and verify the live sitemap before deployment.

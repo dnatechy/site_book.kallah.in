@@ -9,17 +9,21 @@
 <meta property="og:description" content="{{ meta.description }}">
 <meta property="og:url" content="{{ meta.canonical }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+{% if demo.enabled %}<link rel="stylesheet" href="{{ url_for('static', filename='css/demo.css') }}">{% endif %}
 <style>:root { {{ theme_css | safe }} }</style>
 <script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "WebSite", "name": site.name, "url": site.url} | tojson }}</script>
 <script type="application/json" id="location-data">{{ locations | tojson }}</script>
 <script src="{{ url_for('static', filename='js/discovery.js') }}" defer></script>
+{% if demo.enabled %}<script src="{{ url_for('static', filename='js/demo_booking.js') }}" defer></script>{% endif %}
 </head>
 <body data-current-city="{{ active_city.slug if active_city else '' }}" data-entry-page="{{ 'yes' if is_root else 'no' }}">
 <header class="site-header"><div class="container header-inner">
 <a class="brand" href="{{ url_for('web.home') }}">KALLAH <span>Book</span></a>
+<nav class="header-nav">{% if demo.enabled %}<a class="demo-nav-link" href="{{ url_for('web.demo_bookings') }}">My demo bookings</a>{% endif %}
 <button class="location-button" type="button" data-open-location aria-haspopup="dialog">
 <span aria-hidden="true">⌖</span> <span id="selected-district">{{ active_city.name if active_city else 'Select district' }}</span> <span aria-hidden="true">⌄</span>
-</button></div></header>
+</button></nav></div></header>
+{% if demo.enabled %}<div class="demo-banner" role="status"><div class="container"><strong>DEMO MODE</strong> · All businesses, professionals, ratings and slots shown are fictitious. No real appointments or payments.</div></div>{% endif %}
 {% block filterbar %}{% endblock %}
 <main class="container">{% block content %}{% endblock %}</main>
 <footer class="site-footer"><div class="container">© KALLAH Book · {{ site.tagline }}</div></footer>

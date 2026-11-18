@@ -1,0 +1,8 @@
+{
+  "currency": "INR",
+  "convenience_fee_inr": 12,
+  "demo_payable_inr": 0,
+  "demo_days_ahead": 14,
+  "payments_enabled": false,
+  "description": "Display-only price preview. Demo reservations are never charged."
+}

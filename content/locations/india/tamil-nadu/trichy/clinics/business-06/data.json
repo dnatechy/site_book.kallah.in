@@ -1,0 +1,73 @@
+{
+  "id": 700006,
+  "name": "Demo Care Clinic 06",
+  "slug": "demo-clinic-06",
+  "enabled": true,
+  "published": true,
+  "is_demo": true,
+  "featured": false,
+  "address": "Sample address · KK Nagar, Trichy (not a real location)",
+  "area": "KK Nagar",
+  "geo": {
+    "lat": 10.828957,
+    "lng": 78.681851
+  },
+  "demo_rating": 4.7,
+  "amenities": {
+    "parking": false,
+    "wifi": true,
+    "accessible": false
+  },
+  "content": {
+    "heading": "Demo Care Clinic 06",
+    "summary": "Practice consultations, profiles and the demo appointment flow.",
+    "description": "This is a sample clinics listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+  },
+  "seo": {
+    "title": "Demo Care Clinic 06 — Demo Listing | KALLAH Book",
+    "description": "Explore a sample clinics profile, filters and demo slots in KALLAH Book. Not a real business."
+  },
+  "theme": {
+    "colors": {
+      "primary": "#DF473C"
+    }
+  },
+  "professionals": [
+    {
+      "id": "demo-clinics-person-06",
+      "name": "Demo Doctor 06",
+      "role": "Doctor (sample)",
+      "description": "Illustrative demo doctor profile for testing the website. No real professional is represented.",
+      "photo_url": null,
+      "enabled": true,
+      "demo_slots": [
+        {
+          "time": "09:30",
+          "enabled": true
+        },
+        {
+          "time": "10:00",
+          "enabled": true
+        },
+        {
+          "time": "10:30",
+          "enabled": false
+        },
+        {
+          "time": "11:00",
+          "enabled": true
+        },
+        {
+          "time": "16:00",
+          "enabled": true
+        }
+      ],
+      "specialties": [
+        "dermatology"
+      ]
+    }
+  ],
+  "specialties": [
+    "dermatology"
+  ]
+}

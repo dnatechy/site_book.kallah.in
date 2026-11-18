@@ -52,3 +52,21 @@ Hosting checkout is /home/dnatechy/book.kallah.in and tracks Publish only:
 
 Do not push development directly to Publish. No runtime secrets, logs or user data in Git.
 See docs/ARCHITECTURE.md and scripts/hosting/README.md.
+
+## Static dummy marketplace preview
+
+- Demo flag: content/global/demo.json, enabled=true. Disable it to hide all demo businesses.
+- Trichy includes 10 fictional businesses per category and exactly 1 fictional professional
+  per business: 40 sample businesses and 40 sample professionals.
+- All sample businesses show an obvious DEMO label, use simulated rating scores,
+  and are excluded from indexing/sitemap while demo mode is active.
+- Flow: home -> select district -> category -> filters -> business -> select person ->
+  preview future sample date/time -> save demo confirmation -> My demo bookings -> remove.
+- Demo bookings are stored only in that browser's localStorage. There is no server booking,
+  capacity reservation, payment, message or notification. No personal data is requested.
+- The page has placeholder avatars, and each professional can later use an HTTPS photo URL
+  (Cloudflare R2 / hosting) with the same JSON field.
+
+To remove all dummy data from public display before launch:
+edit content/global/demo.json and set enabled:false; the JSON fixtures can
+remain in Git for QA without being displayed or indexed.
