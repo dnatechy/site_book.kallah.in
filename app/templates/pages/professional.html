@@ -16,6 +16,7 @@
   <div class="professional-page-grid">
     <div class="professional-profile-card">
       <div class="professional-profile-top">
+        {% include "components/gallery.html" %}
         <div class="professional-hero-band">
           <div class="professional-portrait-wrap">
             {% if person.photo_url %}
@@ -217,4 +218,5 @@
   </div>
 </section>
 <script type="application/json" id="demo-booking-data">{{ {"business": business.name, "slug": business.slug, "category": category.slug, "city": city.slug, "person_id": person.id, "professionals": [person], "venues": person.venues, "days_ahead": booking_config.demo_days_ahead, "booking": booking_config, "default_services": booking_config.services_menu_defaults, "availability_url": url_for('api.professional_availability', city_slug=city.slug, category_slug=category.slug, business_slug=business.slug, person_id=person.id)} | tojson }}</script>
+{% include "components/gallery_dialogs.html" %}
 {% endblock %}

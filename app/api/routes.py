@@ -284,3 +284,65 @@ def professional_availability(city_slug, category_slug, business_slug, person_id
         demo_mode=demo_enabled(),
         availability_mode="demo_preview" if business.get("is_demo") else "published_schedule",
     )
+
+
+# Restaurant and hotel domain endpoints. Shared by Flask pages and Flutter clients.
+# Quotes are authoritative catalogue calculations, not confirmed reservations.
+@api_bp.get("/locations/<city_slug>/restaurants/businesses/<business_slug>/dining")
+def restaurant_dining(city_slug, business_slug):
+    business = get_business(city_slug, "restaurants", business_slug)
+    if not business:
+        abort(404)
+    return _response(dining=business["dining"], booking_type="dining", demo_mode=demo_enabled())
+
+
+@api_bp.post("/locations/<city_slug>/restaurants/businesses/<business_slug>/dining/quote")
+def restaurant_dining_quote(city_slug, business_slug):
+    from ..dining import quote_dining
+    business = get_business(city_slug, "restaurants", business_slug)
+    if not business:
+        abort(404)
+    values = request.get_json(silent=True)
+    if not isinstance(values, dict):
+        abort(400, description="Provide a JSON object with guests, date, time and items.")
+    try:
+        quote = quote_dining(business["dining"], values)
+    except (ValueError, TypeError) as error:
+        abort(400, description=str(error))
+    return _response(quote=quote, demo_mode=demo_enabled(), booking_is_persistent=False)
+
+
+@api_bp.get("/locations/<city_slug>/hotels/businesses/<business_slug>/rooms")
+def hotel_rooms(city_slug, business_slug):
+    business = get_business(city_slug, "hotels", business_slug)
+    if not business:
+        abort(404)
+    return _response(rooms=business.get("rooms", []), booking_type="rooms", demo_mode=demo_enabled())
+
+
+@api_bp.get("/locations/<city_slug>/hotels/businesses/<business_slug>/rooms/<room_id>")
+def hotel_room(city_slug, business_slug, room_id):
+    business = get_business(city_slug, "hotels", business_slug)
+    if not business:
+        abort(404)
+    room = next((item for item in business.get("rooms", []) if item["id"] == room_id), None)
+    if not room:
+        abort(404)
+    return _response(room=room, business={"name": business["name"], "slug": business["slug"]},
+                     demo_mode=demo_enabled())
+
+
+@api_bp.get("/locations/<city_slug>/hotels/businesses/<business_slug>/rooms/<room_id>/quote")
+def hotel_room_quote(city_slug, business_slug, room_id):
+    from ..rooms import quote_room
+    business = get_business(city_slug, "hotels", business_slug)
+    if not business:
+        abort(404)
+    room = next((item for item in business.get("rooms", []) if item["id"] == room_id), None)
+    if not room:
+        abort(404)
+    try:
+        quote = quote_room(room, request.args.to_dict())
+    except (ValueError, TypeError, KeyError) as error:
+        abort(400, description=str(error))
+    return _response(quote=quote, demo_mode=demo_enabled(), booking_is_persistent=False)

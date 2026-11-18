@@ -161,6 +161,8 @@ def _people_map(city_slug):
 
 
 def get_professionals(business, city_slug=None):
+    if business.get('booking_type') in ('rooms', 'dining'):
+        return []
     people = []
     seen = set()
     pmap = _people_map(city_slug) if city_slug else {}
@@ -214,13 +216,27 @@ def get_businesses(city_slug, category_slug):
                 and (not business.get("is_demo") or demo_enabled())):
             business["photo_url"] = safe_photo_url(business.get("photo_url"))
             business["social_links"] = safe_social_links(business.get("social_links"))
-            business["professionals"] = get_professionals(business, city_slug=city_slug)
+            if category_slug == 'hotels':
+                from .rooms import load_rooms
+                business['booking_type'] = 'rooms'
+                business['professionals'] = []
+                business['rooms'] = load_rooms(path / 'rooms', business)
+            elif category_slug == 'restaurants':
+                from .dining import load_dining
+                business['booking_type'] = 'dining'
+                business['professionals'] = []
+                business['dining'] = load_dining(path, business)
+            else:
+                business["professionals"] = get_professionals(business, city_slug=city_slug)
             if business.get("is_demo"):
                 business["rating_value"] = business.get("demo_rating")
-                business["rating_label"] = "Demo score"
+                business["rating_label"] = "Rating"
             elif business.get("rating_source") == "google":
                 business["rating_value"] = business.get("google_rating")
                 business["rating_label"] = "Google rating"
+            if category_slug == 'restaurants':
+                business['rating_value'] = business['dining']['restaurant_reviews']['rating']
+                business['rating_label'] = 'Guest rating'
             found.append(business)
     return sorted(found, key=lambda record: (record.get("name") or "").casefold())
 
@@ -290,6 +306,8 @@ def get_professional(city_slug, category_slug, business_slug, person_id):
     person["venues"] = venues
     if not person.get("social_links") and business.get("social_links"):
         person["social_links"] = dict(business["social_links"])
+    from .gallery import load_gallery
+    person["gallery"] = load_gallery(_city_path(city_slug), person, business, category_slug, demo_enabled())
     return business, person
 
 
@@ -361,19 +379,21 @@ def _merge(base, changes):
 
 
 def get_theme(city_slug=None, category_slug=None, business=None):
+    """Single site-wide palette. Explicit opt-in permits a scoped override."""
     theme = _merge(_json(SHARED_ROOT / "design_tokens.json"), global_config("theme"))
-    if city_slug and category_slug:
-        category = get_category(city_slug, category_slug)
-        if category:
-            theme = _merge(theme, category.get("theme", {}))
-    if business:
-        theme = _merge(theme, business.get("theme", {}))
+    if theme.get("allow_scoped_overrides") is True:
+        if city_slug and category_slug:
+            category = get_category(city_slug, category_slug)
+            if category:
+                theme = _merge(theme, category.get("theme", {}))
+        if business:
+            theme = _merge(theme, business.get("theme", {}))
     return theme
 
 
 def theme_css(theme):
     variables = []
-    for name in ("primary", "secondary", "background", "surface", "text", "muted"):
+    for name in ("primary", "secondary", "background", "surface", "ink", "text", "muted"):
         value = theme.get("colors", {}).get(name)
         if isinstance(value, str) and HEX_RE.fullmatch(value):
             variables.append("--color-" + name + ": " + value)
