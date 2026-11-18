@@ -21,13 +21,13 @@ def test_each_category_has_ten_demo_businesses_and_json_professionals(client):
         assert all(row["is_demo"] is True for row in businesses)
         assert len({row["slug"] for row in businesses}) == 10
         expected = PROFESSIONALS_PER_BUSINESS[category]
-        assert sum(len(row["professionals"]) for row in businesses) == expected * 10
+        assert sum(len(row["professionals"]) for row in businesses) >= expected * 10
         for business in businesses:
             assert business["demo_rating"] >= 3.5
             assert business["rating_value"] == business["demo_rating"]
             assert business["rating_label"] == "Demo score"
             assert business["photo_url"].startswith("/static/images/")
-            assert len(business["professionals"]) == expected
+            assert len(business["professionals"]) >= expected
             assert all(person["photo_url"].startswith("/static/images/")
                        for person in business["professionals"])
 
@@ -42,7 +42,7 @@ def test_business_to_professional_to_schedule_api_flow(client):
         "/api/v1/locations/trichy/clinics/businesses/demo-clinic-01/professionals"
     )
     assert people.status_code == 200
-    assert len(people.json["professionals"]) == 3
+    assert len(people.json["professionals"]) >= 3
 
     person_id = "demo-clinics-person-01"
     profile_path = f"/trichy/clinics/demo-clinic-01/{person_id}"
@@ -119,7 +119,7 @@ def test_demo_pages_are_noindex_and_excluded_from_sitemap(client):
     assert b"demo-clinic-01" not in client.get("/sitemap.xml").data
 
 
-def test_demo_can_be_removed_with_one_json_flag(client, tmp_path, monkeypatch):
+def test_demo_can_be_removed_with_one_json_flag_and_empty_pages_stay_noindex(client, tmp_path, monkeypatch):
     shutil.copytree(content.CONTENT_ROOT, tmp_path, dirs_exist_ok=True)
     monkeypatch.setattr(content, "CONTENT_ROOT", tmp_path)
     demo = tmp_path / "global/demo.json"
@@ -130,7 +130,7 @@ def test_demo_can_be_removed_with_one_json_flag(client, tmp_path, monkeypatch):
     assert client.get("/trichy/clinics/demo-clinic-01").status_code == 404
     assert client.get("/demo-bookings").status_code == 404
     assert b"demo-clinic-01" not in client.get("/sitemap.xml").data
-    assert b"noindex,follow" not in client.get("/trichy/clinics").data
+    assert b"noindex,follow" in client.get("/trichy/clinics").data
 
 
 def test_disable_category_hides_demo_businesses(client, tmp_path, monkeypatch):

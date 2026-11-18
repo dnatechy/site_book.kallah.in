@@ -46,7 +46,7 @@
   <p class="eyebrow">{{ home.how_it_works.eyebrow }}</p>
   <h2>{{ home.how_it_works.title }}</h2>
   <div class="how-grid">
-    {% for item in home.how_it_works.items %}
+    {% for item in home.how_it_works['items'] %}
     <div class="how-item">
       <span class="how-index">{{ "%02d" | format(loop.index) }} · {{ item.label }}</span>
       <h3>{{ item.title }}</h3>
