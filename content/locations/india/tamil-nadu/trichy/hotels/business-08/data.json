@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": false,
-  "address": "Sample address · Thiruverumbur, Trichy (not a real location)",
+  "address": "Thiruverumbur, Trichy, Tamil Nadu",
   "area": "Thiruverumbur",
   "geo": {
     "lat": 10.746437,
@@ -16,52 +16,45 @@
   "amenities": {
     "parking": true,
     "wifi": true,
-    "accessible": true
+    "accessible": true,
+    "ac": false
   },
   "content": {
     "heading": "Demo Stay Hotel 08",
-    "summary": "Explore stays and preview check-in enquiry slots.",
-    "description": "This is a sample hotels listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Plan your arrival and check-in window ahead for a smooth, effortless stay.",
+    "description": "Comfortable rooms, attentive hospitality, and pre-scheduled check-in assistance in Trichy."
   },
   "seo": {
-    "title": "Demo Stay Hotel 08 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample hotels profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Stay Hotel 08 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Stay Hotel 08 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#9A4D32"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-hotels-person-08",
-      "name": "Demo Guest Host 08",
-      "role": "Guest host (sample)",
-      "description": "Illustrative demo guest host profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "11:00",
-          "enabled": true
-        },
-        {
-          "time": "13:00",
-          "enabled": false
-        },
-        {
-          "time": "15:00",
-          "enabled": true
-        },
-        {
-          "time": "17:00",
-          "enabled": true
-        }
-      ],
-      "services": [
-        "stay-enquiry"
-      ]
-    }
+  "stay_type": "resort",
+  "photo_url": "/static/images/hotel_place.jpg",
+  "timings": "Check-in 12:00 PM · Check-out 11:00 AM",
+  "diet": "non-veg",
+  "cuisines": [
+    "south-indian",
+    "north-indian"
   ],
-  "stay_type": "resort"
+  "room_types": [
+    "Deluxe Room",
+    "Family Suite"
+  ],
+  "phone": "+91 431 244 1008",
+  "email": "hello@demo-hotel-08.trichy.in",
+  "people_ids": [
+    "demo-hotels-person-08",
+    "hotels-person-08-2"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312441008",
+    "instagram": "https://instagram.com/demo.hotel.08.trichy",
+    "linkedin": "https://linkedin.com/company/demo-hotel-08-trichy",
+    "facebook": "https://facebook.com/demo.hotel.08.trichy"
+  }
 }

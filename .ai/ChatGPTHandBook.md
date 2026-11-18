@@ -1,32 +1,39 @@
 # KALLAH Book Development Handbook
 
 Repository: dnatechy/site_book.kallah.in
-Development: Dev_v01
-Production: Publish; only selective approved runtime files, never wholesale merge.
+Reference UI/content source: mani-baskar/kallah-book-with-AI-Studio (main)
+Development branch: Dev_v01
+Hosting branch: Publish — only reviewed, selected files are copied here.
 Hosting: /home/dnatechy/book.kallah.in, Python Passenger 3.10 WSGI.
 
-Tech: Flask + Jinja2, static JSON content + SEO, shared design tokens for future Flutter.
-Current implementation:
-- District picker on first visit, manual district change, optional browser location.
-- Trichy categories + curated quick booking links on the homepage.
-- Four category-specific JSON filter sets with easy future additions.
-- Category enabled:false blocks all nested HTML/API routes and sitemap entries.
-- Professionals are nested beneath each published business in data.json.
-- Professional photos accept HTTPS or static paths; booking slots are placeholders only.
-- No database, live booking, payment or POS integration in this phase.
+## Non-negotiable architecture
 
-Source locations: content/locations/india/tamil-nadu/{city}/{category}/
-Business record: {category}/{business-id}/data.json
-API: /api/v1, same JSON sources for future Flutter.
-Rules: don't fabricate businesses, ratings or slots; keep tests updated;
-do not modify Publish without explicit user permission.
+- Python + Flask is the only backend/application runtime.
+- Jinja2 server-renders public website pages for SEO.
+- HTML/CSS implement the reference UI; JavaScript is only for browser interactions.
+- Do not add Node.js, Express, EJS, Bun, React, AI Studio runtime or another backend.
+- Web and future Flutter app use the same Python content/services and /api/v1 contract.
+- JSON is the single source for site, location, category, filter, business, professional, SEO, theme and schedule data.
+- Flutter must not read Git files or keep a second copy of filters/business rules. It consumes the API.
 
-## Demo marketplace QA phase
+## Reference migration
 
-Demo content is enabled in content/global/demo.json. Trichy receives 10 fictional
-businesses per category, each with one fictional professional. They include
-variable amenities, specialty/service, geo proximity, sample rating and sample
-time-slot arrays. Demo website is globally noindex, sitemap has no fake URLs.
-Browser-only demo booking flow uses localStorage; not a real reservation or payment.
-Never link these sample entries to actual patients, doctors, clinics or businesses.
-Production toggle enabled:false must hide every is_demo business.
+Use the reference repository's page layouts, UI components, CSS, static images, icons and navigation flow. Re-implement/render them through this Flask application. The reference's Node/AI Studio runtime is not part of KALLAH Book.
+
+## Navigation and features
+
+District picker -> district -> category -> visual filter wizard -> filtered business list -> business profile -> professional profile -> venue/date/service/time selection -> demo preview. Category enable/disable and publication gates apply consistently to HTML, API and sitemap.
+
+The API contract is in docs/API_CONTRACT.md. Keep API v1 additive; use v2 for breaking changes. Update API tests whenever a page capability or shared JSON model changes.
+
+## Booking truth
+
+Current slots are read-only JSON schedule previews. Demo selections are local-only, not real appointments, not capacity reservations and not payments. Live booking must be server-authoritative and MariaDB-backed with authentication, idempotency and atomic slot locking.
+
+## Development and release
+
+- Develop only on Dev_v01.
+- Do not push to Publish without the user's approval.
+- Do not deploy directly from the reference repository.
+- Keep secrets, .env, logs, virtual environments and user data out of Git.
+- Update README, architecture/API docs, tests and this handbook with each significant change.

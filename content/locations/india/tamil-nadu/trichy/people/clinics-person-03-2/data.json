@@ -1,0 +1,168 @@
+{
+  "id": "clinics-person-03-2",
+  "name": "Dr. Kavitha Subramanian",
+  "category": "clinics",
+  "role": "Senior Consultant",
+  "description": "Known for thorough consultations, clear diagnosis, and attentive follow-up care.",
+  "photo_url": "/static/images/doctor_portrait.jpg",
+  "enabled": true,
+  "rating": 4.8,
+  "experience": "15 yrs experience",
+  "consultation_fee": "₹500 consultation",
+  "languages": [
+    "Tamil",
+    "English"
+  ],
+  "reviews": [
+    {
+      "author": "Suresh B.",
+      "rating": 5,
+      "date": "1 week ago",
+      "comment": "Punctual consultation and well-organized clinic reception. Saved nearly an hour."
+    },
+    {
+      "author": "Anitha V.",
+      "rating": 4,
+      "date": "3 weeks ago",
+      "comment": "Clean consultation room and very thorough checkup."
+    }
+  ],
+  "demo_slots": [
+    {
+      "time": "10:00",
+      "enabled": true
+    },
+    {
+      "time": "11:00",
+      "enabled": true
+    },
+    {
+      "time": "12:00",
+      "enabled": false
+    },
+    {
+      "time": "17:00",
+      "enabled": true
+    },
+    {
+      "time": "18:00",
+      "enabled": true
+    }
+  ],
+  "schedules": [
+    {
+      "business_slug": "demo-clinic-03",
+      "category_slug": "clinics",
+      "weekly": {
+        "mon": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "17:00",
+            "end": "20:00"
+          }
+        ],
+        "wed": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "17:00",
+            "end": "20:00"
+          }
+        ],
+        "fri": [
+          {
+            "start": "17:00",
+            "end": "20:00"
+          }
+        ],
+        "sun": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "17:00",
+            "end": "20:00"
+          }
+        ]
+      },
+      "enabled_dates": [
+        "today",
+        "tomorrow"
+      ],
+      "slot_minutes": 15
+    },
+    {
+      "business_slug": "demo-clinic-05",
+      "category_slug": "clinics",
+      "weekly": {
+        "tue": [
+          {
+            "start": "10:00",
+            "end": "13:30"
+          },
+          {
+            "start": "17:00",
+            "end": "20:30"
+          }
+        ],
+        "thu": [
+          {
+            "start": "10:00",
+            "end": "13:30"
+          },
+          {
+            "start": "17:00",
+            "end": "20:30"
+          }
+        ],
+        "sat": [
+          {
+            "start": "10:00",
+            "end": "14:00"
+          },
+          {
+            "start": "16:30",
+            "end": "19:30"
+          }
+        ]
+      },
+      "enabled_dates": [
+        "today",
+        "tomorrow"
+      ],
+      "slot_minutes": 15
+    }
+  ],
+  "specialties": [
+    "pediatrics"
+  ],
+  "services_menu": [
+    {
+      "id": "consultation",
+      "label": "Consultation",
+      "duration_min": 15
+    },
+    {
+      "id": "checkup",
+      "label": "Detailed Check-up",
+      "duration_min": 30
+    },
+    {
+      "id": "report-review",
+      "label": "Report Review",
+      "duration_min": 10
+    }
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/919842510005",
+    "instagram": "https://instagram.com/dr.kavitha.subramanian.trichy",
+    "linkedin": "https://linkedin.com/in/dr-kavitha-subramanian-trichy",
+    "facebook": "https://facebook.com/dr.kavitha.subramanian.trichy"
+  }
+}

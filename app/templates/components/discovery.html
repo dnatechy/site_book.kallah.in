@@ -1,27 +1,76 @@
 <section class="section" id="browse">
-<div class="section-heading"><div><p class="eyebrow">EXPLORE</p>
-<h2>Browse {{ city.name if city else 'local' }} services</h2></div>
-<button type="button" class="text-button" data-open-location>Change district</button></div>
-<div class="category-grid">
-{% for category in categories %}
-<a class="category-card" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">
-<span class="category-icon" aria-hidden="true">{{ category.icon | default('◈') }}</span>
-<strong>{{ category.name }}</strong><span>{{ category.short_description | default(category.description) }}</span>
-</a>
-{% else %}<div class="notice">Services aren't listed for this district yet. You can choose another district.</div>{% endfor %}
-</div></section>
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Explore services</p>
+      <h2>Browse {{ city.name if city else 'local' }} services</h2>
+    </div>
+    <button type="button" class="text-button" data-open-location>Detect my location</button>
+  </div>
+  {% if locations %}
+  <nav class="district-bar" aria-label="Switch district">
+    {% for item in locations %}
+    <a class="district-tab {{ 'is-active' if city and city.slug == item.slug else '' }}" href="{{ url_for('web.city_page', city_slug=item.slug) }}">{{ item.name }}</a>
+    {% endfor %}
+  </nav>
+  {% endif %}
+  <div class="category-grid">
+    {% for category in categories %}
+    <a class="category-card" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">
+      <span class="category-icon" aria-hidden="true">{{ category.icon | default('◈') }}</span>
+      <strong>{{ category.name }}</strong>
+      <span class="category-card-desc">{{ category.short_description | default(category.description) }}</span>
+      <span class="category-card-cta">Filter &amp; browse →</span>
+    </a>
+    {% else %}
+    <div class="notice">Services aren't listed for this district yet. You can choose another district above.</div>
+    {% endfor %}
+  </div>
+</section>
 {% if quick_links %}
-<section class="section compact-section"><p class="eyebrow">QUICK ACCESS</p><h2>Popular booking types</h2>
-<p class="muted">Common service categories, curated for browsing. Live booking counts are not available yet.</p>
-<div class="quick-links">{% for item in quick_links %}
-<a class="quick-link" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=item.category) }}">{{ item.label }} <span aria-hidden="true">↗</span></a>
-{% endfor %}</div></section>
+<section class="section compact-section">
+  <p class="eyebrow">Quick access</p>
+  <h2>Popular booking types</h2>
+  <p class="muted">Jump straight to common local appointment categories in {{ city.name if city else 'your district' }}.</p>
+  <div class="quick-links">
+    {% for item in quick_links %}
+    <a class="quick-link" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=item.category, browse='1') }}">
+      <span>{{ item.label }}</span>
+      <span aria-hidden="true">↗</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
 {% endif %}
 {% if featured %}
-<section class="section compact-section"><h2>Featured places</h2><div class="cards">
-{% for item in featured %}
-<a class="card" href="{{ url_for('web.business_page', city_slug=city.slug, category_slug=item.category.slug, business_slug=item.business.slug) }}">
-<strong>{{ item.business.name }}</strong>{% if item.business.is_demo %}<span class="sample-label">Demo listing</span>{% endif %}<span>{{ item.category.name }} · {{ city.name }}</span>
-<span>{{ item.business.content.summary | default('', true) }}</span></a>
-{% endfor %}</div></section>
+<section class="section compact-section">
+  <p class="eyebrow">Featured in {{ city.name }}</p>
+  <h2>Places ready to book</h2>
+  <div class="cards">
+    {% for item in featured %}
+    <a class="card" href="{{ url_for('web.business_page', city_slug=city.slug, category_slug=item.category.slug, business_slug=item.business.slug) }}">
+      <div class="card-media">
+        {% if item.business.photo_url %}
+        <img class="card-photo" src="{{ item.business.photo_url }}" alt="{{ item.business.name }}" loading="lazy" referrerpolicy="no-referrer">
+        {% else %}
+        <div class="card-photo-fallback" aria-hidden="true">{{ item.category.icon | default('◈') }}</div>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <strong class="card-title">{{ item.business.name }}</strong>
+        <div class="card-meta">
+          <span>{{ item.category.name }}</span>
+          <span aria-hidden="true">·</span>
+          <span>{{ city.name }}</span>
+          {% if item.business.rating_value is defined and item.business.rating_value is not none %}
+          <span aria-hidden="true">·</span>
+          <span class="demo-rating">★ {{ item.business.rating_value }}</span>
+          {% endif %}
+        </div>
+        <span class="card-summary">{{ item.business.content.summary | default('', true) }}</span>
+        <span class="card-action">View availability →</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>
 {% endif %}

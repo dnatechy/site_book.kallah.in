@@ -1,0 +1,156 @@
+{
+  "id": "demo-restaurants-person-06",
+  "name": "Meenakshi Sundar",
+  "category": "restaurants",
+  "role": "Guest Relations Manager",
+  "description": "Ensures reserved guests are welcomed immediately with zero waiting time.",
+  "photo_url": "/static/images/host_portrait.jpg",
+  "enabled": true,
+  "rating": 4.9,
+  "experience": "11 yrs experience",
+  "consultation_fee": "Complimentary table booking",
+  "languages": [
+    "Tamil",
+    "English"
+  ],
+  "reviews": [
+    {
+      "author": "Bala S.",
+      "rating": 5,
+      "date": "4 days ago",
+      "comment": "Reserved our family table ahead of dinner rush and got seated immediately."
+    },
+    {
+      "author": "Gayathri L.",
+      "rating": 5,
+      "date": "2 weeks ago",
+      "comment": "Fresh hot food, quick service, and comfortable seating."
+    }
+  ],
+  "demo_slots": [
+    {
+      "time": "12:00",
+      "enabled": true
+    },
+    {
+      "time": "12:45",
+      "enabled": true
+    },
+    {
+      "time": "13:30",
+      "enabled": true
+    },
+    {
+      "time": "19:30",
+      "enabled": true
+    },
+    {
+      "time": "20:30",
+      "enabled": true
+    }
+  ],
+  "schedules": [
+    {
+      "business_slug": "demo-restaurant-06",
+      "category_slug": "restaurants",
+      "weekly": {
+        "mon": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:00"
+          }
+        ],
+        "tue": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:00"
+          }
+        ],
+        "wed": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:00"
+          }
+        ],
+        "thu": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:00"
+          }
+        ],
+        "fri": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:00"
+          }
+        ],
+        "sat": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:30"
+          }
+        ],
+        "sun": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:30"
+          }
+        ]
+      },
+      "enabled_dates": [
+        "today",
+        "tomorrow"
+      ],
+      "slot_minutes": 30
+    }
+  ],
+  "services": [
+    "table-reservation"
+  ],
+  "services_menu": [
+    {
+      "id": "table-2",
+      "label": "Table for 2",
+      "duration_min": 45
+    },
+    {
+      "id": "family",
+      "label": "Family Table (4–6)",
+      "duration_min": 60
+    }
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/919842510046",
+    "instagram": "https://instagram.com/meenakshi.sundar.trichy",
+    "linkedin": "https://linkedin.com/in/meenakshi-sundar-trichy",
+    "facebook": "https://facebook.com/meenakshi.sundar.trichy"
+  }
+}

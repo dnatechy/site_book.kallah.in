@@ -23,15 +23,22 @@
       if (!dialog.open) dialog.showModal();
     } else { dialog?.setAttribute("open", ""); }
   };
+  const close = () => {
+    if (dialog && typeof dialog.close === "function") {
+      if (dialog.open) dialog.close();
+    } else { dialog?.removeAttribute("open"); }
+  };
   document.querySelectorAll("[data-open-location]").forEach(button =>
     button.addEventListener("click", show));
-  document.getElementById("close-location")?.addEventListener("click", () => dialog.close());
+  document.getElementById("close-location")?.addEventListener("click", close);
+  dialog?.addEventListener("click", event => {
+    if (event.target === dialog) close();
+  });
   document.getElementById("confirm-district")?.addEventListener("click", () => pick(select.value));
   if (current && valid(current)) save(current);
   else if (entry) {
     const last = stored();
     if (last && valid(last)) window.location.replace("/" + encodeURIComponent(last));
-    else show();
   }
   function distanceKm(lat1, lon1, lat2, lon2) {
     if (![lat1, lon1, lat2, lon2].every(Number.isFinite)) return Infinity;

@@ -1,0 +1,152 @@
+{
+  "id": "demo-hotels-person-03",
+  "name": "Karthik Sundaram",
+  "category": "hotels",
+  "role": "Hospitality Lead",
+  "description": "Coordinates prompt table seating, group arrangements, and seamless check-ins.",
+  "photo_url": "/static/images/host_portrait.jpg",
+  "enabled": true,
+  "rating": 4.9,
+  "experience": "11 yrs experience",
+  "consultation_fee": "Express check-in reservation",
+  "languages": [
+    "Tamil",
+    "English"
+  ],
+  "reviews": [
+    {
+      "author": "Manoj V.",
+      "rating": 5,
+      "date": "1 week ago",
+      "comment": "Smooth check-in and neat, quiet room ready right on arrival."
+    },
+    {
+      "author": "Lakshmi N.",
+      "rating": 5,
+      "date": "2 weeks ago",
+      "comment": "Helpful front desk and very convenient parking."
+    }
+  ],
+  "demo_slots": [
+    {
+      "time": "11:00",
+      "enabled": true
+    },
+    {
+      "time": "12:30",
+      "enabled": true
+    },
+    {
+      "time": "14:00",
+      "enabled": true
+    },
+    {
+      "time": "17:00",
+      "enabled": true
+    }
+  ],
+  "schedules": [
+    {
+      "business_slug": "demo-hotel-03",
+      "category_slug": "hotels",
+      "weekly": {
+        "mon": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:00"
+          }
+        ],
+        "tue": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:00"
+          }
+        ],
+        "wed": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:00"
+          }
+        ],
+        "thu": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:00"
+          }
+        ],
+        "fri": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:00"
+          }
+        ],
+        "sat": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:30"
+          }
+        ],
+        "sun": [
+          {
+            "start": "11:30",
+            "end": "15:30"
+          },
+          {
+            "start": "18:30",
+            "end": "22:30"
+          }
+        ]
+      },
+      "enabled_dates": [
+        "today",
+        "tomorrow"
+      ],
+      "slot_minutes": 30
+    }
+  ],
+  "services": [
+    "stay-enquiry"
+  ],
+  "services_menu": [
+    {
+      "id": "express-checkin",
+      "label": "Express Check-in",
+      "duration_min": 15
+    },
+    {
+      "id": "stay-tour",
+      "label": "Room & Stay Assist",
+      "duration_min": 30
+    }
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/919842510033",
+    "instagram": "https://instagram.com/karthik.sundaram.trichy",
+    "linkedin": "https://linkedin.com/in/karthik-sundaram-trichy",
+    "facebook": "https://facebook.com/karthik.sundaram.trichy"
+  }
+}

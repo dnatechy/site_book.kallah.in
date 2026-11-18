@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": false,
-  "address": "Sample address · Srirangam, Trichy (not a real location)",
+  "address": "Srirangam, Trichy, Tamil Nadu",
   "area": "Srirangam",
   "geo": {
     "lat": 10.762093,
@@ -16,58 +16,43 @@
   "amenities": {
     "parking": true,
     "wifi": true,
-    "accessible": true
+    "accessible": true,
+    "ac": false
   },
   "content": {
     "heading": "Demo Dine Restaurant 04",
-    "summary": "Browse cuisines and try sample table reservation times.",
-    "description": "This is a sample restaurants listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Reserve your table ahead and enjoy fresh meals without standing in line.",
+    "description": "Welcoming local dining room offering pre-booked seating for families, lunches, and evening meals."
   },
   "seo": {
-    "title": "Demo Dine Restaurant 04 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample restaurants profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Dine Restaurant 04 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Dine Restaurant 04 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#CF6631"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-restaurants-person-04",
-      "name": "Demo Table Host 04",
-      "role": "Table host (sample)",
-      "description": "Illustrative demo table host profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "12:00",
-          "enabled": false
-        },
-        {
-          "time": "12:30",
-          "enabled": true
-        },
-        {
-          "time": "13:30",
-          "enabled": true
-        },
-        {
-          "time": "19:00",
-          "enabled": true
-        },
-        {
-          "time": "20:00",
-          "enabled": true
-        }
-      ],
-      "services": [
-        "table-reservation"
-      ]
-    }
-  ],
   "cuisines": [
     "south-indian"
-  ]
+  ],
+  "photo_url": "/static/images/nonveg_biryani_card.jpg",
+  "timings": "07:00 AM – 10:30 PM",
+  "diet": "non-veg",
+  "dishes": [
+    "biryani",
+    "tandoor"
+  ],
+  "phone": "+91 431 243 1004",
+  "email": "hello@demo-restaurant-04.trichy.in",
+  "people_ids": [
+    "demo-restaurants-person-04",
+    "restaurants-person-04-2"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312431004",
+    "instagram": "https://instagram.com/demo.restaurant.04.trichy",
+    "linkedin": "https://linkedin.com/company/demo-restaurant-04-trichy",
+    "facebook": "https://facebook.com/demo.restaurant.04.trichy"
+  }
 }

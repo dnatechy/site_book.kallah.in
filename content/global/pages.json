@@ -1,0 +1,79 @@
+{
+  "navigation": [
+    {
+      "key": "services",
+      "label": "Services",
+      "target": "browse"
+    },
+    {
+      "key": "how_it_works",
+      "label": "How it works",
+      "target": "how-it-works"
+    }
+  ],
+  "location_picker": {
+    "eyebrow": "Your location",
+    "title": "Choose your district",
+    "description": "Browse nearby clinics, salons, restaurants, and hotels. Your location is used only to pick your district.",
+    "use_location": "Use my current location",
+    "manual_label": "Or choose manually",
+    "confirm_label": "Show services",
+    "close_label": "Close"
+  },
+  "bookings": {
+    "nav_label": "My bookings"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Local appointment discovery",
+      "title": "Book ahead.",
+      "emphasis": "Skip the queue.",
+      "description": "Find trusted clinics, salons, restaurants, and hotels in your district. Pick a specialist, reserve a time slot before you step out, and walk in right on schedule.",
+      "primary_action": "Find services near me",
+      "secondary_action_prefix": "Explore",
+      "districts_label": "Districts:"
+    },
+    "flow_panel": {
+      "accessible_label": "How booking ahead saves time",
+      "title": "Arrive when it is your turn",
+      "subtitle": "Three simple steps to skip crowded waiting rooms",
+      "currently_browsing": "Currently browsing",
+      "browse_label": "Browse clinics",
+      "steps": [
+        {
+          "title": "Choose your district & service",
+          "description": "Filter by specialty, food preference, distance, or parking."
+        },
+        {
+          "title": "Pick a specialist & time slot",
+          "description": "See available doctors, stylists, or tables before leaving home."
+        },
+        {
+          "title": "Walk in right on schedule",
+          "description": "Spend minutes getting served instead of hours waiting in line."
+        }
+      ]
+    },
+    "how_it_works": {
+      "eyebrow": "Built for local convenience",
+      "title": "Why book ahead with KALLAH Book",
+      "items": [
+        {
+          "label": "Discover",
+          "title": "District-first local directory",
+          "description": "Quickly browse clinics, salons, dining, and stays organized by city and neighborhood."
+        },
+        {
+          "label": "Choose",
+          "title": "Compare before you travel",
+          "description": "Check specialties, ratings, amenities, and individual professionals in one place."
+        },
+        {
+          "label": "Save time",
+          "title": "Less waiting, faster service",
+          "description": "Reserve an available slot ahead of time so your visit starts promptly when you arrive."
+        }
+      ]
+    }
+  }
+}

@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": false,
-  "address": "Sample address · Anna Nagar, Trichy (not a real location)",
+  "address": "Anna Nagar, Trichy, Tamil Nadu",
   "area": "Anna Nagar",
   "geo": {
     "lat": 10.835077,
@@ -16,52 +16,44 @@
   "amenities": {
     "parking": true,
     "wifi": true,
-    "accessible": false
+    "accessible": false,
+    "ac": false
   },
   "content": {
     "heading": "Demo Stay Hotel 10",
-    "summary": "Explore stays and preview check-in enquiry slots.",
-    "description": "This is a sample hotels listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Plan your arrival and check-in window ahead for a smooth, effortless stay.",
+    "description": "Comfortable rooms, attentive hospitality, and pre-scheduled check-in assistance in Trichy."
   },
   "seo": {
-    "title": "Demo Stay Hotel 10 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample hotels profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Stay Hotel 10 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Stay Hotel 10 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#9A4D32"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-hotels-person-10",
-      "name": "Demo Guest Host 10",
-      "role": "Guest host (sample)",
-      "description": "Illustrative demo guest host profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "11:00",
-          "enabled": true
-        },
-        {
-          "time": "13:00",
-          "enabled": true
-        },
-        {
-          "time": "15:00",
-          "enabled": true
-        },
-        {
-          "time": "17:00",
-          "enabled": false
-        }
-      ],
-      "services": [
-        "stay-enquiry"
-      ]
-    }
+  "stay_type": "guest-house",
+  "photo_url": "/static/images/hotel_place.jpg",
+  "timings": "Check-in 12:00 PM · Check-out 11:00 AM",
+  "diet": "non-veg",
+  "cuisines": [
+    "south-indian"
   ],
-  "stay_type": "guest-house"
+  "room_types": [
+    "Standard AC",
+    "Deluxe Room"
+  ],
+  "phone": "+91 431 244 1010",
+  "email": "hello@demo-hotel-10.trichy.in",
+  "people_ids": [
+    "demo-hotels-person-10",
+    "hotels-person-10-2"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312441010",
+    "instagram": "https://instagram.com/demo.hotel.10.trichy",
+    "linkedin": "https://linkedin.com/company/demo-hotel-10-trichy",
+    "facebook": "https://facebook.com/demo.hotel.10.trichy"
+  }
 }

@@ -12,11 +12,11 @@ def create_app(test_config=None):
     from .api.routes import api_bp
     app.register_blueprint(web_bp)
     app.register_blueprint(api_bp)
-    from .content import get_site, get_theme, get_locations, theme_css, demo_config, get_booking_config
+    from .content import get_site, get_theme, get_locations, theme_css, demo_config, get_booking_config, get_pages
 
     @app.context_processor
     def shared_layout():
         return {"site": get_site(), "locations": get_locations(),
                 "theme_css": theme_css(get_theme()), "demo": demo_config(),
-                "booking_config": get_booking_config()}
+                "booking_config": get_booking_config(), "pages": get_pages()}
     return app

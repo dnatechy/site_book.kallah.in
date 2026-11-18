@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero city-hero"><div class="hero-content"><p class="eyebrow">EXPLORE {{ city.state | upper }}</p>
-<h1>Find services in <em>{{ city.name }}.</em></h1>
-<p>Choose a category and explore local places. Appointments will appear when businesses join KALLAH Book.</p>
-<button type="button" class="button button-secondary" data-open-location>⌖ Change district</button></div></section>
+<section class="hero city-hero">
+  <div class="hero-content">
+    <p class="eyebrow">Explore {{ city.state }}</p>
+    <h1>Book local services in <em>{{ city.name }}.</em></h1>
+    <p class="hero-lead">Choose a category below to compare local places, check professionals, and reserve a time slot without waiting in line.</p>
+    <div class="hero-actions">
+      <a class="button button-primary" href="#browse">Browse categories</a>
+      <button type="button" class="button button-secondary" data-open-location>⌖ Change district</button>
+    </div>
+  </div>
+</section>
 {% include "components/discovery.html" %}
 {% endblock %}

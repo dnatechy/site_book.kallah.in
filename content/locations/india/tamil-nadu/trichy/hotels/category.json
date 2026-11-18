@@ -1,54 +1,99 @@
 {
   "slug": "hotels",
   "name": "Hotels",
-  "description": "Explore local hotels and reservation options in Trichy.",
+  "description": "Explore local hotels, dining kitchens, and room check-in options in Trichy.",
   "short_description": "Rooms & stays",
   "enabled": true,
   "icon": "🏨",
-  "professional_label": "Host",
+  "professional_label": "Guest host",
+  "layout_type": "hotel",
+  "filter_page": {
+    "eyebrow": "Stay & kitchen preferences",
+    "title": "Find the right hotel or stay",
+    "subtitle": "Pick stay type, veg or non-veg kitchen preference, dining style, and room amenities."
+  },
   "filters": [
+    {
+      "key": "diet",
+      "label": "In-house kitchen",
+      "type": "select",
+      "field": "diet",
+      "all_image": "/static/images/filters/all_hotels.svg",
+      "all_subtitle": "All stays & kitchens",
+      "options": [
+        {
+          "value": "veg",
+          "label": "Only Veg",
+          "subtitle": "Pure veg dining",
+          "image": "/static/images/filters/veg_food.svg"
+        },
+        {
+          "value": "non-veg",
+          "label": "Veg & Non-Veg",
+          "subtitle": "Full kitchen menu",
+          "image": "/static/images/filters/nonveg_food.svg"
+        }
+      ]
+    },
     {
       "key": "type",
       "label": "Stay type",
       "type": "select",
       "field": "stay_type",
+      "all_image": "/static/images/filters/all_hotels.svg",
+      "all_subtitle": "Any stay type",
       "options": [
-        {
-          "value": "hotel",
-          "label": "Hotel"
-        },
-        {
-          "value": "guest-house",
-          "label": "Guest House"
-        },
-        {
-          "value": "resort",
-          "label": "Resort"
-        }
+        { "value": "hotel", "label": "Hotel", "subtitle": "Full-service stay", "image": "/static/images/filters/hotel_stay.svg" },
+        { "value": "guest-house", "label": "Guest House", "subtitle": "Quiet family rooms", "image": "/static/images/filters/guest_house.svg" },
+        { "value": "resort", "label": "Resort", "subtitle": "Leisure & grounds", "image": "/static/images/filters/resort.svg" }
       ]
     },
     {
-      "key": "near-me",
-      "label": "Near me (10 km)",
-      "type": "proximity"
+      "key": "cuisine",
+      "label": "Dining style",
+      "type": "select",
+      "field": "cuisines",
+      "all_image": "/static/images/filters/all_restaurants.svg",
+      "all_subtitle": "Any kitchen",
+      "options": [
+        { "value": "south-indian", "label": "South Indian", "subtitle": "Breakfast & meals", "image": "/static/images/filters/south_indian.svg" },
+        { "value": "north-indian", "label": "North Indian", "subtitle": "Curries & breads", "image": "/static/images/filters/north_indian.svg" },
+        { "value": "multi-cuisine", "label": "Multi-cuisine", "subtitle": "All-day menu", "image": "/static/images/filters/all_restaurants.svg" }
+      ]
     },
     {
       "key": "rating",
-      "label": "Google rating / Demo score",
+      "label": "Minimum rating",
       "type": "min_number",
       "field": "rating_value",
+      "all_image": "/static/images/filters/rating_top.svg",
+      "all_subtitle": "Any rating",
       "options": [
-        {
-          "value": "4",
-          "label": "4+ ★"
-        }
+        { "value": "4", "label": "4+ ★", "subtitle": "Highly rated", "image": "/static/images/filters/rating_top.svg" }
       ]
+    },
+    {
+      "key": "wifi",
+      "label": "Free Wi-Fi",
+      "subtitle": "High-speed wireless",
+      "image": "/static/images/filters/wifi.svg",
+      "type": "toggle",
+      "field": "amenities.wifi"
     },
     {
       "key": "parking",
       "label": "Car parking",
+      "subtitle": "Dedicated parking",
+      "image": "/static/images/filters/parking.svg",
       "type": "toggle",
       "field": "amenities.parking"
+    },
+    {
+      "key": "near-me",
+      "label": "Near me (10 km)",
+      "subtitle": "Closest stays",
+      "image": "/static/images/filters/near_me.svg",
+      "type": "proximity"
     }
   ],
   "theme": {}

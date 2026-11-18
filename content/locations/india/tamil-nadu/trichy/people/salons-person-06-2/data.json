@@ -1,0 +1,162 @@
+{
+  "id": "salons-person-06-2",
+  "name": "Ananya Krishnan",
+  "category": "salons",
+  "role": "Creative Hair Stylist",
+  "description": "Specializes in precision cuts, natural texture styling, and bridal finish.",
+  "photo_url": "/static/images/stylist_portrait.jpg",
+  "enabled": true,
+  "rating": 4.8,
+  "experience": "15 yrs experience",
+  "consultation_fee": "Starts ₹450",
+  "languages": [
+    "Tamil",
+    "English"
+  ],
+  "reviews": [
+    {
+      "author": "Vignesh T.",
+      "rating": 5,
+      "date": "6 days ago",
+      "comment": "Clean beard trim and quick slot timing before an event."
+    },
+    {
+      "author": "Shalini D.",
+      "rating": 4,
+      "date": "1 month ago",
+      "comment": "Relaxing atmosphere and polite stylist."
+    }
+  ],
+  "demo_slots": [
+    {
+      "time": "10:30",
+      "enabled": true
+    },
+    {
+      "time": "11:30",
+      "enabled": true
+    },
+    {
+      "time": "14:00",
+      "enabled": true
+    },
+    {
+      "time": "16:00",
+      "enabled": true
+    },
+    {
+      "time": "18:30",
+      "enabled": true
+    }
+  ],
+  "schedules": [
+    {
+      "business_slug": "demo-salon-06",
+      "category_slug": "salons",
+      "weekly": {
+        "mon": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "16:00",
+            "end": "20:30"
+          }
+        ],
+        "tue": [
+          {
+            "start": "10:00",
+            "end": "13:30"
+          },
+          {
+            "start": "16:00",
+            "end": "20:00"
+          }
+        ],
+        "wed": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "16:00",
+            "end": "20:30"
+          }
+        ],
+        "thu": [
+          {
+            "start": "10:00",
+            "end": "13:30"
+          },
+          {
+            "start": "16:00",
+            "end": "20:00"
+          }
+        ],
+        "fri": [
+          {
+            "start": "16:00",
+            "end": "20:30"
+          }
+        ],
+        "sat": [
+          {
+            "start": "09:30",
+            "end": "14:00"
+          },
+          {
+            "start": "16:00",
+            "end": "21:00"
+          }
+        ],
+        "sun": [
+          {
+            "start": "09:30",
+            "end": "13:30"
+          },
+          {
+            "start": "16:30",
+            "end": "20:00"
+          }
+        ]
+      },
+      "enabled_dates": [
+        "today",
+        "tomorrow"
+      ],
+      "slot_minutes": 20
+    }
+  ],
+  "services": [
+    "hair-styling"
+  ],
+  "services_menu": [
+    {
+      "id": "haircut",
+      "label": "Haircut",
+      "duration_min": 30
+    },
+    {
+      "id": "beard",
+      "label": "Beard Trim",
+      "duration_min": 15
+    },
+    {
+      "id": "combo",
+      "label": "Haircut & Beard",
+      "duration_min": 45
+    },
+    {
+      "id": "spa",
+      "label": "Facial & Spa",
+      "duration_min": 60
+    }
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/919842510091",
+    "instagram": "https://instagram.com/ananya.krishnan.trichy",
+    "linkedin": "https://linkedin.com/in/ananya-krishnan-trichy",
+    "facebook": "https://facebook.com/ananya.krishnan.trichy"
+  }
+}

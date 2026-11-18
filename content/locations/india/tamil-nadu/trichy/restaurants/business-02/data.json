@@ -6,7 +6,7 @@
   "published": true,
   "is_demo": true,
   "featured": true,
-  "address": "Sample address · Thillai Nagar, Trichy (not a real location)",
+  "address": "Thillai Nagar, Trichy, Tamil Nadu",
   "area": "Thillai Nagar",
   "geo": {
     "lat": 10.805574,
@@ -16,58 +16,43 @@
   "amenities": {
     "parking": true,
     "wifi": true,
-    "accessible": false
+    "accessible": false,
+    "ac": false
   },
   "content": {
     "heading": "Demo Dine Restaurant 02",
-    "summary": "Browse cuisines and try sample table reservation times.",
-    "description": "This is a sample restaurants listing created solely to demonstrate KALLAH Book. It is not a real business and no appointments can be made here."
+    "summary": "Reserve your table ahead and enjoy fresh meals without standing in line.",
+    "description": "Welcoming local dining room offering pre-booked seating for families, lunches, and evening meals."
   },
   "seo": {
-    "title": "Demo Dine Restaurant 02 — Demo Listing | KALLAH Book",
-    "description": "Explore a sample restaurants profile, filters and demo slots in KALLAH Book. Not a real business."
+    "title": "Demo Dine Restaurant 02 in Trichy | KALLAH Book",
+    "description": "Book appointments and skip queues at Demo Dine Restaurant 02 in Trichy with KALLAH Book."
   },
   "theme": {
     "colors": {
       "primary": "#CF6631"
     }
   },
-  "professionals": [
-    {
-      "id": "demo-restaurants-person-02",
-      "name": "Demo Table Host 02",
-      "role": "Table host (sample)",
-      "description": "Illustrative demo table host profile for testing the website. No real professional is represented.",
-      "photo_url": null,
-      "enabled": true,
-      "demo_slots": [
-        {
-          "time": "12:00",
-          "enabled": true
-        },
-        {
-          "time": "12:30",
-          "enabled": true
-        },
-        {
-          "time": "13:30",
-          "enabled": true
-        },
-        {
-          "time": "19:00",
-          "enabled": false
-        },
-        {
-          "time": "20:00",
-          "enabled": true
-        }
-      ],
-      "services": [
-        "table-reservation"
-      ]
-    }
-  ],
   "cuisines": [
     "chinese"
-  ]
+  ],
+  "photo_url": "/static/images/nonveg_biryani_card.jpg",
+  "timings": "11:30 AM – 11:00 PM",
+  "diet": "non-veg",
+  "dishes": [
+    "biryani",
+    "meals-thali"
+  ],
+  "phone": "+91 431 243 1002",
+  "email": "hello@demo-restaurant-02.trichy.in",
+  "people_ids": [
+    "demo-restaurants-person-02",
+    "restaurants-person-02-2"
+  ],
+  "social_links": {
+    "whatsapp": "https://wa.me/914312431002",
+    "instagram": "https://instagram.com/demo.restaurant.02.trichy",
+    "linkedin": "https://linkedin.com/company/demo-restaurant-02-trichy",
+    "facebook": "https://facebook.com/demo.restaurant.02.trichy"
+  }
 }

@@ -1,9 +1,9 @@
 """Public pages, category-specific filters, and SEO."""
 from xml.etree import ElementTree as ET
-from flask import Blueprint, Response, abort, current_app, render_template, request
+from flask import Blueprint, Response, abort, current_app, jsonify, render_template, request
 from ..content import (
     filter_businesses, get_business, get_businesses, get_categories,
-    get_category, get_city, get_locations, get_quick_links,
+    get_category, get_city, get_locations, get_professional, get_quick_links,
     get_theme, page_meta, theme_css, demo_enabled,
 )
 
@@ -46,6 +46,17 @@ def demo_bookings():
                            active_city=None)
 
 
+@web_bp.get("/login")
+def login_page():
+    next_url = request.args.get("next", "/")
+    if not isinstance(next_url, str) or not next_url.startswith("/") or next_url.startswith("//"):
+        next_url = "/"
+    meta = _meta("home", False)
+    meta["title"] = "Sign in with mobile | KALLAH Book"
+    meta["description"] = "Sign in with your mobile number to confirm your appointment slot."
+    return render_template("pages/login.html", meta=meta, active_city=None, next_url=next_url)
+
+
 @web_bp.get("/<city_slug>")
 def city_page(city_slug):
     city = get_city(city_slug)
@@ -63,6 +74,17 @@ def category_page(city_slug, category_slug):
         abort(404)
     all_businesses = get_businesses(city_slug, category_slug)
     selected = request.args.to_dict(flat=True)
+    if not selected:
+        toggles = [
+            f for f in category.get("filters", [])
+            if isinstance(f, dict) and f.get("type") in ("toggle", "proximity")
+        ]
+        return render_template(
+            "pages/category_filter.html", active_city=city, city=city, category=category,
+            toggles=toggles, total_businesses=len(all_businesses),
+            theme_css=theme_css(get_theme(city_slug, category_slug)),
+            meta=_meta("category", bool(all_businesses), city=city, category=category),
+        )
     matching = filter_businesses(all_businesses, category.get("filters", []), selected)
     return render_template(
         "pages/category.html", active_city=city, city=city, category=category,
@@ -82,6 +104,26 @@ def business_page(city_slug, category_slug, business_slug):
         "pages/business.html", active_city=city, city=city, category=category,
         business=business, theme_css=theme_css(get_theme(city_slug, category_slug, business)),
         meta=_meta("business", True, city=city, category=category, business=business),
+    )
+
+
+@web_bp.get("/<city_slug>/<category_slug>/<business_slug>/<person_id>")
+def professional_page(city_slug, category_slug, business_slug, person_id):
+    city, category = get_city(city_slug), get_category(city_slug, category_slug)
+    business, person = get_professional(city_slug, category_slug, business_slug, person_id)
+    if not city or not category or not business or not person:
+        abort(404)
+    meta = _meta("business", True, city=city, category=category, business=business)
+    meta["title"] = f"{person['name']} — {business['name']} | {city['name']} | KALLAH Book"
+    meta["description"] = (
+        f"Book a direct appointment slot with {person['name']} ({person.get('role', 'Specialist')}) "
+        f"at {business['name']} in {city['name']}."
+    )
+    return render_template(
+        "pages/professional.html", active_city=city, city=city, category=category,
+        business=business, person=person,
+        theme_css=theme_css(get_theme(city_slug, category_slug, business)),
+        meta=meta,
     )
 
 
@@ -118,4 +160,12 @@ def sitemap():
 
 @web_bp.app_errorhandler(404)
 def not_found(_error):
+    if request.path.startswith("/api/"):
+        return jsonify({
+            "api_version": "v1",
+            "error": {
+                "code": "NOT_FOUND",
+                "message": "The requested API endpoint was not found.",
+            },
+        }), 404
     return render_template("pages/404.html", meta=_meta("not_found", False)), 404

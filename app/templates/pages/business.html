@@ -1,58 +1,195 @@
 {% extends "base.html" %}
 {% block content %}
-<nav class="crumb"><a href="{{ url_for('web.home') }}">Home</a> /
-<a href="{{ url_for('web.city_page',city_slug=city.slug) }}">{{ city.name }}</a> /
-<a href="{{ url_for('web.category_page',city_slug=city.slug,category_slug=category.slug) }}">{{ category.name }}</a></nav>
-<section class="section business-intro"><p class="eyebrow">{{ category.name | upper }} · {{ city.name | upper }}</p>
-<h1>{{ business.content.heading | default(business.name,true) }}</h1>
-<p class="muted">{{ business.content.summary | default('',true) }}</p>
-{% if business.is_demo %}<span class="sample-label">Demo listing · Not a real business</span>{% endif %}
-{% if business.address is defined %}<p>📍 {{ business.address }}</p>{% endif %}
-{% if business.google_rating is defined and business.rating_source | default('') == 'google' %}
-<p>★ {{ business.google_rating }} · Google rating</p>{% endif %}
-{% if business.is_demo %}
-<div class="notice">These are test details only. You can try a sample slot and see a browser-only confirmation; it does not reserve an actual appointment.</div>
-{% else %}
-<div class="notice">Booking and live slot availability are being prepared. No payment is collected on this page.</div>
-{% endif %}
+<nav class="crumb" aria-label="Breadcrumb">
+  <a href="{{ url_for('web.home') }}">Home</a>
+  <span aria-hidden="true">/</span>
+  <a href="{{ url_for('web.city_page', city_slug=city.slug) }}">{{ city.name }}</a>
+  <span aria-hidden="true">/</span>
+  <a href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug, browse='1') }}">{{ category.name }}</a>
+  <span aria-hidden="true">/</span>
+  <span>{{ business.name }}</span>
+</nav>
+<section class="section business-intro">
+  <div class="business-hero-grid">
+    <div class="business-media-box">
+      {% if business.photo_url %}
+      <img class="business-cover" src="{{ business.photo_url }}" alt="{{ business.name }}" referrerpolicy="no-referrer">
+      {% else %}
+      <div class="card-photo-fallback" aria-hidden="true">{{ category.icon | default('◈') }}</div>
+      {% endif %}
+    </div>
+    <div class="business-summary-col">
+      <p class="eyebrow">{{ category.name }} · {{ city.name }}</p>
+      <h1>{{ business.content.heading | default(business.name, true) }}</h1>
+      <p class="muted">{{ business.content.summary | default('', true) }}</p>
+      <div class="business-meta-row">
+        {% if business.address is defined %}<span>{{ business.address }}</span>{% endif %}
+        {% if business.rating_value is defined and business.rating_value is not none %}
+        <span aria-hidden="true">·</span>
+        <strong>★ {{ business.rating_value }}</strong>
+        {% endif %}
+      </div>
+      {% set bsocials = business.social_links or {} %}
+      {% if business.phone or business.email or bsocials.whatsapp or bsocials.instagram or bsocials.linkedin or bsocials.facebook %}
+      <div class="contact-actions" aria-label="Direct contact &amp; social links">
+        {% if business.phone %}
+        <a class="icon-action-btn" href="tel:{{ business.phone | replace(' ', '') }}" aria-label="Call {{ business.phone }}" title="Call {{ business.phone }}">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        {% endif %}
+        {% if business.email %}
+        <a class="icon-action-btn" href="mailto:{{ business.email }}" aria-label="Email {{ business.email }}" title="Email {{ business.email }}">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+        {% endif %}
+        {% if bsocials.whatsapp %}
+        <a class="icon-action-btn icon-action-btn--whatsapp" href="{{ bsocials.whatsapp }}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp {{ business.name }}" title="WhatsApp">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </a>
+        {% endif %}
+        {% if bsocials.instagram %}
+        <a class="icon-action-btn icon-action-btn--instagram" href="{{ bsocials.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram {{ business.name }}" title="Instagram">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        {% endif %}
+        {% if bsocials.linkedin %}
+        <a class="icon-action-btn icon-action-btn--linkedin" href="{{ bsocials.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn {{ business.name }}" title="LinkedIn">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        {% endif %}
+        {% if bsocials.facebook %}
+        <a class="icon-action-btn icon-action-btn--facebook" href="{{ bsocials.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook {{ business.name }}" title="Facebook">
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        {% endif %}
+      </div>
+      {% endif %}
+      <div class="business-highlights">
+        {% if category.slug == 'clinics' %}
+        <div class="highlight-box">
+          <span class="highlight-label">Specialties</span>
+          <span class="highlight-value">{{ (business.specialties or ['General care']) | join(', ') | replace('-', ' ') | title }}</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Consultation hours</span>
+          <span class="highlight-value">{{ business.timings | default('09:00 AM – 08:30 PM') }}</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Typical wait</span>
+          <span class="highlight-value">{{ business.avg_wait | default('10–15 min') }} with slot</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Facilities</span>
+          <span class="highlight-value">
+            {%- if business.amenities and (business.amenities.parking or business.amenities.accessible or business.amenities.ac) -%}
+              {%- if business.amenities.parking -%}Car parking{%- endif -%}
+              {%- if business.amenities.parking and (business.amenities.accessible or business.amenities.ac) %} · {% endif -%}
+              {%- if business.amenities.accessible -%}Wheelchair access{%- endif -%}
+              {%- if business.amenities.accessible and business.amenities.ac %} · {% endif -%}
+              {%- if business.amenities.ac -%}AC waiting{%- endif -%}
+            {%- else -%}Standard reception{%- endif -%}
+          </span>
+        </div>
+        {% elif category.slug == 'salons' %}
+        <div class="highlight-box">
+          <span class="highlight-label">Services</span>
+          <span class="highlight-value">{{ (business.services or ['Haircut & styling']) | join(', ') | replace('-', ' ') | title }}</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Studio hours</span>
+          <span class="highlight-value">{{ business.timings | default('09:30 AM – 09:00 PM') }}</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Typical wait</span>
+          <span class="highlight-value">{{ business.avg_wait | default('10 min') }} with slot</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Studio comfort</span>
+          <span class="highlight-value">
+            {%- if business.amenities and (business.amenities.ac or business.amenities.parking or business.amenities.wifi) -%}
+              {%- if business.amenities.ac -%}AC studio{%- endif -%}
+              {%- if business.amenities.ac and (business.amenities.parking or business.amenities.wifi) %} · {% endif -%}
+              {%- if business.amenities.parking -%}Car parking{%- endif -%}
+              {%- if business.amenities.parking and business.amenities.wifi %} · {% endif -%}
+              {%- if business.amenities.wifi -%}Free Wi-Fi{%- endif -%}
+            {%- else -%}Walk-in &amp; appointment{%- endif -%}
+          </span>
+        </div>
+        {% elif category.slug == 'restaurants' %}
+        <div class="highlight-box">
+          <span class="highlight-label">Kitchen preference</span>
+          <span class="highlight-value">{{ 'Only Veg' if business.diet == 'veg' else 'Veg & Non-Veg' }}</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Cuisines</span>
+          <span class="highlight-value">{{ (business.cuisines or ['South Indian']) | join(', ') | replace('-', ' ') | title }}</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Popular dishes</span>
+          <span class="highlight-value">{{ (business.dishes or ['Meals & Tiffin']) | join(', ') | replace('-', ' ') | title }}</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Dining hours &amp; comfort</span>
+          <span class="highlight-value">{{ business.timings | default('07:30 AM – 10:30 PM') }}{% if business.amenities and business.amenities.ac %} · AC{% endif %}{% if business.amenities and business.amenities.parking %} · Parking{% endif %}</span>
+        </div>
+        {% elif category.slug == 'hotels' %}
+        <div class="highlight-box">
+          <span class="highlight-label">Stay type</span>
+          <span class="highlight-value">{{ (business.stay_type or 'hotel') | replace('-', ' ') | title }}</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">In-house kitchen</span>
+          <span class="highlight-value">{{ 'Only Veg' if business.diet == 'veg' else 'Veg & Non-Veg' }} · {{ (business.cuisines or ['South Indian']) | join(', ') | replace('-', ' ') | title }}</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Room options</span>
+          <span class="highlight-value">{{ (business.room_types or ['Standard AC', 'Deluxe Room']) | join(' · ') }}</span>
+        </div>
+        <div class="highlight-box">
+          <span class="highlight-label">Check-in &amp; amenities</span>
+          <span class="highlight-value">{{ business.timings | default('24-hour check-in') }}{% if business.amenities and business.amenities.wifi %} · Free Wi-Fi{% endif %}{% if business.amenities and business.amenities.parking %} · Parking{% endif %}</span>
+        </div>
+        {% endif %}
+      </div>
+      {% if business.content and business.content.description %}
+      <p class="business-about">{{ business.content.description }}</p>
+      {% endif %}
+    </div>
+  </div>
 </section>
 {% if business.professionals %}
 <section class="section compact-section" id="professionals">
-<p class="eyebrow">PEOPLE AT {{ business.name | upper }}</p>
-<h2>Choose your {{ category.professional_label | default('professional') | lower }}</h2>
-<div class="professional-grid">{% for person in business.professionals %}
-<article class="professional-card">
-{% if person.photo_url %}<img class="profile-photo" src="{{ person.photo_url }}" alt="{{ person.name }}" loading="lazy" referrerpolicy="no-referrer">
-{% else %}<div class="profile-placeholder" aria-hidden="true">👤</div>{% endif %}
-<div class="profile-details"><h3>{{ person.name }}</h3>
-{% if person.role %}<p class="muted">{{ person.role }}</p>{% endif %}
-{% if person.description %}<p>{{ person.description }}</p>{% endif %}
-{% if person.specialties %}<p class="profile-skills">{{ person.specialties | join(" · ") }}</p>{% endif %}
-{% if person.services %}<p class="profile-skills">{{ person.services | join(" · ") }}</p>{% endif %}
-{% if business.is_demo %}
-<button class="button button-primary" type="button" data-demo-person="{{ person.id }}">Try sample slots</button>
-{% else %}
-<button class="button button-secondary" type="button" disabled aria-label="Slots for {{ person.name }} coming soon">Slots coming soon</button>
-{% endif %}
-</div></article>
-{% endfor %}</div></section>
-{% endif %}
-{% if business.is_demo and demo.enabled %}
-<section class="section demo-booking-section" id="demo-booking-panel" hidden>
-<h2>Try a sample appointment</h2>
-<p class="muted">This preview is stored only in your browser. It is not an actual booking.</p>
-<div class="demo-fee"><span>Future convenience fee (preview)</span><strong>₹{{ booking_config.convenience_fee_inr }}</strong>
-<small>No fee is collected in demo mode. Payable now: ₹{{ booking_config.demo_payable_inr }}.</small></div>
-<form id="demo-booking-form">
-<p><strong id="demo-selected-person"></strong></p>
-<label class="demo-date-label">Choose a date <input id="demo-date" type="date" required></label>
-<p><strong>Sample available times</strong></p>
-<div class="demo-slot-list" id="demo-slot-list" role="group" aria-label="Sample time slots"></div>
-<button type="submit" class="button button-primary">Confirm demo booking · ₹0</button>
-</form>
-<p id="demo-booking-message" class="demo-result" role="status" aria-live="polite"></p>
-<p><a href="{{ url_for('web.demo_bookings') }}">View my demo bookings</a></p>
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Team at {{ business.name }} · <span class="tabular">{{ business.professionals | length }}</span> {{ (category.professional_label | default('specialist') | lower) }}s available</p>
+      <h2>Choose your {{ category.professional_label | default('professional') | lower }}</h2>
+    </div>
+    <span class="muted">Select any portrait to open their profile, reviews &amp; live booking page</span>
+  </div>
+  <div class="professional-grid">
+    {% for person in business.professionals %}
+    <a class="professional-card-trigger" href="{{ url_for('web.professional_page', city_slug=city.slug, category_slug=category.slug, business_slug=business.slug, person_id=person.id) }}">
+      <div class="profile-media">
+        {% if person.photo_url %}
+        <img class="profile-photo" src="{{ person.photo_url }}" alt="{{ person.name }}" loading="lazy" referrerpolicy="no-referrer">
+        {% else %}
+        <div class="profile-placeholder" aria-hidden="true">{{ person.name[:1] | upper }}</div>
+        {% endif %}
+      </div>
+      <div class="profile-details">
+        <div class="profile-head-row">
+          <h3>{{ person.name }}</h3>
+          {% if person.rating %}<span class="demo-rating tabular">★ {{ person.rating }}</span>{% endif %}
+        </div>
+        {% if person.role %}<p class="profile-role">{{ person.role }}{% if person.experience %} · {{ person.experience }}{% endif %}</p>{% endif %}
+        {% if person.description %}<p class="profile-desc">{{ person.description }}</p>{% endif %}
+        {% if person.specialties %}<p class="profile-skills">{{ person.specialties | join(" · ") | replace("-", " ") | title }}</p>{% endif %}
+        {% if person.services %}<p class="profile-skills">{{ person.services | join(" · ") | replace("-", " ") | title }}</p>{% endif %}
+        <span class="profile-select-cue">Open profile, reviews &amp; book →</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
 </section>
-<script type="application/json" id="demo-booking-data">{{ {"business": business.name, "slug": business.slug, "category": category.slug, "city": city.slug, "professionals": business.professionals, "days_ahead": booking_config.demo_days_ahead} | tojson }}</script>
 {% endif %}
 {% endblock %}

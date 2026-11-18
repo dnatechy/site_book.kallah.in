@@ -1,70 +1,99 @@
 {
   "slug": "clinics",
   "name": "Clinics",
-  "description": "Discover clinics and healthcare appointments in Trichy.",
+  "description": "Discover clinics and book doctor consultations in Trichy.",
   "short_description": "Doctors & care",
   "enabled": true,
   "icon": "🩺",
   "professional_label": "Doctor",
+  "layout_type": "clinic",
+  "filter_page": {
+    "eyebrow": "Medical consultation",
+    "title": "Choose a specialty or browse clinics",
+    "subtitle": "Pick the medical specialty and facilities you need — tap any card below to filter clinics and doctors in Trichy."
+  },
   "filters": [
     {
       "key": "specialty",
       "label": "Specialty",
       "type": "select",
       "field": "specialties",
+      "all_image": "/static/images/filters/all_clinics.svg",
+      "all_subtitle": "Every clinic & doctor",
       "options": [
         {
           "value": "general-physician",
-          "label": "General Physician"
+          "label": "General Physician",
+          "subtitle": "Primary care & fever",
+          "image": "/static/images/filters/general_physician.svg"
+        },
+        {
+          "value": "gastro",
+          "label": "Gastroenterology",
+          "subtitle": "Stomach & digestive care",
+          "image": "/static/images/filters/gastro.svg"
         },
         {
           "value": "dermatology",
-          "label": "Dermatology"
-        },
-        {
-          "value": "dental",
-          "label": "Dental"
-        },
-        {
-          "value": "pediatrics",
-          "label": "Pediatrics"
+          "label": "Skin & Dermatology",
+          "subtitle": "Acne, rash & skin care",
+          "image": "/static/images/filters/dermatology.svg"
         },
         {
           "value": "orthopedics",
-          "label": "Orthopedics"
+          "label": "Orthopedics",
+          "subtitle": "Bones, joints & knee care",
+          "image": "/static/images/filters/ortho.svg"
+        },
+        {
+          "value": "dental",
+          "label": "Dental",
+          "subtitle": "Teeth & smile care",
+          "image": "/static/images/filters/dental.svg"
+        },
+        {
+          "value": "pediatrics",
+          "label": "Pediatrics",
+          "subtitle": "Child & infant care",
+          "image": "/static/images/filters/pediatrics.svg"
         }
       ]
     },
     {
-      "key": "near-me",
-      "label": "Near me (10 km)",
-      "type": "proximity"
-    },
-    {
       "key": "rating",
-      "label": "Google rating / Demo score",
+      "label": "Minimum rating",
       "type": "min_number",
       "field": "rating_value",
+      "all_image": "/static/images/filters/rating_top.svg",
+      "all_subtitle": "Any rating",
       "options": [
-        {
-          "value": "4.5",
-          "label": "4.5+ ★"
-        },
-        {
-          "value": "4",
-          "label": "4+ ★"
-        },
-        {
-          "value": "3.5",
-          "label": "3.5+ ★"
-        }
+        { "value": "4.5", "label": "4.5+ ★", "subtitle": "Top rated", "image": "/static/images/filters/rating_top.svg" },
+        { "value": "4", "label": "4+ ★", "subtitle": "Highly rated", "image": "/static/images/filters/rating_top.svg" },
+        { "value": "3.5", "label": "3.5+ ★", "subtitle": "Well reviewed", "image": "/static/images/filters/rating_top.svg" }
       ]
     },
     {
       "key": "parking",
       "label": "Car parking",
+      "subtitle": "Dedicated parking",
+      "image": "/static/images/filters/parking.svg",
       "type": "toggle",
       "field": "amenities.parking"
+    },
+    {
+      "key": "accessible",
+      "label": "Wheelchair access",
+      "subtitle": "Step-free entry",
+      "image": "/static/images/filters/accessible.svg",
+      "type": "toggle",
+      "field": "amenities.accessible"
+    },
+    {
+      "key": "near-me",
+      "label": "Near me (10 km)",
+      "subtitle": "Closest clinics",
+      "image": "/static/images/filters/near_me.svg",
+      "type": "proximity"
     }
   ],
   "theme": {}

@@ -1,14 +1,58 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero"><div class="hero-content">
-<p class="eyebrow">KALLAH BOOK</p>
-<h1>Book ahead. <em>Skip the long wait.</em></h1>
-<p>Find clinics, salons, restaurants and more in your district. Discover places today; book ahead when appointments are available.</p>
-<div class="hero-actions">
-<button class="button button-primary" type="button" data-open-location>⌖ Find services near me</button>
-{% if city %}<a class="button button-secondary" href="#browse">Explore {{ city.name }}</a>{% endif %}
-</div></div>
-<div class="hero-art" aria-hidden="true"><span class="hero-symbol">◷</span>
-<strong>Your time is valuable.</strong><span>Discover · Choose · Book</span></div></section>
+{% set home = pages.home %}
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">{{ home.hero.eyebrow }}</p>
+    <h1>{{ home.hero.title }} <em>{{ home.hero.emphasis }}</em></h1>
+    <p class="hero-lead">{{ home.hero.description }}</p>
+    <div class="hero-actions">
+      <button class="button button-primary" type="button" data-open-location>⌖ {{ home.hero.primary_action }}</button>
+      {% if city %}<a class="button button-secondary" href="#browse">{{ home.hero.secondary_action_prefix }} {{ city.name }}</a>{% endif %}
+    </div>
+    {% if locations %}
+    <div class="hero-districts">
+      <span>{{ home.hero.districts_label }}</span>
+      {% for item in locations %}
+      <a href="{{ url_for('web.city_page', city_slug=item.slug) }}">{{ item.name }}</a>{% if not loop.last %}<span aria-hidden="true">·</span>{% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <aside class="hero-panel" aria-label="{{ home.flow_panel.accessible_label }}">
+    <div class="hero-panel-header">
+      <p class="hero-panel-title">{{ home.flow_panel.title }}</p>
+      <p class="hero-panel-sub">{{ home.flow_panel.subtitle }}</p>
+    </div>
+    <ol class="flow-steps">
+      {% for step in home.flow_panel.steps %}
+      <li class="flow-step">
+        <span class="flow-num">{{ "%02d" | format(loop.index) }}</span>
+        <div>
+          <strong>{{ step.title }}</strong>
+          <span>{{ step.description }}</span>
+        </div>
+      </li>
+      {% endfor %}
+    </ol>
+    <div class="hero-panel-foot">
+      <span>{{ home.flow_panel.currently_browsing }} {{ city.name if city else 'Tamil Nadu' }}</span>
+      {% if city %}<a href="{{ url_for('web.category_page', city_slug=city.slug, category_slug='clinics') }}">{{ home.flow_panel.browse_label }} →</a>{% endif %}
+    </div>
+  </aside>
+</section>
 {% include "components/discovery.html" %}
+<section class="section compact-section" id="how-it-works">
+  <p class="eyebrow">{{ home.how_it_works.eyebrow }}</p>
+  <h2>{{ home.how_it_works.title }}</h2>
+  <div class="how-grid">
+    {% for item in home.how_it_works.items %}
+    <div class="how-item">
+      <span class="how-index">{{ "%02d" | format(loop.index) }} · {{ item.label }}</span>
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.description }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
 {% endblock %}
