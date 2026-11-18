@@ -1,10 +1,9 @@
-"""Read-only foundation endpoints; booking and payments are NOT implemented."""
-from flask import Blueprint, abort, jsonify
+"""JSON-only discovery endpoints for future Flutter client."""
+from flask import Blueprint, abort, jsonify, request
 from ..content import (
-    get_business, get_businesses, get_categories, get_category, get_city,
-    get_locations, get_theme,
+    filter_businesses, get_business, get_businesses, get_categories,
+    get_category, get_city, get_locations, get_professionals, get_quick_links, get_theme,
 )
-
 api_bp = Blueprint("api", __name__, url_prefix="/api/v1")
 
 
@@ -27,14 +26,19 @@ def locations():
 def categories(city_slug):
     if not get_city(city_slug):
         abort(404)
-    return jsonify({"categories": get_categories(city_slug)})
+    return jsonify({"categories": get_categories(city_slug),
+                    "quick_links": get_quick_links(city_slug)})
 
 
 @api_bp.get("/locations/<city_slug>/<category_slug>/businesses")
 def businesses(city_slug, category_slug):
-    if not get_category(city_slug, category_slug):
+    category = get_category(city_slug, category_slug)
+    if not category:
         abort(404)
-    return jsonify({"businesses": get_businesses(city_slug, category_slug)})
+    all_businesses = get_businesses(city_slug, category_slug)
+    return jsonify({"businesses": filter_businesses(all_businesses, category.get("filters", []),
+                                                    request.args.to_dict(flat=True)),
+                    "filters": category.get("filters", []), "total": len(all_businesses)})
 
 
 @api_bp.get("/locations/<city_slug>/<category_slug>/businesses/<business_slug>")
@@ -42,5 +46,12 @@ def business_detail(city_slug, category_slug, business_slug):
     business = get_business(city_slug, category_slug, business_slug)
     if not business:
         abort(404)
-    return jsonify({"business": business,
-                    "theme": get_theme(city_slug, category_slug, business)})
+    return jsonify({"business": business, "theme": get_theme(city_slug, category_slug, business)})
+
+
+@api_bp.get("/locations/<city_slug>/<category_slug>/businesses/<business_slug>/professionals")
+def professionals(city_slug, category_slug, business_slug):
+    business = get_business(city_slug, category_slug, business_slug)
+    if not business:
+        abort(404)
+    return jsonify({"professionals": get_professionals(business)})

@@ -2,5 +2,66 @@
   "slug": "salons",
   "name": "Salons",
   "description": "Discover salons and personal care services in Trichy.",
+  "short_description": "Hair & grooming",
+  "enabled": true,
+  "icon": "✂️",
+  "professional_label": "Hair stylist",
+  "filters": [
+    {
+      "key": "service",
+      "label": "Service",
+      "type": "select",
+      "field": "services",
+      "options": [
+        {
+          "value": "haircut",
+          "label": "Haircut"
+        },
+        {
+          "value": "hair-styling",
+          "label": "Hair styling"
+        },
+        {
+          "value": "beard-grooming",
+          "label": "Beard grooming"
+        },
+        {
+          "value": "facial",
+          "label": "Facial"
+        },
+        {
+          "value": "bridal",
+          "label": "Bridal"
+        }
+      ]
+    },
+    {
+      "key": "near-me",
+      "label": "Near me (10 km)",
+      "type": "proximity"
+    },
+    {
+      "key": "rating",
+      "label": "Google rating",
+      "type": "min_number",
+      "field": "google_rating",
+      "options": [
+        {
+          "value": "4.5",
+          "label": "4.5+ ★"
+        },
+        {
+          "value": "4",
+          "label": "4+ ★"
+        }
+      ]
+    },
+    {
+      "key": "parking",
+      "label": "Car parking",
+      "type": "toggle",
+      "field": "amenities.parking"
+    }
+  ],
   "theme": {}
 }

@@ -1,22 +1,22 @@
 # KALLAH Book Development Handbook
 
 Repository: dnatechy/site_book.kallah.in
-Development branch: Dev_v01 (always implement here first).
-Production branch: Publish (manual, selective promotion only).
-Hosting: /home/dnatechy/book.kallah.in; Passenger WSGI application.
+Development: Dev_v01
+Production: Publish; only selective approved runtime files, never wholesale merge.
+Hosting: /home/dnatechy/book.kallah.in, Python Passenger 3.10 WSGI.
 
-Architecture V3: app (web/api/services/models/templates/static), content
-(global and location/category/business JSON), shared design tokens,
-database migrations, tests, scripts, docs.
+Tech: Flask + Jinja2, static JSON content + SEO, shared design tokens for future Flutter.
+Current implementation:
+- District picker on first visit, manual district change, optional browser location.
+- Trichy categories + curated quick booking links on the homepage.
+- Four category-specific JSON filter sets with easy future additions.
+- Category enabled:false blocks all nested HTML/API routes and sitemap entries.
+- Professionals are nested beneath each published business in data.json.
+- Professional photos accept HTTPS or static paths; booking slots are placeholders only.
+- No database, live booking, payment or POS integration in this phase.
 
-Rules:
-1. Keep the public website Python Flask + Jinja2 SSR for SEO.
-2. Use a single read layer for HTML and Flutter API content.
-3. Business pages use stable IDs and business-specific content/seo/theme in one JSON file.
-4. Share theme design tokens with Flutter. Never duplicate booking logic in routes.
-5. Store booking, payment, queue and personal data in secure MariaDB, NOT Git JSON.
-6. Never publish fictitious businesses or expose private patient data.
-7. Add tests and deployment notes for every meaningful change.
-8. Never merge or push to Publish without explicit user instruction.
-
-Current task: V3 foundation scaffold on Dev_v01 only. No booking or payment flows yet.
+Source locations: content/locations/india/tamil-nadu/{city}/{category}/
+Business record: {category}/{business-id}/data.json
+API: /api/v1, same JSON sources for future Flutter.
+Rules: don't fabricate businesses, ratings or slots; keep tests updated;
+do not modify Publish without explicit user permission.

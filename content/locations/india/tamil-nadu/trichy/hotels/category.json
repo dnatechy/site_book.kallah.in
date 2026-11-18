@@ -2,5 +2,54 @@
   "slug": "hotels",
   "name": "Hotels",
   "description": "Explore local hotels and reservation options in Trichy.",
+  "short_description": "Rooms & stays",
+  "enabled": true,
+  "icon": "🏨",
+  "professional_label": "Host",
+  "filters": [
+    {
+      "key": "type",
+      "label": "Stay type",
+      "type": "select",
+      "field": "stay_type",
+      "options": [
+        {
+          "value": "hotel",
+          "label": "Hotel"
+        },
+        {
+          "value": "guest-house",
+          "label": "Guest House"
+        },
+        {
+          "value": "resort",
+          "label": "Resort"
+        }
+      ]
+    },
+    {
+      "key": "near-me",
+      "label": "Near me (10 km)",
+      "type": "proximity"
+    },
+    {
+      "key": "rating",
+      "label": "Google rating",
+      "type": "min_number",
+      "field": "google_rating",
+      "options": [
+        {
+          "value": "4",
+          "label": "4+ ★"
+        }
+      ]
+    },
+    {
+      "key": "parking",
+      "label": "Car parking",
+      "type": "toggle",
+      "field": "amenities.parking"
+    }
+  ],
   "theme": {}
 }

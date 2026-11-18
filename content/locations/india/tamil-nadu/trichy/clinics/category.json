@@ -2,5 +2,70 @@
   "slug": "clinics",
   "name": "Clinics",
   "description": "Discover clinics and healthcare appointments in Trichy.",
+  "short_description": "Doctors & care",
+  "enabled": true,
+  "icon": "🩺",
+  "professional_label": "Doctor",
+  "filters": [
+    {
+      "key": "specialty",
+      "label": "Specialty",
+      "type": "select",
+      "field": "specialties",
+      "options": [
+        {
+          "value": "general-physician",
+          "label": "General Physician"
+        },
+        {
+          "value": "dermatology",
+          "label": "Dermatology"
+        },
+        {
+          "value": "dental",
+          "label": "Dental"
+        },
+        {
+          "value": "pediatrics",
+          "label": "Pediatrics"
+        },
+        {
+          "value": "orthopedics",
+          "label": "Orthopedics"
+        }
+      ]
+    },
+    {
+      "key": "near-me",
+      "label": "Near me (10 km)",
+      "type": "proximity"
+    },
+    {
+      "key": "rating",
+      "label": "Google rating",
+      "type": "min_number",
+      "field": "google_rating",
+      "options": [
+        {
+          "value": "4.5",
+          "label": "4.5+ ★"
+        },
+        {
+          "value": "4",
+          "label": "4+ ★"
+        },
+        {
+          "value": "3.5",
+          "label": "3.5+ ★"
+        }
+      ]
+    },
+    {
+      "key": "parking",
+      "label": "Car parking",
+      "type": "toggle",
+      "field": "amenities.parking"
+    }
+  ],
   "theme": {}
 }

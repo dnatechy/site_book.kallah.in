@@ -1,0 +1,14 @@
+{
+  "slug": "salem",
+  "name": "Salem",
+  "state": "Tamil Nadu",
+  "country": "India",
+  "enabled": true,
+  "geo": {
+    "lat": 11.6643,
+    "lng": 78.146,
+    "match_radius_km": 35
+  },
+  "categories": [],
+  "quick_links": []
+}

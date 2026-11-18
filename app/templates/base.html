@@ -1,28 +1,39 @@
 <!doctype html>
 <html lang="{{ site.language | default('en') }}">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ meta.title }}</title>
-  <meta name="description" content="{{ meta.description }}">
-  <meta name="robots" content="{{ 'index,follow' if meta.indexable else 'noindex,follow' }}">
-  <link rel="canonical" href="{{ meta.canonical }}">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ meta.title }}">
-  <meta property="og:description" content="{{ meta.description }}">
-  <meta property="og:url" content="{{ meta.canonical }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
-  <style>:root { {{ theme_css | safe }} }</style>
-  <script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "WebSite", "name": site.name, "url": site.url} | tojson }}</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ meta.title }}</title><meta name="description" content="{{ meta.description }}">
+<meta name="robots" content="{{ 'index,follow' if meta.indexable else 'noindex,follow' }}">
+<link rel="canonical" href="{{ meta.canonical }}">
+<meta property="og:type" content="website"><meta property="og:title" content="{{ meta.title }}">
+<meta property="og:description" content="{{ meta.description }}">
+<meta property="og:url" content="{{ meta.canonical }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+<style>:root { {{ theme_css | safe }} }</style>
+<script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "WebSite", "name": site.name, "url": site.url} | tojson }}</script>
+<script type="application/json" id="location-data">{{ locations | tojson }}</script>
+<script src="{{ url_for('static', filename='js/discovery.js') }}" defer></script>
 </head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="{{ url_for('web.home') }}">KALLAH <span>Book</span></a>
-      <span class="tagline">{{ site.tagline }}</span>
-    </div>
-  </header>
-  <main class="container">{% block content %}{% endblock %}</main>
-  <footer class="site-footer"><div class="container">© KALLAH Book · {{ site.tagline }}</div></footer>
-</body>
-</html>
+<body data-current-city="{{ active_city.slug if active_city else '' }}" data-entry-page="{{ 'yes' if is_root else 'no' }}">
+<header class="site-header"><div class="container header-inner">
+<a class="brand" href="{{ url_for('web.home') }}">KALLAH <span>Book</span></a>
+<button class="location-button" type="button" data-open-location aria-haspopup="dialog">
+<span aria-hidden="true">⌖</span> <span id="selected-district">{{ active_city.name if active_city else 'Select district' }}</span> <span aria-hidden="true">⌄</span>
+</button></div></header>
+{% block filterbar %}{% endblock %}
+<main class="container">{% block content %}{% endblock %}</main>
+<footer class="site-footer"><div class="container">© KALLAH Book · {{ site.tagline }}</div></footer>
+<dialog class="location-modal" id="location-modal" aria-labelledby="location-title">
+<div class="modal-body">
+<button type="button" class="modal-close" id="close-location" aria-label="Close">×</button>
+<p class="eyebrow">YOUR LOCATION</p><h2 id="location-title">Choose your district</h2>
+<p>Browse services available in your area. We only use your location to select a district.</p>
+<button type="button" class="button button-primary" id="use-my-location">⌖ Use my current location</button>
+<p id="location-status" class="location-status" role="status" aria-live="polite"></p>
+<label for="district-select">Or choose manually</label>
+<select class="input-control" id="district-select">
+{% for item in locations %}<option value="{{ item.slug }}" {% if active_city and active_city.slug==item.slug %}selected{% endif %}>{{ item.name }}, {{ item.state }}</option>{% endfor %}
+</select>
+<button type="button" class="button button-secondary" id="confirm-district">Show services</button>
+</div></dialog>
+</body></html>

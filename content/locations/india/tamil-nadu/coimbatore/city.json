@@ -1,0 +1,14 @@
+{
+  "slug": "coimbatore",
+  "name": "Coimbatore",
+  "state": "Tamil Nadu",
+  "country": "India",
+  "enabled": true,
+  "geo": {
+    "lat": 11.0168,
+    "lng": 76.9558,
+    "match_radius_km": 35
+  },
+  "categories": [],
+  "quick_links": []
+}

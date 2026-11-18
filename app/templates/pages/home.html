@@ -1,20 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="hero">
-  <p class="eyebrow">KALLAH BOOK</p>
-  <h1>Book ahead. Spend less time waiting.</h1>
-  <p>Find local services and, once booking is enabled, reserve a convenient time.</p>
-</section>
-<section class="section">
-  <h2>Explore by location</h2>
-  <div class="cards">
-    {% for city in cities %}
-    <a class="card" href="{{ url_for('web.city_page', city_slug=city.slug) }}">
-      <strong>{{ city.name }}</strong><span>{{ city.state }}, {{ city.country }}</span>
-    </a>
-    {% else %}
-    <p>Locations will appear here soon.</p>
-    {% endfor %}
-  </div>
-</section>
+<section class="hero"><div class="hero-content">
+<p class="eyebrow">KALLAH BOOK</p>
+<h1>Book ahead. <em>Skip the long wait.</em></h1>
+<p>Find clinics, salons, restaurants and more in your district. Discover places today; book ahead when appointments are available.</p>
+<div class="hero-actions">
+<button class="button button-primary" type="button" data-open-location>⌖ Find services near me</button>
+{% if city %}<a class="button button-secondary" href="#browse">Explore {{ city.name }}</a>{% endif %}
+</div></div>
+<div class="hero-art" aria-hidden="true"><span class="hero-symbol">◷</span>
+<strong>Your time is valuable.</strong><span>Discover · Choose · Book</span></div></section>
+{% include "components/discovery.html" %}
 {% endblock %}

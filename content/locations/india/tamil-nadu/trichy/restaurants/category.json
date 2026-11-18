@@ -2,5 +2,62 @@
   "slug": "restaurants",
   "name": "Restaurants",
   "description": "Explore restaurants and table reservation options in Trichy.",
+  "short_description": "Tables & dining",
+  "enabled": true,
+  "icon": "🍽️",
+  "professional_label": "Staff",
+  "filters": [
+    {
+      "key": "cuisine",
+      "label": "Cuisine",
+      "type": "select",
+      "field": "cuisines",
+      "options": [
+        {
+          "value": "south-indian",
+          "label": "South Indian"
+        },
+        {
+          "value": "north-indian",
+          "label": "North Indian"
+        },
+        {
+          "value": "chinese",
+          "label": "Chinese"
+        },
+        {
+          "value": "multi-cuisine",
+          "label": "Multi-cuisine"
+        }
+      ]
+    },
+    {
+      "key": "near-me",
+      "label": "Near me (10 km)",
+      "type": "proximity"
+    },
+    {
+      "key": "rating",
+      "label": "Google rating",
+      "type": "min_number",
+      "field": "google_rating",
+      "options": [
+        {
+          "value": "4.5",
+          "label": "4.5+ ★"
+        },
+        {
+          "value": "4",
+          "label": "4+ ★"
+        }
+      ]
+    },
+    {
+      "key": "parking",
+      "label": "Car parking",
+      "type": "toggle",
+      "field": "amenities.parking"
+    }
+  ],
   "theme": {}
 }

@@ -1,0 +1,27 @@
+<section class="section" id="browse">
+<div class="section-heading"><div><p class="eyebrow">EXPLORE</p>
+<h2>Browse {{ city.name if city else 'local' }} services</h2></div>
+<button type="button" class="text-button" data-open-location>Change district</button></div>
+<div class="category-grid">
+{% for category in categories %}
+<a class="category-card" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">
+<span class="category-icon" aria-hidden="true">{{ category.icon | default('◈') }}</span>
+<strong>{{ category.name }}</strong><span>{{ category.short_description | default(category.description) }}</span>
+</a>
+{% else %}<div class="notice">Services aren't listed for this district yet. You can choose another district.</div>{% endfor %}
+</div></section>
+{% if quick_links %}
+<section class="section compact-section"><p class="eyebrow">QUICK ACCESS</p><h2>Popular booking types</h2>
+<p class="muted">Common service categories, curated for browsing. Live booking counts are not available yet.</p>
+<div class="quick-links">{% for item in quick_links %}
+<a class="quick-link" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=item.category) }}">{{ item.label }} <span aria-hidden="true">↗</span></a>
+{% endfor %}</div></section>
+{% endif %}
+{% if featured %}
+<section class="section compact-section"><h2>Featured places</h2><div class="cards">
+{% for item in featured %}
+<a class="card" href="{{ url_for('web.business_page', city_slug=city.slug, category_slug=item.category.slug, business_slug=item.business.slug) }}">
+<strong>{{ item.business.name }}</strong><span>{{ item.category.name }} · {{ city.name }}</span>
+<span>{{ item.business.content.summary | default('', true) }}</span></a>
+{% endfor %}</div></section>
+{% endif %}
