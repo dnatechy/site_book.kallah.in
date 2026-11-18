@@ -3,10 +3,34 @@
   "name": "Trichy",
   "state": "Tamil Nadu",
   "country": "India",
+  "enabled": true,
+  "geo": {
+    "lat": 10.7905,
+    "lng": 78.7047,
+    "match_radius_km": 35
+  },
   "categories": [
     "clinics",
     "salons",
     "hotels",
     "restaurants"
+  ],
+  "quick_links": [
+    {
+      "label": "Doctor consultations",
+      "category": "clinics"
+    },
+    {
+      "label": "Salon appointments",
+      "category": "salons"
+    },
+    {
+      "label": "Restaurant tables",
+      "category": "restaurants"
+    },
+    {
+      "label": "Hotel stays",
+      "category": "hotels"
+    }
   ]
 }

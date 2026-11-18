@@ -1,10 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
-<nav class="crumb"><a href="{{ url_for('web.home') }}">Home</a> / <a href="{{ url_for('web.city_page', city_slug=city.slug) }}">{{ city.name }}</a> / <a href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">{{ category.name }}</a></nav>
-<section class="section">
-  <p class="eyebrow">{{ category.name }} · {{ city.name }}</p>
-  <h1>{{ business.content.heading | default(business.name, true) }}</h1>
-  <p>{{ business.content.summary | default('', true) }}</p>
-  <div class="notice">Online appointments and live availability will be added after the booking engine is ready.</div>
+<nav class="crumb"><a href="{{ url_for('web.home') }}">Home</a> /
+<a href="{{ url_for('web.city_page',city_slug=city.slug) }}">{{ city.name }}</a> /
+<a href="{{ url_for('web.category_page',city_slug=city.slug,category_slug=category.slug) }}">{{ category.name }}</a></nav>
+<section class="section business-intro"><p class="eyebrow">{{ category.name | upper }} · {{ city.name | upper }}</p>
+<h1>{{ business.content.heading | default(business.name,true) }}</h1>
+<p class="muted">{{ business.content.summary | default('',true) }}</p>
+{% if business.address is defined %}<p>📍 {{ business.address }}</p>{% endif %}
+{% if business.google_rating is defined and business.rating_source | default('') == 'google' %}
+<p>★ {{ business.google_rating }} · Google rating</p>{% endif %}
+<div class="notice">Booking and live slot availability are being prepared. No payment is collected on this page.</div>
 </section>
+{% if business.professionals %}
+<section class="section compact-section" id="professionals">
+<p class="eyebrow">PEOPLE AT {{ business.name | upper }}</p>
+<h2>Choose your {{ category.professional_label | default('professional') | lower }}</h2>
+<div class="professional-grid">{% for person in business.professionals %}
+<article class="professional-card">
+{% if person.photo_url %}<img class="profile-photo" src="{{ person.photo_url }}" alt="{{ person.name }}" loading="lazy" referrerpolicy="no-referrer">
+{% else %}<div class="profile-placeholder" aria-hidden="true">👤</div>{% endif %}
+<div class="profile-details"><h3>{{ person.name }}</h3>
+{% if person.role %}<p class="muted">{{ person.role }}</p>{% endif %}
+{% if person.description %}<p>{{ person.description }}</p>{% endif %}
+{% if person.specialties %}<p class="profile-skills">{{ person.specialties | join(" · ") }}</p>{% endif %}
+{% if person.services %}<p class="profile-skills">{{ person.services | join(" · ") }}</p>{% endif %}
+<button class="button button-secondary" type="button" disabled aria-label="Slots for {{ person.name }} coming soon">Slots coming soon</button>
+</div></article>
+{% endfor %}</div></section>
+{% endif %}
 {% endblock %}

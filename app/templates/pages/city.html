@@ -1,15 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-<nav class="crumb"><a href="{{ url_for('web.home') }}">Home</a> / {{ city.name }}</nav>
-<section class="section">
-  <h1>Explore services in {{ city.name }}</h1>
-  <p>Browse the available categories in {{ city.name }}.</p>
-  <div class="cards">
-    {% for category in categories %}
-    <a class="card" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">
-      <strong>{{ category.name }}</strong><span>{{ category.description }}</span>
-    </a>
-    {% endfor %}
-  </div>
-</section>
+<section class="hero city-hero"><div class="hero-content"><p class="eyebrow">EXPLORE {{ city.state | upper }}</p>
+<h1>Find services in <em>{{ city.name }}.</em></h1>
+<p>Choose a category and explore local places. Appointments will appear when businesses join KALLAH Book.</p>
+<button type="button" class="button button-secondary" data-open-location>⌖ Change district</button></div></section>
+{% include "components/discovery.html" %}
 {% endblock %}

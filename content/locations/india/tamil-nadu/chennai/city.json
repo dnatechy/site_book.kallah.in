@@ -1,0 +1,14 @@
+{
+  "slug": "chennai",
+  "name": "Chennai",
+  "state": "Tamil Nadu",
+  "country": "India",
+  "enabled": true,
+  "geo": {
+    "lat": 13.0827,
+    "lng": 80.2707,
+    "match_radius_km": 35
+  },
+  "categories": [],
+  "quick_links": []
+}

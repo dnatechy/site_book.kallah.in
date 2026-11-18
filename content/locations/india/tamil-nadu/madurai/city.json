@@ -1,0 +1,14 @@
+{
+  "slug": "madurai",
+  "name": "Madurai",
+  "state": "Tamil Nadu",
+  "country": "India",
+  "enabled": true,
+  "geo": {
+    "lat": 9.9252,
+    "lng": 78.1198,
+    "match_radius_km": 35
+  },
+  "categories": [],
+  "quick_links": []
+}
