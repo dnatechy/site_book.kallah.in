@@ -1,82 +1,121 @@
 # KALLAH Book
 
-Python Flask + Jinja2 booking/discovery foundation for https://book.kallah.in.
-Branch policy: **Dev_v01** for development; **Publish** only for approved hosting files.
+Python Flask + Jinja2 web application and versioned JSON API for https://book.kallah.in.
 
-## Local development
+## Branch policy
 
-Python 3.10+:
+- `Dev_v01`: all development, experiments and automated tests.
+- `Publish`: reviewed release files used by MilesWeb hosting. Promote only tested changes.
+- Hosting checkout: `/home/dnatechy/book.kallah.in` (tracks `Publish`).
 
-    python -m venv .venv
-    python -m pip install -r requirements-dev.txt
-    python -m flask --app "app:create_app" run --debug
-    python -m pytest -q
+## Hosting environment
 
-Windows helper: scripts/windows/run_dev.ps1.
+- Python: 3.10.22
+- WSGI startup file: `passenger_wsgi.py`
+- WSGI application object: `application`
+- Passenger virtual environment is managed by cPanel.
+- Public site: https://book.kallah.in
+- API base: https://book.kallah.in/api/v1
 
-## Available public routes
+The Passenger entrypoint creates the Flask application with `create_app()`. Do not replace the cPanel-generated `.htaccess` or move the hosting virtual environment into Git.
 
-- / — landing page
-- /trichy — city categories
-- /trichy/clinics — category page (noindex until real businesses are published)
-- /trichy/clinics/{business-slug} — business page from published data.json
-- /api/v1/health
-- /api/v1/config/theme
-- /api/v1/locations
-- /api/v1/locations/trichy/categories
-- /api/v1/locations/trichy/clinics/businesses
-- /api/v1/locations/trichy/clinics/businesses/{business-slug}
-- /robots.txt and /sitemap.xml
+## Common GitHub SSH access from MilesWeb
 
-SEO, themes, layouts and content are sourced from shared JSON and location JSON;
-business-specific content/SEO/theme live together in each business data.json.
-Booking, payment, live queue and POS integration are not yet implemented.
+The shared account-level SSH key already exists on MilesWeb. Do not create a new key for this repository.
 
-## GitHub SSH / MilesWeb
+The `~/.ssh/config` alias is:
 
-Use the existing shared SSH identity on MilesWeb; **do not create a new key**.
-Alias github-milesweb is configured in ~/.ssh/config for github.com and uses
-~/.ssh/id_ed25519_github_common. Test:
+```sshconfig
+Host github-milesweb
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519_github_common
+    IdentitiesOnly yes
+```
 
-    ssh -T git@github-milesweb
+Test the connection:
+
+```bash
+ssh -T git@github-milesweb
+```
+
+Expected greeting: `Hi mani-baskar!` (GitHub's “does not provide shell access” message is normal).
 
 Repository remote:
 
-    git@github-milesweb:dnatechy/site_book.kallah.in.git
+```
+git@github-milesweb:dnatechy/site_book.kallah.in.git
+```
 
-Hosting checkout is /home/dnatechy/book.kallah.in and tracks Publish only:
+Update the existing hosting checkout only after a reviewed release has reached `Publish`:
 
-    cd /home/dnatechy/book.kallah.in
-    git switch Publish
-    git pull --ff-only origin Publish
+```bash
+cd /home/dnatechy/book.kallah.in
+git switch Publish
+git pull --ff-only origin Publish
+```
 
-Do not push development directly to Publish. No runtime secrets, logs or user data in Git.
-See docs/ARCHITECTURE.md and scripts/hosting/README.md.
+If dependencies changed, install them using the existing cPanel Python 3.10 virtual environment. Restart Passenger using the hosting panel or its configured restart mechanism. Never use `git reset --hard`, `git clean -fd`, or force checkout to bypass a hosting working-tree conflict.
 
-## Static dummy marketplace preview
+For another repository, the same SSH alias can be reused. For an empty folder:
 
-- Demo flag: content/global/demo.json, enabled=true. Disable it to hide all demo businesses.
-- Trichy includes 10 fictional businesses per category and multiple fictional professionals:
-  40 sample businesses and 100 sample professional profiles (3 per clinic/salon, 2 per hotel/restaurant).
-- All sample businesses show an obvious DEMO label, use simulated rating scores,
-  and are excluded from indexing/sitemap while demo mode is active.
-- Flow: home -> select district -> category -> visual filters -> business profile ->
-  professional profile -> venue/date/service/time selection -> local demo preview -> My bookings.
-- Demo bookings are stored only in that browser's localStorage. There is no server booking,
-  capacity reservation, payment, message or notification. No personal data is requested.
-- Business and professional photos use the same JSON media fields; HTTPS URLs and approved static assets are supported.
+```bash
+git clone --branch Publish git@github-milesweb:dnatechy/REPO_NAME.git
+```
 
-## Reference UI migration and Flutter API parity
+For an existing folder, inspect its files and Git status before adding the remote or switching branches.
 
-- UI/navigation/assets are migrated from mani-baskar/kallah-book-with-AI-Studio; its Node/AI Studio runtime is excluded.
-- Flask/Jinja2 renders the public pages. JavaScript is limited to browser interactions.
-- Web and future Flutter clients share the same Python content/services and JSON source of truth.
-- API base: https://book.kallah.in/api/v1. Start with GET /bootstrap?city=trichy.
-- Business lists support JSON-defined filters, search, sorting, pagination and near-me coordinates.
-- Professional availability returns date windows and service-duration-aware sample start times.
-- Full API request/response contract: docs/API_CONTRACT.md. Architecture: docs/ARCHITECTURE.md.
-- Current availability is a read-only JSON preview; no server-side reservation, slot locking or payment is implemented.
+## Local development and tests
 
-To remove all dummy data from public display before launch:
-edit content/global/demo.json and set enabled:false; the JSON fixtures can
-remain in Git for QA without being displayed or indexed.
+Python 3.10+:
+
+```bash
+python -m venv .venv
+python -m pip install -r requirements-dev.txt
+python -m flask --app "app:create_app" run --debug
+python -m pytest -q
+```
+
+Windows helper: `scripts/windows/run_dev.ps1`.
+
+GitHub Actions runs Python compilation and the Flask/API test suite on `Dev_v01` and `Publish`.
+
+## Architecture and content
+
+- Flask/Jinja2 renders server-side HTML for search-engine crawlability.
+- Public pages and the Flutter-facing API use the same Python content and service layer.
+- Global site, navigation, theme, SEO and booking configuration live under `content/global/`.
+- City, category, business and professional data live under `content/locations/`.
+- Reusable design tokens and shared layout metadata live under `shared/`.
+- Business-specific content, SEO, theme, media, filters and schedules are maintained as JSON.
+- Public SEO metadata, canonical URLs, `robots.txt` and `sitemap.xml` are generated by Flask.
+
+## Main web routes
+
+- `/` — home
+- `/<city>` — city discovery
+- `/<city>/<category>` — category and filters
+- `/<city>/<category>/<business>` — business profile
+- `/<city>/<category>/<business>/<person>` — professional profile
+- `/robots.txt` and `/sitemap.xml`
+
+## Flutter API
+
+Start with:
+
+```
+GET /api/v1/health
+GET /api/v1/bootstrap?city=trichy
+GET /api/v1/locations
+GET /api/v1/locations/trichy/categories
+```
+
+Business discovery supports JSON-defined filters, search, sorting, pagination and near-me coordinates. Professional profile and sample availability endpoints are included. The request/response contract is documented in `docs/API_CONTRACT.md`.
+
+## Preview data and booking limitations
+
+`content/global/demo.json` currently has `enabled: true` for preview. Trichy contains fictional sample businesses, ratings, professionals and time slots. Demo content is visibly labelled and excluded from indexing/sitemaps while demo mode is active.
+
+Demo booking interactions are browser-local only (`localStorage`). There is no server-side booking persistence, slot locking, real-time availability, authentication, payment, SMS or notification integration yet. Do not treat demo slots or demo ratings as real business data. No production booking or payment is enabled.
+
+Before a real public launch, replace demo fixtures with verified business data and set `content/global/demo.json` to `enabled: false`. Keep runtime `.env`, credentials, logs, virtual environments, backups and user data outside Git.
