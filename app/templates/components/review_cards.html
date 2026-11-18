@@ -1,0 +1,21 @@
+{# One lightweight review card renderer shared by professional, hotel and restaurant pages. #}
+{% macro review_cards(reviews, empty_message='No reviews yet.', decimal_rating=false) -%}
+<div class="reviews-grid">
+  {% for rev in reviews %}
+  <article class="review-card">
+    <div class="review-card-head">
+      <strong>{{ rev.author }}</strong>
+      <span class="demo-rating tabular">★ {{ rev.rating }}{{ '.0' if decimal_rating else ' / 5' }}</span>
+    </div>
+    <p class="review-comment">“{{ rev.comment }}”</p>
+    {% if rev.date and rev.date | length == 10 and rev.date[4] == '-' %}
+    <time class="review-date" datetime="{{ rev.date }}">{{ rev.date }}</time>
+    {% else %}
+    <span class="review-date">{{ rev.date }}</span>
+    {% endif %}
+  </article>
+  {% else %}
+  <p class="muted">{{ empty_message }}</p>
+  {% endfor %}
+</div>
+{%- endmacro %}

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "components/review_cards.html" import review_cards %}
 {% block content %}
 <nav class="crumb" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/{{ city.slug }}">{{ city.name }}</a><span>/</span><a href="/{{ city.slug }}/hotels?browse=1">Hotels</a><span>/</span><a href="/{{ city.slug }}/hotels/{{ business.slug }}">{{ business.name }}</a><span>/</span><span>{{ room.name }}</span></nav>
 <section class="section room-detail-layout">
@@ -24,7 +25,7 @@
   <section class="professional-reviews-block room-reviews" id="room-reviews" aria-labelledby="room-reviews-title">
     <div class="section-heading"><div><p class="eyebrow">{% if business.is_demo %}Demo guest feedback{% else %}Guest feedback{% endif %}</p><h2 id="room-reviews-title">Room reviews</h2><p class="muted">{{ room.name }}</p></div>{% if room.review_count %}<strong class="demo-rating">★ {{ room.rating }} / 5 <small>({{ room.review_count }} reviews)</small></strong>{% endif %}</div>
     {% if business.is_demo and room.review_count %}<p class="muted room-review-note">Sample reviews for this demo room.</p>{% endif %}
-    <div class="reviews-grid">{% for rev in room.reviews %}<article class="review-card"><div class="review-card-head"><strong>{{ rev.author }}</strong><span class="demo-rating">★ {{ rev.rating }} / 5</span></div><p class="review-comment">“{{ rev.comment }}”</p><time class="review-date" datetime="{{ rev.date }}">{{ rev.date }}</time></article>{% else %}<p class="muted">No reviews for this room yet.</p>{% endfor %}</div>
+    {{ review_cards(room.reviews, empty_message='No reviews for this room yet.') }}
   </section>
 </section>
 <script type="application/json" id="room-booking-data">{{ {"room": room, "business": {"name": business.name, "slug": business.slug}, "city": city.slug} | tojson }}</script>
