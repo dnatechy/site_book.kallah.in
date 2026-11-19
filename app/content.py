@@ -85,6 +85,15 @@ def get_category(city_slug, category_slug):
     category = _json(_city_path(city_slug) / category_slug / "category.json")
     if category.get("slug") != category_slug or category.get("enabled", True) is False:
         return None
+    artwork = global_config('filter_artwork').get('icons', {})
+    def art(image, key=None):
+        key = key or str(image or '').rsplit('/', 1)[-1].rsplit('.', 1)[0]
+        return artwork.get(key, artwork.get('all_clinics', {}))
+    for field in category.get('filters', []):
+        field['all_artwork'] = art(field.get('all_image'))
+        field['artwork'] = art(field.get('image'), field.get('icon'))
+        for option in field.get('options', []):
+            option['artwork'] = art(option.get('image'), option.get('icon'))
     return category
 
 

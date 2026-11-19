@@ -63,7 +63,7 @@ def test_category_specific_visual_filter_wizards(client):
     assert b"Guest House" in hotel.data and b"Free Wi-Fi" in hotel.data
     assert b"What would you like to eat?" in restaurant.data
     assert b"Biryani &amp; Grill" in restaurant.data
-    assert b"/static/images/filters/" in clinic.data
+    assert b"/static/images/filter-artwork/" in clinic.data
 
 
 def test_category_switch_hides_every_route(client, tmp_path, monkeypatch):

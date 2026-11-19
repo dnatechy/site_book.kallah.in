@@ -28,16 +28,36 @@
           "image": "/static/images/filters/general_physician.svg"
         },
         {
+          "value": "dermatology",
+          "label": "Skin & Dermatology",
+          "subtitle": "Acne, rash & skin care",
+          "image": "/static/images/filters/dermatology.svg"
+        },
+        {
+          "value": "cardiology",
+          "label": "Cardiologist",
+          "subtitle": "Heart care",
+          "icon": "cardiology",
+          "image": "/static/images/filter-artwork/cardiology.webp"
+        },
+        {
           "value": "gastro",
           "label": "Gastroenterology",
           "subtitle": "Stomach & digestive care",
           "image": "/static/images/filters/gastro.svg"
         },
         {
-          "value": "dermatology",
-          "label": "Skin & Dermatology",
-          "subtitle": "Acne, rash & skin care",
-          "image": "/static/images/filters/dermatology.svg"
+          "value": "pediatrics",
+          "label": "Pediatrics",
+          "subtitle": "Child & infant care",
+          "image": "/static/images/filters/pediatrics.svg"
+        },
+        {
+          "value": "nephrology",
+          "label": "Nephrologist",
+          "subtitle": "Kidney care",
+          "icon": "nephrology",
+          "image": "/static/images/filter-artwork/medical.webp"
         },
         {
           "value": "orthopedics",
@@ -52,10 +72,32 @@
           "image": "/static/images/filters/dental.svg"
         },
         {
-          "value": "pediatrics",
-          "label": "Pediatrics",
-          "subtitle": "Child & infant care",
-          "image": "/static/images/filters/pediatrics.svg"
+          "value": "gynecology",
+          "label": "Gynaecologist",
+          "subtitle": "Gynaecology",
+          "icon": "gynecology",
+          "image": "/static/images/filter-artwork/medical.webp"
+        },
+        {
+          "value": "pulmonology",
+          "label": "Pulmonologist",
+          "subtitle": "Lung care",
+          "icon": "pulmonology",
+          "image": "/static/images/filter-artwork/medical.webp"
+        },
+        {
+          "value": "neurology",
+          "label": "Neurologist",
+          "subtitle": "Neurology",
+          "icon": "neurology",
+          "image": "/static/images/filter-artwork/medical.webp"
+        },
+        {
+          "value": "endocrinology",
+          "label": "Endocrinologist",
+          "subtitle": "Endocrinology",
+          "icon": "endocrinology",
+          "image": "/static/images/filter-artwork/medical.webp"
         }
       ]
     },

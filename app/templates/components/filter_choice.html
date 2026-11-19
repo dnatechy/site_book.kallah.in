@@ -1,0 +1,12 @@
+{% macro filter_choice(name, value, label, artwork, description='', kind='radio', checked=false) %}
+<label class="visual-choice-card"{% if description %} title="{{ description }}"{% endif %}>
+  <input type="{{ kind }}" name="{{ name }}" value="{{ value }}"{% if checked %} checked{% endif %}{% if description %} aria-description="{{ description }}"{% endif %}>
+  <span class="visual-card-inner">
+    <span class="visual-card-media">
+      <span class="filter-option-artwork" aria-hidden="true" style="background-image:url('{{ artwork.url }}');background-size:{{ artwork.columns * 100 }}% {{ artwork.rows * 100 }}%;background-position:{{ (artwork.column * 100 / (artwork.columns - 1)) if artwork.columns > 1 else 0 }}% {{ (artwork.row * 100 / (artwork.rows - 1)) if artwork.rows > 1 else 0 }}%"></span>
+      <span class="visual-card-check" aria-hidden="true"><svg viewBox="0 0 20 20" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 10 3 3 7-7"/></svg></span>
+    </span>
+    <span class="visual-card-title">{{ label }}</span>
+  </span>
+</label>
+{% endmacro %}

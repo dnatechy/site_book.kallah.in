@@ -699,7 +699,7 @@ input:focus-visible {
   color: var(--color-primary);
 }
 
-/* Full-Page Category Filter Concierge with Visual Image Cards */
+/* Full-page category filters */
 .filter-page {
   min-height: calc(100vh - 150px);
   padding: 28px 0 64px;
@@ -718,7 +718,7 @@ input:focus-visible {
 }
 
 .filter-wizard {
-  background: var(--color-surface);
+  background: var(--color-background);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: 32px;
@@ -748,167 +748,36 @@ input:focus-visible {
   margin-bottom: 14px;
 }
 
-/* Visual Image Cards for Specialists / Services / Veg-NonVeg / Stays */
+/* Shared compact pictogram choices for every category filter. */
 .visual-choice-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  max-width: 1000px;
+  gap: 20px 12px;
 }
-
-.visual-choice-card {
-  position: relative;
-  display: block;
-  cursor: pointer;
-}
-
-.visual-choice-card input {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-}
-
-.visual-card-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-background);
-  overflow: hidden;
-  transition: transform 180ms var(--ease-out), border-color 180ms var(--ease-out), box-shadow 180ms var(--ease-out), background-color 180ms var(--ease-out);
-}
-
-.visual-choice-card:hover .visual-card-inner {
-  transform: translateY(-2px);
-  border-color: var(--color-primary);
-  box-shadow: var(--shadow-card);
-}
-
+.visual-choice-card { display: block; position: relative; cursor: pointer; min-width: 0; }
+.visual-choice-card input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.visual-card-inner { display: flex; flex-direction: column; align-items: center; gap: 9px; height: 100%; padding: 6px 2px; border-radius: var(--radius-sm); }
 .visual-card-media {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: var(--color-surface-muted);
-  border-bottom: 1px solid var(--color-border);
+  position: relative; display: grid; place-items: center; flex-shrink: 0;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--color-filter-icon-background); color: var(--color-filter-icon-ink);
+  box-shadow: 0 0 0 1.5px transparent; transition: background-color 150ms, box-shadow 150ms;
 }
-
-.visual-card-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  display: block;
-  transition: transform 300ms var(--ease-out);
-}
-
-.visual-choice-card:hover .visual-card-media img {
-  transform: scale(1.04);
-}
-
-.visual-card-check {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  font-size: 0.78rem;
-  font-weight: 800;
-  background: rgba(255, 255, 255, 0.92);
-  color: transparent;
-  border: 1px solid rgba(20, 20, 24, 0.16);
-  transition: background-color 150ms var(--ease-out), color 150ms var(--ease-out), border-color 150ms var(--ease-out);
-}
-
-.visual-choice-card input:checked + .visual-card-inner {
-  border-color: var(--color-primary);
-  background: var(--color-surface);
-  box-shadow: 0 0 0 2px rgba(201, 42, 42, 0.16), var(--shadow-card);
-}
-
-.visual-choice-card input:checked + .visual-card-inner .visual-card-check {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
-  color: #FFFFFF;
-}
-
-.visual-choice-card input:focus-visible + .visual-card-inner {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
-}
-
-.visual-card-body {
-  padding: 12px 14px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.visual-card-title {
-  font-weight: 700;
-  font-size: 0.95rem;
-  color: var(--color-ink);
-  line-height: 1.25;
-}
-
-.visual-card-sub {
-  font-size: 0.82rem;
-  color: var(--color-muted);
-  line-height: 1.35;
-}
-
-/* Text Choice Options (for Ratings / Secondary selects) */
-.choice-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.choice-option {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-
-.choice-option input {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-}
-
-.choice-option span {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 10px 18px;
-  background: var(--color-background);
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-sm);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--color-ink);
-  cursor: pointer;
-  transition: border-color 150ms var(--ease-out), background-color 150ms var(--ease-out), color 150ms var(--ease-out);
-}
-
-.choice-option span:hover {
-  border-color: var(--color-primary);
-}
-
-.choice-option input:checked + span {
-  border-color: var(--color-primary);
-  background: var(--color-primary);
-  color: #FFFFFF;
-}
-
-.choice-option input:focus-visible + span {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+.filter-option-artwork { display: block; width: 48px; height: 48px; background-repeat: no-repeat; pointer-events: none; }
+.visual-card-title { font-size: .875rem; font-weight: 500; line-height: 1.35; color: var(--color-ink); text-align: center; overflow-wrap: anywhere; }
+.visual-card-check { display: none; position: absolute; right: -2px; bottom: -1px; width: 17px; height: 17px; place-items: center; border: 2px solid var(--color-background); border-radius: 50%; color: var(--color-on-primary); background: var(--color-filter-icon-ink); }
+.visual-choice-card:hover .visual-card-media { background: var(--color-filter-icon-selected); }
+.visual-choice-card input:checked + .visual-card-inner .visual-card-media { background: var(--color-filter-icon-selected); box-shadow: 0 0 0 1.5px var(--color-filter-icon-ink); }
+.visual-choice-card input:checked + .visual-card-inner .visual-card-title { color: var(--color-filter-icon-ink); font-weight: 700; }
+.visual-choice-card input:checked + .visual-card-inner .visual-card-check { display: grid; }
+.visual-choice-card input:focus-visible + .visual-card-inner { outline: 2px solid var(--color-filter-icon-ink); outline-offset: 3px; }
+@media (max-width: 680px) {
+  .visual-choice-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 6px; }
+  .visual-card-media { width: 50px; height: 50px; }
+  .filter-option-artwork { width: 43px; height: 43px; }
+  .visual-card-inner { padding-inline: 0; }
+  .visual-card-title { font-size: .8125rem; }
 }
 
 .toggle-grid {
@@ -1390,22 +1259,6 @@ input:focus-visible {
 .modal-close:hover {
   background: var(--color-surface-muted);
   color: var(--color-ink);
-}
-
-/* Two-Color Vector Icon Stage on Filter Cards */
-.visual-card-media--icon {
-  background: #F6F3EE;
-  aspect-ratio: 4 / 3;
-}
-
-.visual-card-media--icon img {
-  object-fit: contain;
-  object-position: center;
-  padding: 6px;
-}
-
-.visual-choice-grid--compact {
-  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
 }
 
 /* Business & Specialist Call, Email & Social Icon-Only Logo Buttons */
@@ -2299,8 +2152,7 @@ input:focus-visible {
     display: none;
   }
 
-  .category-grid,
-  .visual-choice-grid {
+  .category-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }

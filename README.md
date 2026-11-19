@@ -4,7 +4,8 @@ Python Flask + Jinja2 web application and versioned JSON API for https://book.ka
 
 ## Branch policy
 
-- `Dev_v01`: all development, experiments and automated tests.
+- `prePublish`: current development and review branch. Future changes reach `Publish` only after user approval.
+- `Dev_v01`: retained historical development branch.
 - `Publish`: reviewed release files used by MilesWeb hosting. Promote only tested changes.
 - Hosting checkout: `/home/dnatechy/book.kallah.in` (tracks `Publish`).
 
@@ -78,7 +79,7 @@ python -m pytest -q
 
 Windows helper: `scripts/windows/run_dev.ps1`.
 
-GitHub Actions runs Python compilation and the Flask/API test suite on `Dev_v01` and `Publish`.
+GitHub Actions runs Python compilation and the Flask/API test suite on `prePublish`, `Dev_v01` and `Publish`.
 
 ## Architecture and content
 
@@ -126,3 +127,12 @@ Before a real public launch, replace demo fixtures with verified business data a
 Restaurant group dining, hotel rooms and galleries from `sites-preview-2026-11-18` were ported into the existing Flask/Jinja implementation; the EJS/Node/Sites runtime was not copied. Existing Flutter-ready search, pagination and professional schedule APIs were retained.
 
 See **[Python migration, folder map and APIs](docs/AI_STUDIO_FLASK_MIGRATION.md)**. Site-wide branding is configured once in `content/global/theme.json`. Hospitality quotes are server-calculated but remain demonstrations until payment, OTP and persistent bookings are implemented.
+
+## Filter illustration release (19 November 2026)
+
+Compact circular filter choices and detailed medical/service artwork now share
+one Flask/Jinja component and one JSON artwork registry across all categories.
+API v1 exposes the same atlas metadata for future Flutter clients; see
+[the filter artwork contract](docs/API_CONTRACT.md#shared-filter-illustrations-19-november-2026).
+No requirements or database changes are needed for this release. Pull `Publish`
+and restart the existing Passenger application to apply it on hosting.

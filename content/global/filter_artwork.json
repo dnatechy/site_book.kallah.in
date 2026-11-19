@@ -1,0 +1,278 @@
+{
+  "version": 1,
+  "icons": {
+    "general_physician": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 0,
+      "row": 0
+    },
+    "dermatology": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 1,
+      "row": 0
+    },
+    "gastro": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 2,
+      "row": 0
+    },
+    "ortho": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 3,
+      "row": 0
+    },
+    "dental": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 0,
+      "row": 1
+    },
+    "pediatrics": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 1,
+      "row": 1
+    },
+    "nephrology": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 2,
+      "row": 1
+    },
+    "gynecology": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 3,
+      "row": 1
+    },
+    "pulmonology": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 0,
+      "row": 2
+    },
+    "neurology": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 1,
+      "row": 2
+    },
+    "endocrinology": {
+      "url": "/static/images/filter-artwork/medical.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 2,
+      "row": 2
+    },
+    "cardiology": {
+      "url": "/static/images/filter-artwork/cardiology.webp",
+      "columns": 1,
+      "rows": 1,
+      "column": 0,
+      "row": 0
+    },
+    "veg_food": {
+      "url": "/static/images/filter-artwork/food.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 0,
+      "row": 0
+    },
+    "nonveg_food": {
+      "url": "/static/images/filter-artwork/food.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 1,
+      "row": 0
+    },
+    "south_indian": {
+      "url": "/static/images/filter-artwork/food.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 2,
+      "row": 0
+    },
+    "north_indian": {
+      "url": "/static/images/filter-artwork/food.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 3,
+      "row": 0
+    },
+    "biryani": {
+      "url": "/static/images/filter-artwork/food.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 0,
+      "row": 1
+    },
+    "chinese": {
+      "url": "/static/images/filter-artwork/food.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 1,
+      "row": 1
+    },
+    "meals_thali": {
+      "url": "/static/images/filter-artwork/food.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 2,
+      "row": 1
+    },
+    "tiffin": {
+      "url": "/static/images/filter-artwork/food.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 3,
+      "row": 1
+    },
+    "tandoor": {
+      "url": "/static/images/filter-artwork/food.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 0,
+      "row": 2
+    },
+    "all_restaurants": {
+      "url": "/static/images/filter-artwork/food.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 1,
+      "row": 2
+    },
+    "all_salons": {
+      "url": "/static/images/filter-artwork/salon-stays.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 0,
+      "row": 0
+    },
+    "haircut": {
+      "url": "/static/images/filter-artwork/salon-stays.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 1,
+      "row": 0
+    },
+    "hair_styling": {
+      "url": "/static/images/filter-artwork/salon-stays.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 2,
+      "row": 0
+    },
+    "beard_grooming": {
+      "url": "/static/images/filter-artwork/salon-stays.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 3,
+      "row": 0
+    },
+    "facial": {
+      "url": "/static/images/filter-artwork/salon-stays.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 0,
+      "row": 1
+    },
+    "bridal": {
+      "url": "/static/images/filter-artwork/salon-stays.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 1,
+      "row": 1
+    },
+    "hotel_stay": {
+      "url": "/static/images/filter-artwork/salon-stays.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 2,
+      "row": 1
+    },
+    "guest_house": {
+      "url": "/static/images/filter-artwork/salon-stays.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 3,
+      "row": 1
+    },
+    "resort": {
+      "url": "/static/images/filter-artwork/salon-stays.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 0,
+      "row": 2
+    },
+    "all_hotels": {
+      "url": "/static/images/filter-artwork/salon-stays.webp",
+      "columns": 4,
+      "rows": 3,
+      "column": 1,
+      "row": 2
+    },
+    "all_clinics": {
+      "url": "/static/images/filter-artwork/facilities.webp",
+      "columns": 4,
+      "rows": 2,
+      "column": 0,
+      "row": 0
+    },
+    "rating_top": {
+      "url": "/static/images/filter-artwork/facilities.webp",
+      "columns": 4,
+      "rows": 2,
+      "column": 1,
+      "row": 0
+    },
+    "parking": {
+      "url": "/static/images/filter-artwork/facilities.webp",
+      "columns": 4,
+      "rows": 2,
+      "column": 2,
+      "row": 0
+    },
+    "accessible": {
+      "url": "/static/images/filter-artwork/facilities.webp",
+      "columns": 4,
+      "rows": 2,
+      "column": 3,
+      "row": 0
+    },
+    "near_me": {
+      "url": "/static/images/filter-artwork/facilities.webp",
+      "columns": 4,
+      "rows": 2,
+      "column": 0,
+      "row": 1
+    },
+    "ac": {
+      "url": "/static/images/filter-artwork/facilities.webp",
+      "columns": 4,
+      "rows": 2,
+      "column": 1,
+      "row": 1
+    },
+    "wifi": {
+      "url": "/static/images/filter-artwork/facilities.webp",
+      "columns": 4,
+      "rows": 2,
+      "column": 2,
+      "row": 1
+    }
+  }
+}

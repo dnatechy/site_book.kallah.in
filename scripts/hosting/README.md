@@ -2,7 +2,7 @@
 
 Production application root: /home/dnatechy/book.kallah.in
 Keep the existing cPanel-generated .htaccess and Python 3.10 Passenger venv.
-Only reviewed changes are promoted from Dev_v01 to Publish.
+Only reviewed changes are promoted from prePublish to Publish.
 Hosting checkout must stay on Publish.
 
 When deploying approved changes, run from hosting:

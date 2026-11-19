@@ -2,7 +2,7 @@
 
 Repository: dnatechy/site_book.kallah.in
 Reference UI/content source: mani-baskar/kallah-book-with-AI-Studio (main)
-Development branch: Dev_v01
+Development branch: prePublish
 Hosting branch: Publish — only reviewed, selected files are copied here.
 Hosting: /home/dnatechy/book.kallah.in, Python Passenger 3.10 WSGI.
 
@@ -32,7 +32,7 @@ Current slots are read-only JSON schedule previews. Demo selections are local-on
 
 ## Development and release
 
-- Develop only on Dev_v01.
+- Develop only on prePublish.
 - Do not push to Publish without the user's approval.
 - Do not deploy directly from the reference repository.
 - Keep secrets, .env, logs, virtual environments and user data out of Git.
@@ -40,7 +40,7 @@ Current slots are read-only JSON schedule previews. Demo selections are local-on
 
 
 ## 2026-11-18 / AI Studio preview migration
-- Source: `mani-baskar/kallah-book-with-AI-Studio` branch `sites-preview-2026-11-18`; target: `dnatechy/site_book.kallah.in` Dev_v01 -> Publish.
+- Source: `mani-baskar/kallah-book-with-AI-Studio` branch `sites-preview-2026-11-18`; target: `dnatechy/site_book.kallah.in` prePublish -> Publish.
 - Keep Flask SSR and `/api/v1` as the sole shared backend, including future Flutter clients. Never introduce EJS/Node to hosting.
 - `app/templates/base.html` owns the shared navigation/header/footer and SEO metadata. Do not fork common headers for restaurants.
 - Global theme: `content/global/theme.json`, `allow_scoped_overrides=false` by default; theme is not independently set in category pages.
@@ -65,3 +65,17 @@ Current slots are read-only JSON schedule previews. Demo selections are local-on
 - `components/reviews.html` provides shared review section/cards across professionals, rooms, restaurants and dish feedback.
 - `shared/design_tokens.json` defines global brand/status colors; `content/global/theme.json` chooses `global` or `category` mode. Only category primary/secondary may change. Business/category JSON no longer owns colors.
 - Keep Flask SEO SSR and versioned `/api/v1` for Flutter; preserve existing Python booking availability and quote APIs. Do not introduce Node, EJS or another backend.
+
+## 2026-11-19 / filter artwork and current release workflow
+- User designated this repository as the source of truth for all future work.
+- Develop on `prePublish`; retain `Dev_v01` as historical. Promote to `Publish`
+  only after user approval. This filter artwork release was explicitly approved
+  for direct publication. Hosting pull/restart is performed by the user.
+- Detailed heart/stomach/kidney and other category illustrations live in optimized
+  WebP atlases under `app/static/images/filter-artwork/`.
+- Shared registry: `content/global/filter_artwork.json`. `get_category()` resolves
+  it for both Jinja and API v1, preserving existing filters and API fields.
+- Reuse `components/filter_choice.html` for every category. Keep brand/theme
+  tokens centralized. Future Flutter clients consume API atlas coordinates.
+- Preserve Flask API services, search/pagination/availability and booking truth;
+  do not replace hosting application files with the preview runtime.

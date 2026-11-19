@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% from "components/filter_choice.html" import filter_choice %}
 <nav class="crumb" aria-label="Breadcrumb">
   <a href="{{ url_for('web.home') }}">Home</a>
   <span aria-hidden="true">/</span>
@@ -16,82 +17,23 @@
   <form class="filter-wizard" method="get" action="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug) }}">
     {% for filter in category.filters | default([]) %}
     {% if filter.type in ['select', 'min_number'] %}
-    {% set has_images = filter.options and filter.options[0].image is defined %}
     <fieldset class="filter-group">
       <legend class="filter-group-label">{{ filter.label }}</legend>
-      {% if has_images %}
       <div class="visual-choice-grid">
-        <label class="visual-choice-card">
-          <input type="radio" name="{{ filter.key }}" value="" checked>
-          <div class="visual-card-inner">
-            <div class="visual-card-media visual-card-media--icon">
-              <img src="{{ filter.all_image | default('/static/images/filters/all_clinics.svg') }}" alt="All {{ filter.label }}" loading="lazy">
-              <span class="visual-card-check" aria-hidden="true">✓</span>
-            </div>
-            <div class="visual-card-body">
-              <span class="visual-card-title">All</span>
-              <span class="visual-card-sub">{{ filter.all_subtitle | default('Show all options') }}</span>
-            </div>
-          </div>
-        </label>
+        {{ filter_choice(filter.key, '', 'All', filter.all_artwork, filter.all_subtitle | default('Show all options'), checked=true) }}
         {% for option in filter.options | default([]) %}
-        <label class="visual-choice-card">
-          <input type="radio" name="{{ filter.key }}" value="{{ option.value }}">
-          <div class="visual-card-inner">
-            <div class="visual-card-media visual-card-media--icon">
-              <img src="{{ option.image }}" alt="{{ option.label }}" loading="lazy">
-              <span class="visual-card-check" aria-hidden="true">✓</span>
-            </div>
-            <div class="visual-card-body">
-              <span class="visual-card-title">{{ option.label }}</span>
-              {% if option.subtitle %}<span class="visual-card-sub">{{ option.subtitle }}</span>{% endif %}
-            </div>
-          </div>
-        </label>
+        {{ filter_choice(filter.key, option.value, option.label, option.artwork, option.subtitle | default('')) }}
         {% endfor %}
       </div>
-      {% else %}
-      <div class="choice-grid">
-        <label class="choice-option">
-          <input type="radio" name="{{ filter.key }}" value="" checked>
-          <span>All</span>
-        </label>
-        {% for option in filter.options | default([]) %}
-        <label class="choice-option">
-          <input type="radio" name="{{ filter.key }}" value="{{ option.value }}">
-          <span>{{ option.label }}</span>
-        </label>
-        {% endfor %}
-      </div>
-      {% endif %}
     </fieldset>
     {% endif %}
     {% endfor %}
     {% if toggles %}
     <fieldset class="filter-group">
       <legend class="filter-group-label">Comfort &amp; location</legend>
-      <div class="visual-choice-grid visual-choice-grid--compact">
+      <div class="visual-choice-grid">
         {% for filter in toggles %}
-        {% if filter.image is defined %}
-        <label class="visual-choice-card">
-          <input type="checkbox" name="{{ filter.key }}" value="1">
-          <div class="visual-card-inner">
-            <div class="visual-card-media visual-card-media--icon">
-              <img src="{{ filter.image }}" alt="{{ filter.label }}" loading="lazy">
-              <span class="visual-card-check" aria-hidden="true">✓</span>
-            </div>
-            <div class="visual-card-body">
-              <span class="visual-card-title">{{ filter.label }}</span>
-              {% if filter.subtitle %}<span class="visual-card-sub">{{ filter.subtitle }}</span>{% endif %}
-            </div>
-          </div>
-        </label>
-        {% else %}
-        <label class="filter-toggle">
-          <input type="checkbox" name="{{ filter.key }}" value="1">
-          <span>{{ filter.label }}</span>
-        </label>
-        {% endif %}
+        {{ filter_choice(filter.key, '1', filter.label, filter.artwork, filter.subtitle | default(''), kind='checkbox') }}
         {% endfor %}
       </div>
     </fieldset>
@@ -100,7 +42,7 @@
       <span class="muted">Pick your preferences above or browse every listing in {{ city.name }}.</span>
       <div class="filter-wizard-buttons">
         <a class="button button-secondary" href="{{ url_for('web.category_page', city_slug=city.slug, category_slug=category.slug, browse='1') }}">View all {{ category.name }}</a>
-        <button class="button button-primary" type="submit" name="browse" value="1">Show matching places →</button>
+        <button class="button button-primary" type="submit" name="browse" value="1">Show matching places</button>
       </div>
     </div>
   </form>

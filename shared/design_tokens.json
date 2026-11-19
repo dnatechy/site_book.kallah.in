@@ -18,7 +18,10 @@
     "danger": "#913C2C",
     "danger_background": "#F8EAE6",
     "disabled": "#787771",
-    "disabled_background": "#E9E7E2"
+    "disabled_background": "#E9E7E2",
+    "filter_icon_background": "#EAF9FD",
+    "filter_icon_ink": "#34489B",
+    "filter_icon_selected": "#D8F1FA"
   },
   "typography": {
     "fontFamily": "system-ui",

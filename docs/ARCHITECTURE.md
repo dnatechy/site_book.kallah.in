@@ -46,7 +46,15 @@ See API_CONTRACT.md. The mobile bootstrap endpoint returns site config, JSON-dri
 
 ## Hosting and branches
 
-- Develop and test on Dev_v01.
+- Develop and test on prePublish.
 - Publish is the hosting branch; move only reviewed/approved files there.
 - MilesWeb Passenger runs the Flask WSGI application.
 - Keep secrets, logs, virtual environments and runtime data outside Git.
+
+## Shared filter artwork
+
+`get_category()` resolves `content/global/filter_artwork.json` once per category
+load and adds the same atlas coordinates to website and API filter definitions.
+`components/filter_choice.html` is reused for every business category. Shared
+filter colors are design tokens. Images are optimized static WebP assets; no
+image processing or external image service runs on hosting.

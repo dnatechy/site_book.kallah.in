@@ -103,3 +103,22 @@ These routes are planned, not implemented. Do not add a client-side fake success
 - Breaking response changes require /api/v2.
 - Flutter must not read repository files directly; it consumes this API.
 - No Node.js, Express, EJS, Bun, React or AI Studio runtime is part of this deployment.
+
+## Shared filter illustrations (19 November 2026)
+
+Category filter definitions now include additive `artwork` and `all_artwork`
+objects. Each option includes `artwork`. The same resolved metadata is present
+in bootstrap, location/category responses and business-list filter definitions.
+Existing filter values, `image` paths and API v1 keys remain available.
+
+`content/global/filter_artwork.json` maps artwork keys to optimized WebP atlases.
+Each object has `url`, `columns`, `rows`, `column`, `row` (zero-based coordinates).
+A single image uses one row and one column. Resolve `/static/` URLs against
+`site.url`. Flutter should crop the atlas into equal cells using these fields;
+it must not infer an illustration from the legacy `image` filename or maintain
+its own specialty mapping. Web uses the same metadata through a shared Jinja
+filter-choice component, with four columns on mobile.
+
+Cardiology uses a dedicated anatomical heart; gastroenterology and nephrology
+use the stomach and kidney cells in the medical atlas. New specialty options
+do not create fictitious providers; unmatched filters return an empty list.

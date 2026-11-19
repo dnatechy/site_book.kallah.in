@@ -2,9 +2,9 @@ name: Flask and Flutter API contract tests
 
 on:
   push:
-    branches: [Dev_v01, Publish]
+    branches: [prePublish, Dev_v01, Publish]
   pull_request:
-    branches: [Dev_v01]
+    branches: [prePublish, Publish]
   workflow_dispatch:
 
 permissions:
